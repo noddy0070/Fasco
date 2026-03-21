@@ -1,0 +1,58 @@
+
+<section class="responsive-margin-x  responsive-padding-y" style="padding-top: 0px;">
+    <div class="flex justify-between items-center pb-11 max-md:flex-col max-md:gap-4 ">
+        <h2 class="leading-[106%] font-volkhov text-46px-lg text-[#484848] whitespace-nowrap">Make Your<br/>Own Trend</h2>
+        <div class="flex gap-2.5 w-full max-w-full  overflow-x-auto hide-scrollbar">
+            <app-rounded-black-button class="ml-auto"  placeholder="Men's Fashion"></app-rounded-black-button>
+            <app-rounded-black-button  placeholder="Women's Fashion"></app-rounded-black-button>
+            <app-rounded-black-button  placeholder="Men's Accessories"></app-rounded-black-button>
+            <app-rounded-black-button  placeholder="Women's Accessories"></app-rounded-black-button>
+            <app-rounded-black-button  placeholder="Discount Deals"></app-rounded-black-button>
+        </div>
+    </div>
+    <div class="flex flex-col md:grid  grid-cols-[4fr_3fr_26fr] max-md:gap-2">
+        <div class="h-full w-full gap-9 flex flex-col items-center">
+            <div class="flex gap-2 max-md:order-2 max-md:w-full max-md:max-w-full max-md:overflow-x-auto hide-scrollbar">
+                <!-- LEFT -->
+                <div class="flex md:flex-col gap-3">
+                    @for (color of leftColumn(); track color.name) {
+                        <app-rounded-black-button
+                            [buttonClass]="'leading-[150%] font-medium md:[writing-mode:vertical-rl] md:-rotate-180'"
+                            [colorClass]="color.class"
+                            [placeholder]="color.name">
+                        </app-rounded-black-button>
+                    }
+                </div>
+
+                <!-- RIGHT -->
+                <div class="flex md:flex-col-reverse gap-3">
+                    @for (color of rightColumn(); track color.name) {
+                    <app-rounded-black-button
+                        [buttonClass]="'leading-[150%] font-medium md:[writing-mode:vertical-rl] md:-rotate-180'"
+                        [colorClass]="color.class"
+                        [placeholder]="color.name">
+                    </app-rounded-black-button>
+                    }
+                </div>
+            </div>
+
+            <h2 class="text-60px-lg md:[writing-mode:vertical-rl] max-md:order-1 md:-rotate-180  font-poppins  tracking-[-3px] leading-[109%] ">Explore<br/><span class="whitespace-nowrap">by Colors</span></h2>
+        </div>
+
+        <div class="">
+            <div class="mx-auto h-full w-px bg-black/10"></div>
+        </div>
+        
+        <div class=" grid grid-cols-2 lg:grid-cols-4 gap-x-2.5 gap-y-5">
+            @for(product of products(); track product.name){
+               <app-product-card
+                    [class.col-span-2]="false"
+                    [title]="product.name"
+                    [price]="product.price"
+                    [url]="product.imageUrl"
+                    class="w-full h-full overflow-hidden hover:col-span-2"
+                />
+            }
+        </div>
+    </div>
+</section>

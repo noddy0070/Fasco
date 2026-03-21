@@ -1,0 +1,13 @@
+<div class="overflow-hidden w-full bg-white responsive-padding-y my-5">
+  <div class="carousel-track flex gap-10 md:gap-10 lg:gap-15">
+    @for (brand of duplicatedBrands(); track $index) {
+      <div class="flex items-center justify-center ">
+        <img
+          [src]="brand.logo"
+          [alt]="brand.name"
+          class=" object-contain max-h-6 md:max-h-8 lg:max-h-10 transition"
+        />
+      </div>
+    }
+  </div>
+</div>

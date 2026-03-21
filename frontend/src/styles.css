@@ -1,3 +1,188 @@
+/* @use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel'; */
+/* @use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default' as owl-theme; */
 /* You can add global styles to this file, and also import other style files */
+@theme{
+    --font-manrope: "Manrope", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-oregano: "Oregano", cursive;
+    --font-poppins: "Poppins", sans-serif;
+    --font-volkhov: "Volkhov", serif;
+    --font-digital-Numbers: "Digital Numbers", monospace;
+
+    --breakpoint-xs:400px;
+    
+    /* Responsive Text 2xl */
+    --text-180px-2xl: clamp(100px, 9.7vw, 190px);
+
+
+    /* Responsive Text lg*/
+    --text-180px-lg: clamp(100px, 8.75vw, 132px);
+    --text-90px-lg: clamp(48px, 4.6vw, 90px);
+    --text-60px-lg:clamp(46px, 3.4vw, 60px);
+    --text-46px-lg:clamp(32px, 2.4vw, 46px);
+    --text-28px-lg:clamp(24px, 1.6vw, 30px);
+    --text-28px-lg:clamp(22px, 1.45vw, 28px);
+    --text-20px-lg:clamp(16px,1.2vw,20px);
+    --text-18px-lg:clamp(14px,1vw,18px);
+    --text-16px-lg:clamp(12px,.9vw,16px);
+    /* Responsive Text sm*/
+    --text-180px-sm: clamp(58px, 13.5vw, 70px);
+    --text-90px-sm: clamp(30px, 7vw, 50px);
+    --text-60px-sm:clamp(32px, 8vw, 60px);
+    --text-46px-sm:clamp(24px, 9vw, 44px);
+    --text-28px-sm:clamp(22px, 6.5vw, 30px);
+    --text-28px-sm:clamp(20px, 6.25vw, 28px);
+    --text-20px-sm:clamp(16px,4.25vw,20px);
+    --text-18px-sm:clamp(12px,4vw,16px);
+    --text-16px-sm:clamp(11px,3.8vw,14px);
+
+    /* Responsive Text xs */
+    --text-180px-xs: clamp(58px, 30vw, 160px);
+    --text-90px-xs: clamp(30px, 16vw, 150px);
+}
+
+
+
+@source inline("{ssm:,lg:,xl:}col-span-{1,2,3,4},");
 
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Digital Numbers";
+  src: url("/assets/fonts/Digital_Numbers/DigitalNumbers-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/assets/fonts/Manrope/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oregano";
+  src: url("/assets/fonts/Oregano/Oregano-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("/assets/fonts/Poppins/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* Responsive margin and padding in x and y */
+.responsive-margin-x{
+ margin-left: 80px;
+ margin-right: 80px;
+}
+.responsive-margin-y{
+ margin-top: 80px;
+ margin-bottom: 80px;
+}
+
+
+.responsive-padding-x{
+ padding-left: 80px;
+ padding-right: 80px;
+}
+
+.responsive-padding-y {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width:1280px){
+  .responsive-margin-x{
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  .responsive-margin-y{
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .responsive-padding-x{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .responsive-padding-y {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width:1024px){
+  .responsive-margin-x{
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .responsive-margin-y{
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .responsive-padding-x{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .responsive-padding-y {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+@media (max-width:768px){
+  .responsive-margin-x{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .responsive-margin-y{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .responsive-padding-x{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .responsive-padding-y {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Operas */
+.hide-scrollbar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+button{
+  cursor: pointer;
+}

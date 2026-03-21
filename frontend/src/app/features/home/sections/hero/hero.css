@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-grey-bg: #E0E0E0;
+  --grid-cols-24: repeat(16, minmax(0, 1fr));
+  --breakpoint-xs:400px
+}
+

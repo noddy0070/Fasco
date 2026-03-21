@@ -1,0 +1,24 @@
+<section class="flex flex-col items-center gap-4 md:gap-8 w-full overflow-hidden responsive-margin-y" style="margin-top: 20px;">
+    <div class="flex flex-col gap-3 md:gap-5 responsive-padding-x text-center">
+        <p class="font-volkhov text-[#484848] text-46px-sm md:text-46px-lg">Follow Us On Instagram</p>
+        <p class="font-poppins text-[#8A8A8A] text-16px-sm md:text-16px-lg">Get daily styling ideas and trend updates on instagram </p>
+    </div>
+    <app-rounded-black-button placeholder="View Instagram" buttonClass="px-7 py-3.5 border-black hover:bg-black hover:text-white mb-8"></app-rounded-black-button>
+    <!-- <div class="flex gap-0  carousel-track hover:cursor-pointer  ">
+    @for (item of duplicateImages(); track $index; let i = $index) {
+        <div  [class]="(i%2!=0?'bg-[#838383] transform scale-[115%] z-10':'bg-[#D3D3D3] transform scale-[95%] z-0')">
+            <img [src]="item" class="w-[15vw] h-auto aspect-[.85]" />
+        </div>
+    }
+    </div> -->
+    <owl-carousel-o [options]="customOptions" class="w-full">
+         @for (item of images(); track $index; let i = $index) {
+            <ng-template carouselSlide>
+                <div [class]="(i%2!=0?'bg-[#838383] transform scale-[115%] z-10':'bg-[#D3D3D3] transform scale-[95%] z-0')" class="flex justify-center items-center h-full">
+                    <img [src]="item" class="w-[15vw] h-auto aspect-[.85] object-contain" />
+                </div>
+            </ng-template>
+         } 
+    </owl-carousel-o>
+
+</section>

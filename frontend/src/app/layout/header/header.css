@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+
+a{
+    color:#484848;
+    display: inline-block;
+    transition:all ease-in-out 0.1s;
+}
+
+a:hover{
+    color:#000;
+    transform: scale(1.05);
+}
+

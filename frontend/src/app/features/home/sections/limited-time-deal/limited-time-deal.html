@@ -1,0 +1,86 @@
+<section class="flex flex-col gap-4 md:gap-0 md:flex-row responsive-padding-x responsive-padding-y " >
+    <!-- Right Section -->
+    <div class="md:max-w-90 flex flex-col gap-6 md:gap-10 ">
+        <div class="flex flex-col gap-3 md:gap-5 ">
+            <h2 class="font-volkhov  text-[#484848] text-46px-sm md:text-46px-lg">
+                Deals Of The Month
+            </h2>
+            <p class="font-poppins  text-16px-sm md:text-16px-lg leading-[160%] text-[#8A8A8A]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque duis ultrices sollicitudin 
+            </p>
+        </div>
+        <app-black-button placeholder="Buy Now" buttonClass="py-4 px-12 md:py-5 md:px-17"/>
+        <div class="flex flex-col gap-3.5">
+            <p class="font-poppins font-medium text-[#484848] text-28px-sm md:text-28px-lg">Hurry, Before It’s Too Late!</p>
+
+            <div class="flex gap-3 lg:gap-5 xl:gap-7 font-digital-Numbers text-[#484848]" >
+                @for (item of timeList(); track item.title) {
+                    <div class="flex flex-col gap-3.5 items-center">  
+                    <div class="rounded-[10px] shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] text-30px-sm md:text-30px-lg py-5 px-3 ">
+                        <p class="">{{item.value| leadingZero}}</p>
+                    </div>
+                        <p class="font-poppins leading-[120%] text-20px-sm md:text-20px-lg ">{{item.title}}</p>
+                    </div>
+                }
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Arrows -->
+     <div class="flex  flex-col-reverse md:flex-row gap-5 ">
+    <div class="flex">
+        <!-- Arrows -->
+        <div class="flex gap-4 mt-auto">
+            <button class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5">
+                <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <button class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out  bg-white py-4 px-5 text-[#B6B6B6] hover:text-black">
+                <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.900391 0.899902L7.90768 7.8999L0.900393 14.8999" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    
+    </div>
+
+    <div class="flex relative  gap-4 w-full h-min overflow-hidden">
+        @for (image of images(); track image.src) {
+        <div class="relative h-min" [ngClass]="$index===0?'':'shrink'">
+            <img [src]="image.src" class="h-min aspect-3/4"  [ngClass]="$index===0 ? 'w-[25.5vw]' : 'w-[18vw]'"/>
+            <div class="absolute flex flex-col gap-2 bg-white px-6 py-8 rounded-[18px]
+            leading-[120%] text-[#484848] font-poppins text-16px-sm lg:text-16px-lg"
+            [ngClass]="$index===0 ? 'bottom-6 left-6' : 'bottom-3 left-3'">
+                <div class="flex gap-2 items-center ">
+                    <p >{{$index+1 |leadingZero}}</p>
+                    <div class="border-t border-[#484848] w-7"></div>
+                    <p >{{image.name}}</p>
+                </div>
+                <p class="text-28px-sm lg:text-28px-lg">{{image.discount}}</p>
+                
+            </div>
+        </div>
+        }
+        
+        <div class="absolute left-[43%] bottom-[3%] flex flex-col">
+          
+            
+            <!-- Dots -->
+            <div class="flex gap-3 items-center mt-auto">
+                <!-- @for (image of images(); track $index) {
+                 @if($index===0) {
+                    <button class="border-white border-[3.5px] size-4 bg-black rounded-full outline-1 outline-black"></button>
+                    }else{
+                    <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button>
+                    }
+                } -->
+                <!-- <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button>
+                <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button> -->
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

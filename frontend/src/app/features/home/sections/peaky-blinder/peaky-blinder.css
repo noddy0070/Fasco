@@ -1,0 +1,17 @@
+.trapezium{
+    clip-path: polygon(0 0, 100% 0%, 85% 100%, 0% 100%);
+}
+.trapezium-small{
+    clip-path: polygon(0 0, 100% 0%, 85% 100%, 0% 100%);
+}
+
+@media (max-width:640px) {
+    .trapezium{
+        clip-path: none;
+    }
+    .trapezium-small{
+        clip-path: none;
+    }
+}
+
+

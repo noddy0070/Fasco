@@ -1,0 +1,12 @@
+<button class=" text-black  uppercase text-[14px] py-2.75 px-4 rounded-full bg-white
+    font-poppins  cursor-pointer border border-[#DDDDDD] whitespace-nowrap hover:border-[#121212] transition-colors duration-300" 
+    [ngClass]="buttonClass()" >
+    <div class="flex gap-2.75 items-center">
+        @if (colorClass()) {
+            <div class="w-7 h-7 rounded-full " [ngClass]="colorClass()"></div>
+        }
+        <span>
+            {{ placeholder() }}
+        </span>
+    </div>
+</button>   

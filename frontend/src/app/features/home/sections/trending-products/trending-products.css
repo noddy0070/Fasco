@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  /* --color-grey-bg: #E0E0E0; */
+  --grid-cols-custom: 4fr 3fr 26fr;
+  
+  
+ 
+}
+
+#trend-colors{
+    transform: rotate(-90deg);
+}
