@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+
+::ng-deep .owl-stage-outer {
+  overflow: hidden !important;
+}
+
+
+
+::ng-deep .owl-stage {
+  display: flex;
+  align-items: start;
+  justify-items: center;
+}
+
+::ng-deep .owl-item {
+  display: flex;
+  justify-content: center;
+  width: min-content;
+}
+::ng-deep .owl-item {
+  /* width: auto !important; 🔥 force override */
+  flex: 0 0 auto;         /* prevent stretching */
+}
+
+.follow-slide img {
+  width: 15vw;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: all 0.5s ease;
+  
+}
+
+::ng-deep .owl-item.active:not(.owl-item.active ~ .owl-item.active) img {
+  width: 24vw !important;
+}
+

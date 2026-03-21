@@ -32,6 +32,7 @@ export class Follow {
     },
   };
 
+  
   images = signal([
     'assets/images/home/follow/1.png',
     'assets/images/home/follow/2.png',

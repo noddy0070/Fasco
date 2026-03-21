@@ -2,13 +2,13 @@
     <div class="flex">
         <!-- Arrows -->
         <div class="flex gap-4 mt-auto">
-            <button class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5">
+            <button (click)="prev()" class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5">
                 <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
 
-            <button class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out  bg-white py-4 px-5 text-[#B6B6B6] hover:text-black">
+            <button (click)="next()" class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out  bg-white py-4 px-5 text-[#B6B6B6] hover:text-black">
                 <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.900391 0.899902L7.90768 7.8999L0.900393 14.8999" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -17,7 +17,31 @@
     
     </div>
 
-    <div class="flex relative  gap-4 w-full h-min overflow-hidden">
+    <owl-carousel-o #carousel [options]="customOptions" class="w-full min-w-0">
+            <ng-template
+                carouselSlide
+                *ngFor="let image of images(); let i = index; trackBy: trackByIndex"
+                [id]="'limited-slide-' + i"
+            >
+                <div class="follow-slide relative ">
+                    <img [src]="image.src" class="aspect-[3/4]  object-cover rounded-[20px]" />
+                    <div class="absolute flex flex-col gap-2 bg-white px-6 py-8 rounded-[18px]
+                    leading-[120%] text-[#484848] font-poppins text-16px-sm lg:text-16px-lg"
+                    [ngClass]="i===0 ? 'bottom-6 left-6' : 'bottom-3 left-3'">
+                        <div class="flex gap-2 items-center ">
+                            
+                            <p >{{i + 1 |leadingZero}}</p>
+                            <div class="border-t border-[#484848] w-7"></div>
+                            <p >{{image.name}}</p>
+                        </div>
+                        <p class="text-28px-sm lg:text-28px-lg">{{image.discount}}</p>
+                    </div>
+                </div>
+            </ng-template>
+    </owl-carousel-o>
+
+    <!-- <div class="flex relative  gap-4 w-full h-min overflow-hidden">
+        
         @for (image of images(); track image.src) {
         <div class="relative h-min" [ngClass]="$index===0?'':'shrink'">
             <img [src]="image.src" class="h-min aspect-3/4"  [ngClass]="$index===0 ? 'w-[25.5vw]' : 'w-[18vw]'"/>
@@ -38,18 +62,12 @@
         <div class="absolute left-[43%] bottom-[3%] flex flex-col">
           
             
-            <!-- Dots -->
             <div class="flex gap-3 items-center mt-auto">
-                <!-- @for (image of images(); track $index) {
-                 @if($index===0) {
-                    }else{
-                    <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button>
-                    }
-                } -->
+            
                 <button class="border-white border-[3.5px] size-4 bg-black rounded-full outline-1 outline-black"></button>
                 <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button>
                 <button class=" size-2.5 bg-[#B6B6B6] hover:bg-black rounded-full "></button>
             </div>
         </div>
-        </div>
+        </div> -->
     </div>
