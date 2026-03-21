@@ -6,7 +6,6 @@ import { Blogs } from "./sections/blogs/blogs";
 import { PeakyBlinder } from "./sections/peaky-blinder/peaky-blinder";
 import { Follow } from "./sections/follow/follow";
 import { LimitedTimeDeal } from "./sections/limited-time-deal/limited-time-deal";
-import { CarousalTest } from "./sections/carousal-test/carousal-test";
 
 @Component({
   selector: 'app-home',

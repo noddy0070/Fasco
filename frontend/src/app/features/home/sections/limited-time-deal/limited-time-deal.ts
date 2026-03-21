@@ -2,13 +2,13 @@ import { Component, signal, computed , OnDestroy } from '@angular/core';
 import { BlackButton } from "../../../../shared/components/black-button/black-button";
 import {interval,Subscription} from 'rxjs'
 import { LeadingZeroPipe } from '../../../../shared/pipes/leading-zero-pipe';
-import { NgClass } from "@angular/common";
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { LimitedTimeDealCarousal } from "./limited-time-deal-carousal/limited-time-deal-carousal";
+
+
 
 @Component({
   selector: 'app-limited-time-deal',
-  imports: [BlackButton, LeadingZeroPipe, NgClass, CarouselModule],
+  imports: [BlackButton, LeadingZeroPipe, LimitedTimeDealCarousal],
   templateUrl: './limited-time-deal.html',
   styleUrl: './limited-time-deal.css',
 })
@@ -42,27 +42,6 @@ export class LimitedTimeDeal implements OnDestroy {
     return [{value:d, title:'days'}, {value:h, title:'hrs'}, {value:m, title:'mins'}, {value:s, title:'sec'}]
   })
 
-  // Image Data
-  images = signal([
-    {
-      src:'assets/images/home/limited/image1.png',
-      name:'Spring Sale',
-      discount:'50% OFF',
-      url:''
-    },
-    {
-      src:'assets/images/home/limited/image2.png',
-      name:'Spring Sale',
-      discount:'50% OFF',
-      url:''
-    },
-    {
-      src:'assets/images/home/limited/image3.png',
-      name:'Spring Sale',
-      discount:'50% OFF',
-      url:''
-    },
-    
-  ])
+  
   
 }

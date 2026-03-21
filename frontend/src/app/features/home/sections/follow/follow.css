@@ -1,22 +1,25 @@
-.carousel-track {
-  display: flex;
-  width: max-content;
-  animation: scroll 10s linear infinite;
-}
-
 owl-carousel-o {
   display: block;
+  position: relative;
   width: 100%;
   max-width: 100%;
+  height: calc(25vw);
 }
 
 ::ng-deep .owl-carousel {
   width: 100%;
 }
 
+/* 🔥 IMPORTANT: prevent clipping + enable 3D */
+::ng-deep .owl-stage-outer {
+  overflow: visible !important;
+  perspective: 1200px;
+}
+
 ::ng-deep .owl-stage {
   display: flex;
   width: 100%;
+  align-items: center;
 }
 
 ::ng-deep .owl-item {
@@ -25,39 +28,38 @@ owl-carousel-o {
   align-items: center;
 }
 
-::ng-deep .owl-nav {
+/* BASE STYLE */
+.follow-slide {
+  border-radius: 16px;
+  background-color: #D2D2D2;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  transform: scale(0.85) translateY(20px) translateZ(-60px);
+  opacity: 0.6;
+
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s ease,
+              background-color 0.6s ease,
+              box-shadow 0.6s ease;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* 🔥 CENTER ITEM (pops forward) */
+::ng-deep .owl-item.center .follow-slide {
+  transform: scale(1.25) translateY(-10px) translateZ(80px);
+  opacity: 1;
+  z-index: 10;
+  background-color: #878787;
+
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+::ng-deep .owl-dots {
   position: absolute;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex !important;
-  justify-content: space-between;
-  padding: 0 20px;
-  pointer-events: none;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-::ng-deep .owl-nav button.owl-prev,
-::ng-deep .owl-nav button.owl-next {
-  pointer-events: all;
-  background: rgba(0, 0, 0, 0.5) !important;
-  color: white !important;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
-  font-size: 20px;
-}
-
-::ng-deep .owl-nav button:hover {
-  background: rgba(0, 0, 0, 0.8) !important;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-25%);
-  }
-}
-
