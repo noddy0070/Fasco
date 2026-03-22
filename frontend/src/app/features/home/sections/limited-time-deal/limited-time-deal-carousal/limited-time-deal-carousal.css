@@ -1,42 +1,62 @@
-:host {
+.limited-deal-swiper .swiper-slide {
+  width: 18vw;
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.limited-deal-swiper .swiper-slide-active {
+  width: 24vw;
+  margin-left: 2vw;
+  max-width: 100%;
+  padding-bottom: 2vw;
+}
+
+.deal-img {
   display: block;
   width: 100%;
-  min-width: 0;
 }
 
-
-::ng-deep .owl-stage-outer {
-  overflow: hidden !important;
+.deal-overlay {
+  bottom: 0.75rem;
+  left: 0.75rem;
 }
 
-
-
-::ng-deep .owl-stage {
-  display: flex;
-  align-items: start;
-  justify-items: center;
+.swiper-slide-active .deal-overlay {
+  bottom: 1.5rem;
+  left: 1.5rem;
 }
 
-::ng-deep .owl-item {
-  display: flex;
-  justify-content: center;
-  width: min-content;
-}
-::ng-deep .owl-item {
-  /* width: auto !important; 🔥 force override */
-  flex: 0 0 auto;         /* prevent stretching */
-}
-
-.follow-slide img {
-  width: 15vw;
-  aspect-ratio: 3/4;
-  object-fit: cover;
+.swiper-slide-active .deal-img {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   border-radius: 20px;
-  transition: all 0.5s ease;
-  
 }
 
-::ng-deep .owl-item.active:not(.owl-item.active ~ .owl-item.active) img {
-  width: 24vw !important;
+.limited-deal-pagination {
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  width: auto !important;
+}
+
+.limited-deal-pagination .swiper-pagination-bullet {
+  width: 0.625rem;
+  height: 0.625rem;
+  background: #b6b6b6;
+  opacity: 1;
+}
+
+.limited-deal-pagination .swiper-pagination-bullet-active {
+  width: 1rem;
+  height: 1rem;
+  border: 3.5px solid white;
+  background: #000;
+  outline: 1px solid #000;
+}
+
+button.swiper-button-disabled {
+  opacity: 0.35;
+  pointer-events: none;
 }
 

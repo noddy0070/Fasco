@@ -1,5 +1,6 @@
-/* @use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel'; */
-/* @use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default' as owl-theme; */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 /* You can add global styles to this file, and also import other style files */
 @theme{
     --font-manrope: "Manrope", sans-serif;
