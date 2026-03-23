@@ -21,7 +21,7 @@ export class Follow {
     dots: true,
     navSpeed: 0,
     autoplaySpeed: 1000,
-    margin:30,
+
     autoplay: true,
     smartSpeed:200,
     responsive: {

@@ -37,7 +37,7 @@ owl-carousel-o {
   will-change: transform;
 
   transform: scale(0.85) translateY(20px) translateZ(-60px);
-  opacity: 0.6;
+  opacity: 0.8;
 
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.6s ease,
@@ -50,6 +50,7 @@ owl-carousel-o {
 /* 🔥 CENTER ITEM (pops forward) */
 ::ng-deep .owl-item.center .follow-slide {
   transform: scale(1.25) translateY(-10px) translateZ(80px);
+
   opacity: 1;
   z-index: 10;
   background-color: #878787;
@@ -59,7 +60,31 @@ owl-carousel-o {
 
 ::ng-deep .owl-dots {
   position: absolute;
+  display: block;
   bottom: -80px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+::ng-deep .owl-carousel .owl-dots.disabled {
+  display:block !important;
+}
+
+::ng-deep .owl-item:has(+ .owl-item.center)   {
+  transform: scale(1.25) translateY(-10px) translateZ(60px);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s ease,
+              background-color 0.6s ease,
+              box-shadow 0.6s ease;
+  margin-left: 20px;
+}
+
+::ng-deep .owl-item.center + .owl-item {
+  transform: scale(1.25) translateY(-10px) translateZ(60px);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s ease,
+              background-color 0.6s ease,
+              box-shadow 0.6s ease;
+  margin-right: 20px;
+
 }
