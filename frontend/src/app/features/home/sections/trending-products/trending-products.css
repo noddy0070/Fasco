@@ -11,3 +11,27 @@
 #trend-colors{
     transform: rotate(-90deg);
 }
+
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.product-grid {
+  &:hover .product-card-1:not(:hover):last-child {
+    width: 17.08vw !important;
+  }
+  
+  &:hover .product-card-1:hover {
+    width: 35vw !important;
+  }
+
+  &:hover .product-card-2:not(:hover):first-child {
+    width: 17.08vw !important;
+  }
+  
+  &:hover .product-card-2:hover {
+    width: 35vw !important;
+  }
+}

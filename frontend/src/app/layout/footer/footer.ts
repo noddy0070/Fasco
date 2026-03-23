@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Cta } from "../cta/cta";
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [Cta],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })

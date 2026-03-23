@@ -11,9 +11,7 @@ import { LeadingZeroPipe } from '../../../../../shared/pipes/leading-zero-pipe';
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+
 
 const GAP = 16;
 
@@ -61,6 +59,7 @@ export class LimitedTimeDealCarousal {
       url: '',
     },
   ]);
+  leftPressed = false;
 
   private readonly swiperHost = viewChild.required<ElementRef<HTMLElement>>('swiperHost');
   private readonly carouselPrev = viewChild.required<ElementRef<HTMLButtonElement>>('carouselPrev');
@@ -82,31 +81,76 @@ export class LimitedTimeDealCarousal {
           rafId = 0;
         });
       };
-
+      
       const swiper = new Swiper(host, {
         modules: [Navigation, Pagination],
         slidesPerView: 'auto',
+        slidesPerGroup: 1,
         spaceBetween: GAP,
         centeredSlides: false,
-        slidesPerGroup: 1,
         loop: true,
         rewind: true,
         watchOverflow: true,
 
-        navigation: {
-          prevEl: this.carouselPrev().nativeElement,
-          nextEl: this.carouselNext().nativeElement,
-        },
         pagination: {
           el: paginationEl,
           clickable: true,
         },
-
-        on: {
-          init: (s) => scheduleUpdate(s),
-          slideChangeTransitionEnd: (s) => scheduleUpdate(s),
-          resize: (s) => scheduleUpdate(s),
+        breakpoints:{
+          0: {
+            slidesPerView: 2,
+          },
+          640:{
+            slidesPerView: 'auto',
+          },
+          768:{
+            slidesPerView: 1,
+          },
+          800:{
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 'auto',
+          },
         },
+        on: {
+          init: (s) => {
+            requestAnimationFrame(() => s.update());
+          },
+          slideChangeTransitionEnd: (s) => {
+            requestAnimationFrame(() => {
+              s.updateSlides();   // 👈 important
+              s.updateProgress(); // 👈 important
+              s.update();         // 👈 final sync
+            });
+          },
+        },
+      });
+
+      const nextBtn = this.carouselNext().nativeElement;
+      const prevBtn = this.carouselPrev().nativeElement;
+      nextBtn.addEventListener('click', () => {
+        
+        swiper.slideNext();
+        if(screen.width<640 || (screen.width>=768 && screen.width<1024)) {
+          return;
+        }
+
+        
+        // Step 2: immediately correct with prev
+      //   setTimeout(() => {
+      //   if(this.leftPressed) {
+      //   requestAnimationFrame(() => {
+      //     swiper.slidePrev(); // instant snap back
+      //   });
+      // }
+      //     this.leftPressed = true;
+
+      // }, 1000);
+      });
+
+      prevBtn.addEventListener('click', () => {
+        swiper.slidePrev();
       });
 
       const ro = new ResizeObserver(() => scheduleUpdate(swiper));

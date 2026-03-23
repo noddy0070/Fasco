@@ -1,7 +1,7 @@
 
 <section class="responsive-margin-x  responsive-padding-y" style="padding-top: 0px;">
-    <div class="flex justify-between items-center pb-11 max-md:flex-col max-md:gap-4 ">
-        <h2 class="leading-[106%] font-volkhov text-46px-lg text-[#484848] whitespace-nowrap">Make Your<br/>Own Trend</h2>
+    <div class="flex justify-between md:items-center pb-4 md:pb-11 max-md:flex-col gap-4   ">
+        <h2 class="leading-[106%] font-volkhov text-46px-lg text-[#484848] whitespace-nowrap ">Make Your <br class="hidden md:block"/>Own Trend</h2>
         <div class="flex gap-2.5 w-full max-w-full  overflow-x-auto hide-scrollbar">
             <app-rounded-black-button class="ml-auto"  placeholder="Men's Fashion"></app-rounded-black-button>
             <app-rounded-black-button  placeholder="Women's Fashion"></app-rounded-black-button>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="flex flex-col md:grid  grid-cols-[4fr_3fr_26fr] max-md:gap-2">
-        <div class="h-full w-full gap-9 flex flex-col items-center">
+        <div class="h-full w-full gap-4 md:gap-9 flex flex-col  md:items-center">
             <div class="flex gap-2 max-md:order-2 max-md:w-full max-md:max-w-full max-md:overflow-x-auto hide-scrollbar">
                 <!-- LEFT -->
                 <div class="flex md:flex-col gap-3">
@@ -36,23 +36,62 @@
                 </div>
             </div>
 
-            <h2 class="text-60px-lg md:[writing-mode:vertical-rl] max-md:order-1 md:-rotate-180  font-poppins  tracking-[-3px] leading-[109%] ">Explore<br/><span class="whitespace-nowrap">by Colors</span></h2>
+            <h2 class="text-60px-lg md:[writing-mode:vertical-rl] max-md:order-1 md:-rotate-180  font-poppins  tracking-[-3px] leading-[109%] ">Explore <br class="hidden md:block"/><span class="whitespace-nowrap">by Colors</span></h2>
         </div>
 
         <div class="">
             <div class="mx-auto h-full w-px bg-black/10"></div>
         </div>
-        
-        <div class=" grid grid-cols-2 lg:grid-cols-4 gap-x-2.5 gap-y-5">
-            @for(product of products(); track product.name){
+        <div class="flex flex-col gap-5">
+            <div class="product-grid  hidden  md:flex  gap-x-2.5 gap-y-5">
+            @for(product of products().slice(0,3); track product.name ; let isFirst = $last){
                <app-product-card
                     [class.col-span-2]="false"
                     [title]="product.name"
                     [price]="product.price"
                     [url]="product.imageUrl"
-                    class="w-full h-full overflow-hidden hover:col-span-2"
+                    [class]="isFirst ? 'product-card-1 md:w-[35vw] col-span-2' : 'col-span-1 product-card-1 md:w-[17.08vw] '"
+                class=" rounded-[20px] hover:rounded-3xl   overflow-hidden transition-all duration-300 ease-in-out"
                 />
             }
+            </div>
+            <div class="product-grid hidden md:flex  gap-x-2.5 gap-y-5">
+                @for(product of products().slice(3,6); track product.name; let isFirst = $first){
+                    <app-product-card
+                    [class.col-span-2]="false"
+                    [title]="product.name"
+                    [price]="product.price"
+                    [url]="product.imageUrl"
+                    [class]="isFirst ? 'product-card-2 w-[35vw]' : 'product-card-2 w-[17.08vw] '"
+                    class="rounded-[20px] hover:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out"
+                    />
+                }
+            </div>
+            <div class="product-grid  hidden  md:flex  gap-x-2.5 gap-y-5">
+            @for(product of products().slice(0,3); track product.name ; let isFirst = $last){
+               <app-product-card
+                    [class.col-span-2]="false"
+                    [title]="product.name"
+                    [price]="product.price"
+                    [url]="product.imageUrl"
+                    [class]="isFirst ? 'product-card-1 md:w-[35vw] col-span-2' : 'col-span-1 product-card-1 md:w-[17.08vw] '"
+                class=" rounded-[20px] hover:rounded-3xl   overflow-hidden transition-all duration-300 ease-in-out"
+                />
+            }
+            </div>
+            <div class="product-grid grid grid-cols-2 md:hidden  gap-x-2.5 gap-y-5">
+                @for(product of products(); track product.name){
+                    <app-product-card
+                    [class.col-span-2]="false"
+                    [title]="product.name"
+                    [price]="product.price"
+                    [url]="product.imageUrl"
+                    class="rounded-[20px] hover:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out"
+                    />
+                }
+            </div>
         </div>
+        
+        
     </div>
 </section>

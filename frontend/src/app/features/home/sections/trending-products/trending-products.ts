@@ -25,6 +25,7 @@ export class TrendingProducts {
     { name: 'White Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-4.png', span:2 },
     { name: 'Colorful Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-5.png' },
     { name: 'White Shirt', price: '$159', imageUrl: 'assets/images/home/trend/Image-6.png' },
+    
   ])
 
   leftColumn = computed(() =>
@@ -34,5 +35,15 @@ export class TrendingProducts {
   rightColumn = computed(() =>
     this.colors().filter((_, i) => i % 2 !== 0)
   );
+
+  getCardClasses(index: number, isLast: boolean): string {
+  if (isLast) {
+    return 'w-[35vw] hover:w-[17.08vw] group-hover:w-[17.08vw]';
+  } else {
+    return 'w-[17.08vw] hover:w-[35vw] hover:col-span-2';
+  }
+}
+
+  
 
 }

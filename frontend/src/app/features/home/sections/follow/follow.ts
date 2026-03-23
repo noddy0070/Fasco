@@ -27,7 +27,7 @@ export class Follow {
     responsive: {
       0: { items: 1 },
       400: { items: 3 },
-      740: { items: 5 },
+      740: { items: 7 },
       940: { items: 7 }
     },
   };
