@@ -31,7 +31,7 @@
             class="swiper limited-deal-swiper w-full min-w-0 max-w-full overflow-hidden pb-10"
         >
             <div class="swiper-wrapper">
-                @for (image of images(); track image.src) {
+                @for (image of images(); track $index) {
                     <div class="swiper-slide">
                         <div class="limited-deal-slide-inner rounded-[18px] relative h-min">
                             <img

@@ -14,7 +14,7 @@
             <p class="font-poppins font-medium text-[#484848] text-28px-sm md:text-28px-lg">Hurry, Before It’s Too Late!</p>
 
             <div class="flex gap-3 lg:gap-5 xl:gap-7 font-digital-Numbers text-[#484848]" >
-                @for (item of timeList(); track item.title) {
+                @for (item of timeList(); track $index) {
                     <div class="flex flex-col gap-3.5 items-center">  
                     <div class="rounded-[10px] shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] text-30px-sm md:text-30px-lg py-5 px-3 ">
                         <p class="">{{item.value| leadingZero}}</p>

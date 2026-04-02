@@ -187,3 +187,20 @@
 button{
   cursor: pointer;
 }
+
+html {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+body{
+  background-color: white;
+  transition-property: opacity, transform, filter, background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.3s;
+}
+
+.page-transition{
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(12px);
+}
