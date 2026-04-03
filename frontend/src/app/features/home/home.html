@@ -1,8 +1,15 @@
 <app-home-hero></app-home-hero>
-<app-brands-carousal class="shadow-[0px_20px_21.7px_rgba(68,68,68,0.04)]\"></app-brands-carousal>
-<app-limited-time-deal></app-limited-time-deal>
-<app-trending-products></app-trending-products>
-<app-blogs></app-blogs>
-<app-peaky-blinder></app-peaky-blinder>
-<app-follow></app-follow>
+<app-brands-carousal class="shadow-[0px_20px_21.7px_rgba(68,68,68,0.04)]"></app-brands-carousal>
+@defer (on viewport) {
+  <app-limited-time-deal></app-limited-time-deal>
+  <app-trending-products></app-trending-products>
+  <app-blogs></app-blogs>
+  <app-peaky-blinder></app-peaky-blinder>
+  <app-follow></app-follow>
+} @placeholder {
+  <div class="space-y-6">
+    <div class="h-75 bg-gray-100 animate-pulse"></div>
+    <div class="h-75 bg-gray-100 animate-pulse"></div>
+  </div>
+}
 

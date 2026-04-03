@@ -3,6 +3,7 @@
     @for (brand of duplicatedBrands(); track $index) {
       <div class="flex items-center justify-center ">
         <img
+          loading="eager" fetchpriority="high"
           [src]="brand.logo"
           [alt]="brand.name"
           class=" object-contain max-h-6 md:max-h-8 lg:max-h-10 transition"

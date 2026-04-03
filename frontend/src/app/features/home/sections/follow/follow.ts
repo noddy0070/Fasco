@@ -41,7 +41,6 @@ export class Follow {
     'assets/images/home/follow/5.png',
     'assets/images/home/follow/6.png',
     'assets/images/home/follow/7.png',
-    'assets/images/home/follow/8.png',
   ]);
 
   updateCenterIndex(data: SlidesOutputData): void {

@@ -9,7 +9,7 @@
          @for (item of images(); track $index; let i = $index) {
             <ng-template carouselSlide  [id]="'follow-slide-' + i">
                 <div class="follow-slide flex justify-center items-center will-change-transform h-full">
-                    <img [src]="item" class="w-[15vw] object-bottom will-change-transform  h-auto aspect-[.85] object-contain" />
+                    <img loading="lazy" [src]="item" class="w-[15vw] object-bottom will-change-transform  h-auto aspect-[.85] object-contain" />
                 </div>
             </ng-template>
          } 

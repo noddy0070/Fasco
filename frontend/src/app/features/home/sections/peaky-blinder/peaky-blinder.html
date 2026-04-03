@@ -3,12 +3,12 @@
     <div class="relative w-full sm:w-[55%] h-full">
         <div class="trapezium sm:bg-black hidden sm:block h-full">
             <div class="">
-                <img src="assets/images/home/peaky-blinder/thumbnail.png" alt="thumbnail"/>
+                <img loading="lazy" src="assets/images/home/peaky-blinder/thumbnail.png" alt="thumbnail"/>
             </div>
         </div>
         <div class="trapezium-small flex justify-center sm:absolute bg-[#F8F8F8] left-0 -top-px w-full sm:w-[calc(100%-3px)] h-[calc(100%+2px)]">
             <div class="">
-                <img src="assets/images/home/peaky-blinder/thumbnail.png" alt="thumbnail"/>
+                <img loading="lazy" src="assets/images/home/peaky-blinder/thumbnail.png" alt="thumbnail"/>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <p class=" ">Women Collection</p>
         <p class="text-[#484848] text-[clamp(24px,7vw,32px)] md:text-46px-lg font-volkhov leading-[110%]">Peaky Blinders</p>
         <p class="text-black underline ">DESCRIPTION</p>
-        <p class="w-full  sm:max-w-[40vw]  line-clamp-none sm:line-clamp-2 lg:line-clamp-3 xl:line-clamp-none">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        <p class="w-full  sm:max-w-[40vw]  line-clamp-none sm:line-clamp-2 lg:line-clamp-3 xl:line-clamp-none text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
              Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque duis ultrices sollicitudin. 
              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis.</p>
         <div class="flex gap-3.75 items-center">
@@ -30,7 +30,7 @@
 <div class="responsive-margin-x grid   grid-cols-[repeat(2,auto)] md:grid-cols-[repeat(4,auto)]  gap-4 sm:gap-8 md:gap-12 lg:gap-16 xl:gap-28   responsive-padding-y justify-center shadow-[0px_20px_52.29px_rgba(68,68,68,0.04)] ">
     @for (service of services(); track service.name) {
         <div class="flex flex-col sm:flex-row  gap-3 items-center">
-            <img [src]="service.url"/>
+            <img  loading="lazy"[src]="service.url"/>
             <div class="font-poppins text-[#484848] text-center md:text-left">
                 <p class="text-20px-sm md:text-20px-lg  font-medium">{{service.name}}</p>
                 <p class="text-16px-sm md:text-16px-lg">{{service.description}}</p>

@@ -1,6 +1,6 @@
-@import 'swiper/css';
+/* @import 'swiper/css';
 @import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
+@import 'swiper/css/pagination'; */
 /* You can add global styles to this file, and also import other style files */
 @theme{
     --font-manrope: "Manrope", sans-serif;
@@ -14,7 +14,6 @@
     
     /* Responsive Text 2xl */
     --text-180px-2xl: clamp(100px, 9.7vw, 190px);
-
 
     /* Responsive Text lg*/
     --text-180px-lg: clamp(100px, 8.75vw, 132px);
@@ -31,11 +30,12 @@
     --text-90px-sm: clamp(30px, 7vw, 50px);
     --text-60px-sm:clamp(32px, 8vw, 60px);
     --text-46px-sm:clamp(24px, 9vw, 44px);
+    --text-30px-sm:clamp(20px, 5.5vw, 30px);
     --text-28px-sm:clamp(22px, 6.5vw, 30px);
     --text-28px-sm:clamp(20px, 6.25vw, 28px);
     --text-20px-sm:clamp(16px,4.25vw,20px);
     --text-18px-sm:clamp(12px,4vw,16px);
-    --text-16px-sm:clamp(11px,3.8vw,14px);
+    --text-16px-sm:clamp(11px,3.3vw,14px);
 
     /* Responsive Text xs */
     --text-180px-xs: clamp(58px, 30vw, 160px);
@@ -105,7 +105,6 @@
  margin-bottom: 80px;
 }
 
-
 .responsive-padding-x{
  padding-left: 80px;
  padding-right: 80px;
@@ -154,6 +153,7 @@
     padding-bottom: 60px;
   }
 }
+
 @media (max-width:768px){
   .responsive-margin-x{
     margin-left: 20px;
@@ -184,10 +184,12 @@
   display: none;
 }
 
+/* Button Styles */
 button{
   cursor: pointer;
 }
 
+/* Page transition on Navigation */
 html {
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -203,4 +205,22 @@ body{
   opacity: 0;
   transform: translateY(40px);
   filter: blur(12px);
+}
+
+/* Hover animation */
+
+.hover-underline::after{
+  content:"";
+  position:absolute;
+  bottom:0px;
+  left: 0px;
+  height: 1px;
+  width: 0px;
+  background-color: var(--after-color, #484848);
+  transition: all ease-out;
+  transition-duration: 300ms;
+}
+
+.hover-underline:hover::after{
+  width: 100%;
 }
