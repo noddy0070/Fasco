@@ -1,0 +1,22 @@
+.eye-shape {
+  width: 25px;
+  height: 25px;
+  border: #6e6e6e solid 1px;
+  border-radius: 75% 15%;
+  transform: rotate(45deg);
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.pupil {
+  width: 11px;
+  height: 11px;
+  background: #3c3c3c;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: transform 0.08s linear;
+}
