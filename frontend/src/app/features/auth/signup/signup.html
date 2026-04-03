@@ -27,20 +27,16 @@
       />
       <div class="relative w-full">
         <input
-          [type]="showPassword ? 'text' : 'password'"
+          [type]="isEyeClosed() ? 'text' : 'password'"
           placeholder="Password"
           name="password"
           class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB] pr-10"
         />
-
         <button
           type="button"
-          (click)="togglePassword()"
           class="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-[#5B86E5]"
         >
-          <div class="eye-shape" #eye>
-            <div class="pupil" [style.transform]="pupilTransform()"></div>
-          </div>
+          <app-eye-track [isEyeClosed]="isEyeClosed" />
         </button>
       </div>
       <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
