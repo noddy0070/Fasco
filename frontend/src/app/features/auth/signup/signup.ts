@@ -12,5 +12,6 @@ import { EyeTrack } from "../../../shared/components/eye-track/eye-track";
 })
 export class Signup {
  isEyeClosed = signal(true);
+ isEyeClosed2 = signal(true);
 
 }

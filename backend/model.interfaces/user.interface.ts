@@ -1,0 +1,45 @@
+import mongoose, { Document, mongo } from "mongoose";
+
+export interface UserI extends Document{
+    firstName:string,
+    lastName:string,
+    email:string,
+    hashedPassword:string,
+    phone?:string,
+    gender:string
+    role:string,
+    isVerified:boolean,
+    isBlocked:boolean,
+    deletedAt:Date,
+    wishlist:mongoose.Schema.Types.ObjectId[],
+    cart:[
+        {
+            product:mongoose.Schema.Types.ObjectId,
+            quantity:number
+        }
+    ],
+    orders:mongoose.Schema.Types.ObjectId[],
+    reviews:mongoose.Schema.Types.ObjectId[],
+    savedAddress:[{
+        fullName:string,
+        phone:string,
+        pincode:string,
+        state:string,
+        city:string,
+        country:string,
+        addressLine1:string,
+        addressLine2:string,
+        label:string,
+        isDefault:boolean
+    }
+    ],
+    savedPaymentModes:[{
+        type:string,
+        provider:string,
+        last4:string
+    }],
+    avatar:string,
+    lastLogin:Date,
+    createdAt:Date,
+    updatedAt:Date
+}
