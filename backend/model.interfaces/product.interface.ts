@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
 
-export interface ProductI extends Document{
+export default interface ProductI extends Document{
     title:string,
     slug:string,
     description?:string,

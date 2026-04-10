@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { role } from "../model.interfaces/customEnum";
-import { UserI } from "../model.interfaces/user.interface";
+import { role } from "../model.interfaces/customEnum.ts";
+import type UserI from "../model.interfaces/user.interface.ts";
 const userSchema = new Schema<UserI>({
   firstName: { type: String, required: true, trim: true },
   lastName: { type: String, trim: true },
@@ -71,8 +71,7 @@ const userSchema = new Schema<UserI>({
 
 }, { timestamps: true });
 
-userSchema.index({ email: 1 });
 userSchema.index({ phone: 1 });
-
-export const User = mongoose.model<UserI>('User', userSchema);
+const User = mongoose.model<UserI>('User', userSchema);
+export default User;
 

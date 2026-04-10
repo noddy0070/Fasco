@@ -1,6 +1,5 @@
-import mongoose, { Document, mongo } from "mongoose";
-
-export interface OrderI extends Document{
+import mongoose, { Document } from "mongoose";
+export default interface OrderI extends Document{
     user:mongoose.Schema.Types.ObjectId,
     items:[{
         product:mongoose.Schema.Types.ObjectId,

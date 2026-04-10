@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { BrandI } from '../model.interfaces/brand.interface';
+import type BrandI from '../model.interfaces/brand.interface';
 const brandSchema = new Schema<BrandI>({
   title: { type: String, required: true },
   slug: { type: String, unique: true },

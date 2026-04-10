@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { CartI } from "../model.interfaces/cart.interface";
+import type CartI from "../model.interfaces/cart.interface";
 
 const cartSchema = new Schema<CartI>({
   user: {

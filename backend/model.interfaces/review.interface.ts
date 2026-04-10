@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
 
 
-export interface ReviewI extends Document{
+export default interface ReviewI extends Document{
     user:mongoose.Schema.Types.ObjectId,
     product:mongoose.Schema.Types.ObjectId,
     rating:number,

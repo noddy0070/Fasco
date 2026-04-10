@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { Document } from "mongoose"
 
-export interface CartI extends Document{
+export default interface CartI extends Document{
     user:mongoose.Schema.Types.ObjectId,
     items:[
         {

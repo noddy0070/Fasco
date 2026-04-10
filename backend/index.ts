@@ -1,10 +1,17 @@
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import express from 'express';
+import apiRoutes from './routes/main.route.ts';
+import cors from 'cors';
+import apiMiddleWare from './middleware/api.middleware.ts';
 dotenv.config({quiet: true});
 console.log("App started");
 const app = express();
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@base.ttocs5k.mongodb.net/test?retryWrites=true&w=majority`).then(()=>{
+
+app.use(cors())
+app.use(express.json())
+mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@ac-k61j8tu-shard-00-00.ttocs5k.mongodb.net:27017,ac-k61j8tu-shard-00-01.ttocs5k.mongodb.net:27017,ac-k61j8tu-shard-00-02.ttocs5k.mongodb.net:27017/?ssl=true&replicaSet=atlas-t2n02a-shard-0&authSource=admin&appName=base`
+).then(()=>{
     console.log("Connected to MongoDB");
 })
 .catch((err)=>{
@@ -14,7 +21,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
     console.log("Connection attempt finished");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+app.use('/api',apiMiddleWare,apiRoutes)

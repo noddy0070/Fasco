@@ -1,6 +1,5 @@
-import { offerType } from "./customEnum";
 import { Document } from "mongoose";
-export interface OfferI extends Document     {
+export default interface OfferI extends Document     {
     title:string,
     description?:string,
     slug:string,

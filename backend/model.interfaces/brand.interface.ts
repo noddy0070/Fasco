@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-export interface BrandI extends Document {
+export default interface BrandI extends Document {
     title: string;
     slug: string;
     description?: string;

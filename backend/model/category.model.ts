@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { level } from "../model.interfaces/customEnum";
-import { CategoryI } from "../model.interfaces/category.interface";
+import type CategoryI from "../model.interfaces/category.interface";
 
 const categorySchema = new Schema<CategoryI>({
   name: { type: String, required: true },

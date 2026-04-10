@@ -20,7 +20,11 @@ export class App implements OnInit{
   this.router.events.pipe(
     filter(event => event instanceof NavigationEnd)
   ).subscribe((event: NavigationEnd) => {
-    this.showHeader.set(!this.noHeaderRoutes().includes(event.urlAfterRedirects));
+    this.showHeader.set(
+  !this.noHeaderRoutes().some(route =>
+    event.urlAfterRedirects.startsWith(route)
+  )
+);
   });
 }
 

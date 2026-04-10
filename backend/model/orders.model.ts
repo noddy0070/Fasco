@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { OrderI } from "../model.interfaces/orders.interface";
+import type OrderI from "../model.interfaces/orders.interface";
 import { orderStatus, paymentMethod, paymentStatus } from "../model.interfaces/customEnum";
 
 const orderSchema = new Schema<OrderI>({
