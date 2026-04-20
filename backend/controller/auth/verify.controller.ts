@@ -3,11 +3,15 @@ import express from "express";
 import jwt from "jsonwebtoken";
 const verifyEmail= (req: express.Request, res: express.Response)=>{
     try {
-        const {token}=req.query;
+        // console.log(req)
+        const token=req.params.token;
         if(!token){
             return res.status(400).json({message:"Token is required"});
         }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if(typeof token !== "string"){
+            return res.status(400).json({message:"Invalid token"});
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
         const userId = decoded.userId;
         User.findByIdAndUpdate(userId, { isVerified: true }, { new: true })
         .then((user) => {

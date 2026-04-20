@@ -2,6 +2,7 @@ import express from 'express';
 import User from '../../model/user.model.ts';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { sendEmail } from '../../utils/mailService.ts';
 
 const signup=async(req:express.Request,res:express.Response)=>{
     const {
@@ -34,13 +35,14 @@ const signup=async(req:express.Request,res:express.Response)=>{
         hashedPassword
     });
     await newUser.save();
+    await sendEmail(email, `${process.env.FRONTEND_URL}/signup/verification?token=${jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET as string, { expiresIn: "1h" })}`, newUser._id.toString());
     
     return res.status(201).json({ message: "User created successfully" });
 }
 
 const login = async (req:express.Request,res:express.Response)=>{
     const {email,password}=req.body;
-    if(!email || !password){
+    if(!email || !password){    
         return res.status(400).json({message:"Email and password are required"});
     }
     User.findOne({email}).then(async (user)=>{
