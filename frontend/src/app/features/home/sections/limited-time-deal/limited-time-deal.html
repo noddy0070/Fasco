@@ -1,33 +1,39 @@
-<section class="flex flex-col gap-4 md:gap-0 md:flex-row px-5 md:px-7.5 lg:px-10 xl:px-20 py-0 md:py-10 lg:py-20 "  >
-    <!-- Right Section -->
-    <div class="md:max-w-90 flex flex-col gap-6 md:gap-10 ">
-        <div class="flex flex-col gap-3 md:gap-5 ">
-            <h2 class="font-volkhov  text-[#484848] text-46px-sm md:text-46px-lg">
-                Deals Of The Month
-            </h2>
-            <p class="font-poppins  text-16px-sm md:text-16px-lg leading-[160%] text-[#8A8A8A] text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque duis ultrices sollicitudin 
-            </p>
-        </div>
-        <app-black-button placeholder="Buy Now" buttonClass="py-4 px-12 md:py-5 md:px-17"/>
-        <div class="flex flex-col gap-3.5">
-            <p class="font-poppins font-medium text-[#484848] text-28px-sm md:text-28px-lg">Hurry, Before It’s Too Late!</p>
+<section
+  class="flex flex-col gap-4 md:gap-0 md:flex-row px-5 md:px-7.5 lg:px-10 xl:px-20 py-0 md:py-10 lg:py-20"
+>
+  <!-- Right Section -->
+  <div class="md:max-w-90 flex flex-col gap-6 md:gap-10">
+    <div class="flex flex-col gap-3 md:gap-5">
+      <h2 class="font-volkhov text-[#484848] text-46px-sm md:text-46px-lg">Deals Of The Month</h2>
+      <p
+        class="font-poppins text-16px-sm md:text-16px-lg leading-[160%] text-[#8A8A8A] text-justify"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque duis ultrices
+        sollicitudin aliquam sem. Scelerisque duis ultrices sollicitudin
+      </p>
+    </div>
+    <app-black-button placeholder="Buy Now" buttonClass="py-4 px-12 md:py-5 md:px-17" />
+    <div class="flex flex-col gap-3.5">
+      <p class="font-poppins font-medium text-[#484848] text-28px-sm md:text-28px-lg">
+        Hurry, Before It’s Too Late!
+      </p>
 
-            <div class="flex gap-3 lg:gap-5 xl:gap-7 font-digital-Numbers text-[#484848]" >
-                @for (item of timeList(); track $index) {
-                    <div class="flex flex-col gap-3.5 items-center">  
-                    <div class="rounded-[10px] shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] text-30px-sm md:text-30px-lg py-5 px-3 ">
-                        <p class="">{{item.value| leadingZero}}</p>
-                    </div>
-                        <p class="font-poppins leading-[120%] text-20px-sm md:text-20px-lg ">{{item.title}}</p>
-                    </div>
-                }
+      <div class="flex gap-3 lg:gap-5 xl:gap-7 font-digital-Numbers text-[#484848]">
+        @for (item of timeList(); track $index) {
+          <div class="flex flex-col gap-3.5 items-center">
+            <div
+              class="rounded-[10px] shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] text-30px-sm md:text-30px-lg py-5 px-3"
+            >
+              <p class="">{{ item.value | leadingZero }}</p>
             </div>
-        </div>
-        
+            <p class="font-poppins leading-[120%] text-20px-sm md:text-20px-lg">{{ item.title }}</p>
+          </div>
+        }
+      </div>
     </div>
+  </div>
 
-    <div class="w-full min-w-0 flex-1 md:w-auto">
-      <app-limited-time-deal-carousal />
-    </div>
+  <div class="w-full min-w-0 flex-1 md:w-auto">
+    <app-limited-time-deal-carousal />
+  </div>
 </section>
