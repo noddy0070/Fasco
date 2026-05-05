@@ -1,18 +1,35 @@
-<section class="flex flex-col items-center gap-4 md:gap-8 w-full overflow-hidden responsive-margin-y" style="margin-top: 20px;">
-    <div class="flex flex-col gap-3 md:gap-5 responsive-padding-x text-center">
-        <p class="font-volkhov text-[#484848] text-46px-sm md:text-46px-lg">Follow Us On Instagram</p>
-        <p class="font-poppins text-[#8A8A8A] text-16px-sm md:text-16px-lg">Get daily styling ideas and trend updates on instagram </p>
-    </div>
-    <app-rounded-black-button placeholder="View Instagram" buttonClass="px-7 py-3.5 border-black hover:bg-black hover:text-white mb-8"></app-rounded-black-button>
+<section
+  class="flex flex-col items-center gap-4 md:gap-8 w-full overflow-hidden responsive-margin-y"
+  style="margin-top: 20px"
+>
+  <div class="flex flex-col gap-3 md:gap-5 responsive-padding-x text-center">
+    <p class="font-volkhov text-primary text-46px-sm md:text-46px-lg">Follow Us On Instagram</p>
+    <p class="font-poppins text-gray-medium text-16px-sm md:text-16px-lg">
+      Get daily styling ideas and trend updates on instagram
+    </p>
+  </div>
+  <app-rounded-black-button
+    placeholder="View Instagram"
+    buttonClass="px-7 py-3.5 border-black hover:bg-black hover:text-white mb-8"
+  ></app-rounded-black-button>
 
-    <owl-carousel-o [options]="customOptions" class="w-full h-[1000px] " (initialized)="updateCenterIndex($event)" (translated)="updateCenterIndex($event)">
-         @for (item of images(); track $index; let i = $index) {
-            <ng-template carouselSlide  [id]="'follow-slide-' + i">
-                <div class="follow-slide flex justify-center items-center will-change-transform h-full">
-                    <img loading="lazy" [src]="item" class="w-[15vw] object-bottom will-change-transform  h-auto aspect-[.85] object-contain" />
-                </div>
-            </ng-template>
-         } 
-    </owl-carousel-o>
-
+  <owl-carousel-o
+    [options]="customOptions"
+    class="w-full h-[1000px]"
+    (initialized)="updateCenterIndex($event)"
+    (translated)="updateCenterIndex($event)"
+  >
+    @for (item of images(); track $index; let i = $index) {
+      <ng-template carouselSlide [id]="'follow-slide-' + i">
+        <div class="follow-slide flex justify-center items-center will-change-transform h-full">
+          <img
+            alt="Follow Us On Instagram"
+            loading="lazy"
+            [src]="item"
+            class="w-[15vw] object-bottom will-change-transform h-auto aspect-[.85] object-contain"
+          />
+        </div>
+      </ng-template>
+    }
+  </owl-carousel-o>
 </section>

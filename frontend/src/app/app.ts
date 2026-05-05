@@ -2,7 +2,6 @@ import { Component, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from "./layout/header/header";
 import { Footer } from "./layout/footer/footer";
-import {ActivatedRoute} from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class App implements OnInit{
     this.loadCarouselStyles();
   }
 
-  constructor(private router: Router) {
+  constructor(readonly router: Router) {
   this.router.events.pipe(
     filter(event => event instanceof NavigationEnd)
   ).subscribe((event: NavigationEnd) => {

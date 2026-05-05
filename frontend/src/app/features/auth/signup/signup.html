@@ -5,14 +5,14 @@
     <h2 class="font-volkhov">Create Account in FASCO</h2>
     <div class="flex font-poppins gap-4 text-16px-sm md:text-16px-lg">
       <button
-        class="flex items-center gap-2 justify-center w-full border-[#484848] hover:bg-black text-black hover:text-white border py-2 px-8 rounded-lg transition-colors duration-300 ease-in-out"
+        class="flex items-center gap-2 justify-center w-full border-primary hover:bg-black text-black hover:text-white border py-2 px-8 rounded-lg transition-colors duration-300 ease-in-out"
       >
-        <img src="assets/images/auth/google.png" class="size-6 mr-2" />
+        <img alt="" src="assets/images/auth/google.png" class="size-6 mr-2" />
         <span>Create Account with Google</span>
       </button>
     </div>
     <div
-      class="text-[#838383] font-poppins mx-auto mt-[1vw] xl:mt-[2vw] text-28px-sm md:text-28px-lg font-bold"
+      class="text-gray-dark font-poppins mx-auto mt-[1vw] xl:mt-[2vw] text-28px-sm md:text-28px-lg font-bold"
     >
       <span> - </span>
       <span> OR </span>
@@ -25,32 +25,32 @@
           placeholder="First Name"
           name="firstName"
           type="text"
-          class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB]"
+          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Last Name"
           name="lastName"
           type="text"
-          class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB]"
+          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Email"
           name="email"
           type="email"
-          class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB]"
+          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Phone Number"
           name="mobileNumber"
           type="number"
-          class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB]"
+          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <div class="relative w-full">
           <input
             [type]="isEyeClosed() ? 'text' : 'password'"
             placeholder="Password"
             name="password"
-            class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB] pr-10"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
           <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
             <app-eye-track [isEyeClosed]="isEyeClosed" />
@@ -61,7 +61,7 @@
             [type]="isEyeClosed2() ? 'text' : 'password'"
             placeholder="Confrim Password"
             name="confrimPassword"
-            class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB] pr-10"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
           <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
             <app-eye-track [isEyeClosed]="isEyeClosed2" />
@@ -76,14 +76,14 @@
         />
         <app-transition-link link="/login" class="mx-auto w-full md:w-[80%]">
           <button
-            class="w-full md:-mt-1 lg:mt-0 py-2 hover:bg-[#dbe5f9] text-16px-sm md:text-16px-lg border-[#5B86E5] text-[#5B86E5] border rounded-lg transition-colors duration-300 ease-in-out"
+            class="w-full md:-mt-1 lg:mt-0 py-2 hover:bg-accent-blue-light text-16px-sm md:text-16px-lg border-accent-blue text-accent-blue border rounded-lg transition-colors duration-300 ease-in-out"
           >
             <span>Already have an account? Login In</span>
           </button>
         </app-transition-link>
         <app-transition-link
           link="/forgot-password"
-          class="relative ml-auto mr-[10%] -mt-2 lg:mt-0 font-semibold tracking-[8%] text-16px-sm md:text-16px-lg text-[#5B86E5] w-min whitespace-nowrap hover-underline"
+          class="relative ml-auto mr-[10%] -mt-2 lg:mt-0 font-semibold tracking-[8%] text-16px-sm md:text-16px-lg text-accent-blue w-min whitespace-nowrap hover-underline"
           style="--after-color: #5b86e5"
         >
           Forgot Password?

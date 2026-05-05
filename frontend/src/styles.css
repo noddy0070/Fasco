@@ -1,7 +1,7 @@
-/* @import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination'; */
+
 /* You can add global styles to this file, and also import other style files */
+@import './app/shared/styles/colors.css';
+
 @theme{
     --font-manrope: "Manrope", sans-serif;
     --font-roboto: "Roboto", sans-serif;

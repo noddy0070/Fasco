@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef,  HostListener, signal, ViewChild } from '@angular/core';
+import { Component,  signal } from '@angular/core';
 import { TransitionLink } from "../../../shared/components/transition-link/transition-link";
 import { BlackButton } from "../../../shared/components/black-button/black-button";
 import { AuthFrame } from "../../../layout/auth-frame/auth-frame";
