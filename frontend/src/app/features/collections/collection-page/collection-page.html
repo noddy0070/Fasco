@@ -76,15 +76,37 @@
             }
           </div>
 
-          <button
-            class="flex min-w-45 items-center justify-between rounded-full border border-[#26231F] bg-white px-5 py-3 text-sm font-semibold uppercase tracking-widest text-[#1B1B1B] transition-colors duration-300 hover:bg-[#F7F5EF]"
-          >
-            <span>{{ collection.sortOptions[0] }}</span>
-            <span
-              class="grid size-6 place-items-center rounded-full border border-[#26231F] text-[10px]"
-              >⌄</span
+          <div class="relative">
+            <button
+              type="button"
+              (click)="toggleSortMenu()"
+              class="flex min-w-45 items-center justify-between rounded-full border border-[#26231F] bg-white px-5 py-3 text-sm font-semibold uppercase tracking-widest text-[#1B1B1B] transition-colors duration-300 hover:bg-[#F7F5EF]"
             >
-          </button>
+              <span>{{ activeSortLabel() }}</span>
+              <span
+                class="grid size-6 place-items-center rounded-full border border-[#26231F] text-[10px]"
+                >⌄</span
+              >
+            </button>
+
+            @if (isSortMenuOpen()) {
+              <div class="sort-menu">
+                @for (option of collection.sortOptions; track option) {
+                  <button
+                    type="button"
+                    class="sort-menu-item"
+                    [class.is-selected]="option === activeSortLabel()"
+                    (click)="selectSortOption(option)"
+                  >
+                    <span>{{ option }}</span>
+                    @if (option === activeSortLabel()) {
+                      <span>✓</span>
+                    }
+                  </button>
+                }
+              </div>
+            }
+          </div>
         </div>
       </div>
     </section>
@@ -205,9 +227,9 @@
 
     <section class="mt-5 grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        @for (product of filteredProducts(); track product.name) {
+        @for (product of displayedProducts(); track product.name) {
           <article
-            class="collection-card group flex min-h-107.5 flex-col rounded-[28px] bg-white p-4 shadow-[0_14px_50px_rgba(0,0,0,0.06)]"
+            class="collection-card group flex min-h-130 flex-col rounded-[28px] bg-white p-4 shadow-[0_14px_50px_rgba(0,0,0,0.06)]"
           >
             <div class="flex items-start justify-between gap-3">
               <span
@@ -267,6 +289,17 @@
                 <span class="ml-auto text-lg font-semibold text-[#1A1A1A]">{{
                   product.price
                 }}</span>
+              </div>
+
+              <div class="collection-card-sizes">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#7A7A7A]">
+                  Available sizes
+                </p>
+                <div class="mt-2 grid grid-cols-6 gap-2">
+                  @for (size of product.sizes; track size) {
+                    <span class="size-pill">{{ size }}</span>
+                  }
+                </div>
               </div>
             </div>
           </article>

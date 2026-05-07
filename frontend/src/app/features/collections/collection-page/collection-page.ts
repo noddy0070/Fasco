@@ -79,6 +79,8 @@ export class CollectionPage implements OnInit {
   collections = signal<CollectionData[]>([]);
   currentSlug = signal(this.defaultSlug);
   isFilterModalOpen = signal(false);
+  isSortMenuOpen = signal(false);
+  selectedSortOption = signal('Featured');
 
   selectedSizes = signal<string[]>([]);
   selectedColors = signal<string[]>([]);
@@ -153,6 +155,17 @@ export class CollectionPage implements OnInit {
     return collections.find((collection) => collection.slug === selectedSlug) ?? collections[0] ?? null;
   });
 
+  activeSortLabel = computed(() => {
+    const collection = this.currentCollection();
+    const sortLabel = this.selectedSortOption();
+
+    if (!collection) {
+      return sortLabel;
+    }
+
+    return collection.sortOptions.includes(sortLabel) ? sortLabel : collection.sortOptions[0] ?? sortLabel;
+  });
+
   filteredProducts = computed(() => {
     const collection = this.currentCollection();
 
@@ -177,6 +190,17 @@ export class CollectionPage implements OnInit {
     });
   });
 
+  displayedProducts = computed(() => {
+    const collection = this.currentCollection();
+    const products = this.filteredProducts();
+
+    if (!collection) {
+      return products;
+    }
+
+    return this.sortProducts(products, this.activeSortLabel(), collection.products);
+  });
+
   selectedFilterCount = computed(() => {
     return (
       this.selectedSizes().length +
@@ -192,6 +216,7 @@ export class CollectionPage implements OnInit {
       this.currentSlug.set(paramMap.get('collectionSlug') ?? this.defaultSlug);
       this.clearFilters();
       this.isFilterModalOpen.set(false);
+      this.isSortMenuOpen.set(false);
     });
 
     void this.loadCollections();
@@ -210,6 +235,19 @@ export class CollectionPage implements OnInit {
 
   closeFilterModal(): void {
     this.isFilterModalOpen.set(false);
+  }
+
+  toggleSortMenu(): void {
+    this.isSortMenuOpen.update((current) => !current);
+  }
+
+  closeSortMenu(): void {
+    this.isSortMenuOpen.set(false);
+  }
+
+  selectSortOption(option: string): void {
+    this.selectedSortOption.set(option);
+    this.isSortMenuOpen.set(false);
   }
 
   clearFilters(): void {
@@ -277,5 +315,33 @@ export class CollectionPage implements OnInit {
   private matchesAnySelectedPrice(price: number, selectedPriceLabels: string[]): boolean {
     const selectedRanges = this.priceOptions.filter((range) => selectedPriceLabels.includes(range.label));
     return selectedRanges.some((range) => price >= range.min && price <= range.max);
+  }
+
+  private sortProducts(
+    products: CollectionProduct[],
+    sortLabel: string,
+    originalProducts: CollectionProduct[]
+  ): CollectionProduct[] {
+    const orderMap = new Map(originalProducts.map((product, index) => [product.name, index]));
+
+    return [...products].sort((left, right) => {
+      if (sortLabel === 'Price: Low to High') {
+        return left.priceValue - right.priceValue;
+      }
+
+      if (sortLabel === 'Price: High to Low') {
+        return right.priceValue - left.priceValue;
+      }
+
+      if (sortLabel === 'Newest') {
+        return (orderMap.get(right.name) ?? 0) - (orderMap.get(left.name) ?? 0);
+      }
+
+      if (sortLabel === 'Best Selling' || sortLabel === 'Trending' || sortLabel === 'Discounted') {
+        return right.priceValue - left.priceValue;
+      }
+
+      return (orderMap.get(left.name) ?? 0) - (orderMap.get(right.name) ?? 0);
+    });
   }
 }
