@@ -6,7 +6,7 @@
 - **Initialize a new Angular project using Angular CLI.**
 - **Set up the project structure with necessary folders (e.g., components, services, models).**
 - **Install and configure Angular Material for UI components.**
-
+--
 ### Home Page:
 - **Develop a home page that displays a list of products.**
 - **Use Angular Material components to create a responsive layout.**
