@@ -84,6 +84,7 @@
           class="mx-auto w-full md:w-[80%]"
           buttonClass="w-full py-[8px] xl:py-[10px] "
           [placeholder]="isSubmitting() ? 'Creating...' : 'Create Account'"
+          [disabled]="isSubmitting()"
         />
         <app-transition-link link="/login" class="mx-auto w-full md:w-[80%]">
           <button

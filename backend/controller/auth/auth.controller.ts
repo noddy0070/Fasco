@@ -16,7 +16,7 @@ const getJwtSecret = () => {
 };
 
 const getRefreshJwtSecret = () => {
-  const secret = process.env.JWT_REFRESH_SECRET;
+  const secret = process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET;
 
   if (!secret) {
     throw new Error("JWT_REFRESH_SECRET is required");
@@ -38,29 +38,39 @@ const signup = async (req: express.Request, res: express.Response) => {
       });
     }
 
+    // compute hashed password early so we can reuse existing unverified user
+    const hashedPass = await bcrypt.hash(password, 10);
+
     const existingUser = await User.findOne({ email });
+
+    let newUser;
 
     if (existingUser) {
       if (existingUser.isVerified) {
         return res.status(400).json({
           message: "Email already in use",
         });
-      } else {
-        await User.deleteOne({ email });
       }
+
+      // update the existing (unverified) user with latest values
+      existingUser.firstName = firstName;
+      existingUser.lastName = lastName || existingUser.lastName;
+      existingUser.phone = phone || existingUser.phone;
+      existingUser.hashedPassword = hashedPass;
+
+      newUser = await existingUser.save();
+    } else {
+      // create a fresh user
+      newUser = new User({
+        firstName,
+        lastName,
+        email,
+        phone,
+        hashedPassword: hashedPass,
+      });
+
+      await newUser.save();
     }
-
-    const hashedPass = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      firstName,
-      lastName,
-      email,
-      phone,
-      hashedPassword: hashedPass,
-    });
-
-    await newUser.save();
 
     const accessToken = jwt.sign(
       {
@@ -84,15 +94,13 @@ const signup = async (req: express.Request, res: express.Response) => {
 
     const frontendUrl = process.env.FRONTEND_URL || "http://localhost:4200";
 
-    try {
-      await sendEmail(
-        email,
-        `${frontendUrl}/signup/verification?token=${encodeURIComponent(verificationToken)}`,
-        newUser._id.toString()
-      );
-    } catch (mailError) {
+    void sendEmail(
+      email,
+      `${frontendUrl}/signup/verification?token=${encodeURIComponent(verificationToken)}`,
+      newUser._id.toString()
+    ).catch((mailError) => {
       console.error("Failed to send verification email:", mailError);
-    }
+    });
 
     return res.status(201).json({
       message: "User created successfully",
@@ -121,7 +129,7 @@ const login = async (req: express.Request, res: express.Response) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+hashedPassword');
 
     if (!user) {
       return res.status(400).json({
@@ -129,10 +137,7 @@ const login = async (req: express.Request, res: express.Response) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(
-      password,
-      user.hashedPassword
-    );
+    const isMatch = await bcrypt.compare(password, user.hashedPassword);
 
     if (!isMatch) {
       return res.status(400).json({
@@ -254,7 +259,7 @@ const forgotPassword = async (
   try {
     const { email } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+hashedPassword');
 
     if (!user) {
       return res.status(400).json({

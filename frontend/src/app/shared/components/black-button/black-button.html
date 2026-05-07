@@ -1,6 +1,10 @@
-<button class="bg-black text-white rounded-[10px] shadow-[0_20px_20px_0_rgba(0,0,0,0.2)] md:shadow-[0_20px_35px_0_rgba(0,0,0,0.2)]
-font-poppins  cursor-pointer hover:bg-[#333333] transition-colors duration-300" 
-[ngClass]="buttonClass()">
+<button
+    type="submit"
+    [disabled]="disabled()"
+    class="bg-black text-white rounded-[10px] shadow-[0_20px_20px_0_rgba(0,0,0,0.2)] md:shadow-[0_20px_35px_0_rgba(0,0,0,0.2)]
+font-poppins cursor-pointer hover:bg-[#333333] transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60"
+    [ngClass]="buttonClass()"
+>
     <span class="text-16px-sm md:text-16px-lg font-medium">
         {{ placeholder() }}
     </span>

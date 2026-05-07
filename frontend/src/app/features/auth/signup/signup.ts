@@ -37,6 +37,10 @@ export class Signup {
   });
 
   submit(): void {
+    if (this.isSubmitting()) {
+      return;
+    }
+
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       this.errorMessage.set('Please complete all required fields.');

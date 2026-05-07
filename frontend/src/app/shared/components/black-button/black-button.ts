@@ -10,4 +10,5 @@ import { NgClass } from "@angular/common";
 export class BlackButton {
   placeholder = input<string>('')
   buttonClass= input<string>('')
+  disabled = input<boolean>(false)
 }
