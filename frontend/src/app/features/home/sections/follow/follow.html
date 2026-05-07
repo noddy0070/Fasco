@@ -1,6 +1,5 @@
 <section
-  class="flex flex-col items-center gap-4 md:gap-8 w-full overflow-hidden responsive-margin-y"
-  style="margin-top: 20px"
+  class="flex flex-col items-center gap-4 md:gap-8 w-full overflow-hidden responsive-margin-y mt-5 md:mt-0"
 >
   <div class="flex flex-col gap-3 md:gap-5 responsive-padding-x text-center">
     <p class="font-volkhov text-primary text-46px-sm md:text-46px-lg">Follow Us On Instagram</p>
@@ -15,7 +14,7 @@
 
   <owl-carousel-o
     [options]="customOptions"
-    class="w-full h-[1000px]"
+    class="w-full"
     (initialized)="updateCenterIndex($event)"
     (translated)="updateCenterIndex($event)"
   >
@@ -26,7 +25,7 @@
             alt="Follow Us On Instagram"
             loading="lazy"
             [src]="item"
-            class="w-[15vw] object-bottom will-change-transform h-auto aspect-[.85] object-contain"
+            class="w-[56vw] sm:w-[30vw] md:w-[15vw] object-bottom will-change-transform h-auto aspect-[.85] object-contain"
           />
         </div>
       </ng-template>

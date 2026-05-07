@@ -4,6 +4,8 @@ export interface CollectionTab {
 }
 
 export interface CollectionProduct {
+  productId: string;
+  variantSku: string;
   name: string;
   variant: string;
   price: string;

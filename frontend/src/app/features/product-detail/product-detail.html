@@ -1,0 +1,88 @@
+<section class="responsive-margin-x responsive-padding-y product-detail-page">
+  @if (product(); as item) {
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
+      <div class="grid grid-cols-2 gap-3">
+        @for (image of galleryImages(); track image) {
+          <button class="gallery-tile" [class.is-active]="selectedImage() === image" (click)="setImage(image)">
+            <img [src]="image" [alt]="item.title" />
+          </button>
+        }
+      </div>
+
+      <div class="details-panel">
+        <h1 class="product-title">{{ item.title }}</h1>
+        <div class="rating-row">
+          <span class="stars">★ ★ ★ ★ ☆</span>
+          <span class="reviews">{{ item.totalReviews }} Reviews</span>
+        </div>
+
+        @if (selectedVariant(); as variant) {
+          <div class="price-row">
+            <p class="price">${{ discountedPrice() }}</p>
+            @if (variant.discount > 0) {
+              <p class="price-cut">${{ variant.price }}</p>
+            }
+          </div>
+
+          <p class="label">Color <span class="value">{{ variant.color }}</span></p>
+          <div class="swatch-row">
+            @for (color of colorOptions(); track color) {
+              <button
+                class="swatch"
+                [class.is-selected]="selectedVariant()?.color === color"
+                (click)="selectColor(color)"
+                [style.background-color]="getSwatchColor(color)"
+                [attr.aria-label]="color"
+              ></button>
+            }
+          </div>
+
+          <!-- <p class="label mt-6">Silhouette</p>
+          <div class="silhouette-row">
+            <button class="silhouette-btn is-selected">Hoody</button>
+            <button class="silhouette-btn">Long-Sleeved</button>
+          </div> -->
+
+          <div class="size-head">
+            <p class="label">Size</p>
+            <p class="size-links">Find My Size&nbsp;&nbsp;Size Guide</p>
+          </div>
+          <div class="mt-2 grid grid-cols-4 gap-2">
+            @for (size of sizeOptions(); track size) {
+              <button
+                class="size-chip"
+                [class.is-selected]="selectedVariant()?.size === size"
+                (click)="selectSize(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        }
+
+        <div class="add-row">
+          <button class="wish-btn">♡</button>
+          <button class="add-btn">Add to Bag</button>
+        </div>
+
+        <div class="mt-7 border-t border-[#DEDEDE] pt-5">
+          <p class="text-sm leading-7 text-[#333]">{{ item.description }}</p>
+        </div>
+
+        <div class="mt-5">
+          @for (spec of item.specifications; track spec.title) {
+            <button class="spec-row" (click)="setOpenSpec(spec.title)">
+              <span>{{ spec.title }}</span>
+              <span>{{ openSpec() === spec.title ? '−' : '+' }}</span>
+            </button>
+            @if (openSpec() === spec.title) {
+              <p class="spec-content">{{ spec.value }}</p>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="rounded-2xl border border-[#E3E3E3] bg-white p-8 text-center">Product not found.</div>
+  }
+</section>

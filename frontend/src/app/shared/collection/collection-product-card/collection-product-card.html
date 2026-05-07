@@ -1,3 +1,8 @@
+<a
+  class="block"
+  [routerLink]="['/product', product().productId]"
+  [queryParams]="{ variant: product().variantSku }"
+>
 <article
   class="collection-card group flex min-h-130 flex-col rounded-[28px] bg-white p-4 shadow-[0_14px_50px_rgba(0,0,0,0.06)]"
 >
@@ -46,3 +51,4 @@
     </div>
   </div>
 </article>
+</a>

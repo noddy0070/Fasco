@@ -10,6 +10,25 @@ import { CollectionProductCard } from '../../../shared/collection/collection-pro
 import { CollectionData, CollectionDataFile, CollectionProduct, CollectionTab } from '../../../shared/collection/collection.types';
 import { COLOR_OPTIONS, MATERIAL_OPTIONS, PRICE_OPTIONS, PRODUCT_TYPE_OPTIONS, SIZE_OPTIONS } from '../../../shared/collection/collection.constants';
 
+type ProductVariantModel = {
+  sku: string;
+  size: string;
+  color: string;
+  price: number;
+  discount: number;
+  stock: number;
+  images: string[];
+};
+
+type ProductModel = {
+  _id: string;
+  title: string;
+  gender: 'men' | 'women' | 'kids' | 'unisex';
+  isTrending?: boolean;
+  isLimitedOffer?: boolean;
+  variants: ProductVariantModel[];
+};
+
 @Component({
   selector: 'app-collection-page',
   imports: [CommonModule, TransitionLink, CollectionFilter, CollectionSort, CollectionProductCard],
@@ -23,6 +42,7 @@ export class CollectionPage implements OnInit {
   private readonly defaultSlug = 'mens-new-arrivals';
 
   collections = signal<CollectionData[]>([]);
+  allProducts = signal<ProductModel[]>([]);
   currentSlug = signal(this.defaultSlug);
   isFilterModalOpen = signal(false);
   isSortMenuOpen = signal(false);
@@ -43,8 +63,23 @@ export class CollectionPage implements OnInit {
   currentCollection = computed(() => {
     const collections = this.collections();
     const selectedSlug = this.currentSlug();
+    const mappedProducts = this.mapProductsForSlug(selectedSlug);
+    const resolvedProducts = mappedProducts.length > 0
+      ? mappedProducts
+      : collections.find((collection) => collection.slug === selectedSlug)?.products ?? [];
 
-    return collections.find((collection) => collection.slug === selectedSlug) ?? collections[0] ?? null;
+    const baseCollection =
+      collections.find((collection) => collection.slug === selectedSlug)
+      ?? collections[0]
+      ?? null;
+    if (!baseCollection) {
+      return null;
+    }
+    return {
+      ...baseCollection,
+      products: resolvedProducts,
+      productCount: resolvedProducts.length,
+    };
   });
 
   activeSortLabel = computed(() => {
@@ -115,7 +150,7 @@ export class CollectionPage implements OnInit {
       this.isSortMenuOpen.set(false);
     });
 
-    void this.loadCollections();
+    void Promise.all([this.loadCollections(), this.loadProducts()]);
   }
 
   private async loadCollections(): Promise<void> {
@@ -123,6 +158,12 @@ export class CollectionPage implements OnInit {
     const data = (await response.json()) as CollectionDataFile;
 
     this.collections.set(data.collections ?? []);
+  }
+
+  private async loadProducts(): Promise<void> {
+    const response = await fetch('/mockData/products.json');
+    const data = (await response.json()) as { products?: ProductModel[] };
+    this.allProducts.set(data.products ?? []);
   }
 
   openFilterModal(): void {
@@ -277,5 +318,51 @@ export class CollectionPage implements OnInit {
       return 'womens-new-arrivals';
     }
     return routeSlug;
+  }
+
+  private mapProductsForSlug(slug: string): CollectionProduct[] {
+    const products = this.allProducts();
+    if (products.length === 0) {
+      return [];
+    }
+
+    const bySlug = products.filter((product) => {
+      if (slug === 'sale') {
+        return !!product.isLimitedOffer || product.variants.some((variant) => (variant.discount ?? 0) > 0);
+      }
+      if (slug === 'featured') {
+        return !!product.isTrending;
+      }
+      if (slug.includes('women')) {
+        return product.gender === 'women' || product.gender === 'unisex';
+      }
+      return product.gender === 'men' || product.gender === 'unisex';
+    });
+
+    return bySlug.map((product) => this.toCollectionProduct(product));
+  }
+
+  private toCollectionProduct(product: ProductModel): CollectionProduct {
+    const firstVariant = product.variants[0];
+    const colorList = [...new Set(product.variants.map((variant) => variant.color).filter(Boolean))];
+    const sizeList = [...new Set(product.variants.map((variant) => variant.size).filter(Boolean))];
+    const swatches = ['#2f2f2f', '#a39f95', '#d8d5cd', '#7f8fa4', '#b5ab8d'];
+
+    return {
+      productId: product._id,
+      variantSku: firstVariant?.sku ?? '',
+      name: product.title,
+      variant: firstVariant?.color ?? '',
+      price: `$${firstVariant?.price ?? 0}`,
+      priceValue: firstVariant?.price ?? 0,
+      image: firstVariant?.images?.[0] ?? 'assets/images/promotional_banner_1.webp',
+      badge: product.isLimitedOffer ? 'SALE' : (product.isTrending ? 'TRENDING' : 'NEW'),
+      moreColors: `+${Math.max(colorList.length - 1, 0)}`,
+      swatches: swatches.slice(0, Math.max(colorList.length, 1)),
+      sizes: sizeList.length > 0 ? sizeList : ['M'],
+      colors: colorList.length > 0 ? colorList : ['Default'],
+      productType: 'Everyday Sneakers',
+      material: 'Tree',
+    };
   }
 }
