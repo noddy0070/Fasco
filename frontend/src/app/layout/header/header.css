@@ -12,3 +12,18 @@ a:hover{
     transform: scale(1.05);
 }
 
+.search-dropdown {
+  animation: dropdownFadeIn 160ms ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

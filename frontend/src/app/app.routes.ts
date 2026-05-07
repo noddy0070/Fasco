@@ -8,6 +8,7 @@ import { ForgotPassword } from './features/auth/forgot-password/forgot-password'
 import { NotFound } from './features/not-found/not-found';
 import { CollectionPage } from './features/collections/collection-page/collection-page';
 import { ProductDetail } from './features/product-detail/product-detail';
+import { SearchPage } from './features/search/search-page/search-page';
 export const routes: Routes = [
     {path:'',component:Home, title:'Home Page' },
     {path:'shop',redirectTo:'collections/mens-new-arrivals',pathMatch:'full'},
@@ -17,6 +18,7 @@ export const routes: Routes = [
     {path:'collections',redirectTo:'collections/mens-new-arrivals',pathMatch:'full'},
     {path:'collections/:collectionSlug',component:CollectionPage, title:'Collection Page' },
     {path:'product/:id',component:ProductDetail, title:'Product Detail'},
+    {path:'search',component:SearchPage, title:'Search Results' },
     {path:'signup',component:Signup, title:'Signup Page' },
     {path:'login',component:Login, title:'Login Page' },
     {path:'forgot-password',component:ForgotPassword, title:'Forgot Password Page' },
