@@ -3,70 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TransitionLink } from '../../../shared/components/transition-link/transition-link';
-
-interface CollectionTab {
-  label: string;
-  slug: string;
-}
-
-interface CollectionProduct {
-  name: string;
-  variant: string;
-  price: string;
-  priceValue: number;
-  image: string;
-  badge: string;
-  moreColors: string;
-  swatches: string[];
-  sizes: string[];
-  colors: string[];
-  productType: string;
-  material: string;
-}
-
-interface CollectionPromoAction {
-  label: string;
-  slug: string;
-}
-
-interface CollectionPromo {
-  eyebrow: string;
-  title: string;
-  description: string;
-  actions: CollectionPromoAction[];
-}
-
-interface CollectionData {
-  slug: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  heroImage: string;
-  productCount: number;
-  tabs: CollectionTab[];
-  sortOptions: string[];
-  products: CollectionProduct[];
-  promo: CollectionPromo;
-}
-
-interface CollectionDataFile {
-  collections: CollectionData[];
-}
-
-interface FilterColorOption {
-  label: string;
-  swatch: string;
-}
-
-interface PriceRangeOption {
-  label: string;
-  min: number;
-  max: number;
-}
+import { CollectionFilter } from '../../../shared/collection/collection-filter/collection-filter';
+import { CollectionSort } from '../../../shared/collection/collection-sort/collection-sort';
+import { CollectionProductCard } from '../../../shared/collection/collection-product-card/collection-product-card';
+import { CollectionData, CollectionDataFile, CollectionProduct, CollectionTab } from '../../../shared/collection/collection.types';
+import { COLOR_OPTIONS, MATERIAL_OPTIONS, PRICE_OPTIONS, PRODUCT_TYPE_OPTIONS, SIZE_OPTIONS } from '../../../shared/collection/collection.constants';
 
 @Component({
   selector: 'app-collection-page',
-  imports: [CommonModule, TransitionLink],
+  imports: [CommonModule, TransitionLink, CollectionFilter, CollectionSort, CollectionProductCard],
   templateUrl: './collection-page.html',
   styleUrl: './collection-page.css',
 })
@@ -88,65 +33,11 @@ export class CollectionPage implements OnInit {
   selectedProductTypes = signal<string[]>([]);
   selectedMaterials = signal<string[]>([]);
 
-  readonly sizeOptions = [
-    'XS', 'S', 'M', 'L', 'XL',
-    'XXL', 'XXXL', '8', '8.5', '9',
-    '9.5', '10', '10.5', '11', '11.5',
-    '12', '12.5', '13', '13.5', '14',
-    '15', 'One Size',
-  ];
-
-  readonly colorOptions: FilterColorOption[] = [
-    { label: 'Black', swatch: '#1E1F23' },
-    { label: 'Grey', swatch: '#778092' },
-    { label: 'White', swatch: '#F4F5F6' },
-    { label: 'Beige', swatch: '#EFE2B4' },
-    { label: 'Brown', swatch: '#AF4B02' },
-    { label: 'Red', swatch: '#FF3040' },
-    { label: 'Pink', swatch: '#EE9AC7' },
-    { label: 'Orange', swatch: '#FF6C00' },
-    { label: 'Yellow', swatch: '#F6BE00' },
-    { label: 'Green', swatch: '#0FA748' },
-    { label: 'Blue', swatch: '#3079E9' },
-    { label: 'Purple', swatch: '#A54AEA' },
-  ];
-
-  readonly priceOptions: PriceRangeOption[] = [
-    { label: 'Under $75', min: 0, max: 74 },
-    { label: '$75 - $100', min: 75, max: 100 },
-    { label: '$101 - $125', min: 101, max: 125 },
-    { label: '$126 - $150', min: 126, max: 150 },
-    { label: 'Over $150', min: 151, max: Number.POSITIVE_INFINITY },
-  ];
-
-  readonly productTypeOptions = [
-    'Everyday Sneakers',
-    'Golf',
-    'High Tops',
-    'Hiking Shoes',
-    'Hoodies',
-    'Insoles',
-    'Long Sleeve Tees',
-    'Running Shoes',
-    'Shirts',
-    'Slip Ons',
-    'Slippers',
-    'Socks',
-    'Sweatpants',
-    'Sweatshirts',
-    'Tees',
-    'Water-Repellent Shoes',
-  ];
-
-  readonly materialOptions = [
-    'Alternative-Leather',
-    'Canvas',
-    'Cotton',
-    'Sugar',
-    'Tree',
-    'Tree-Fiber-Blend',
-    'Wool',
-  ];
+  readonly sizeOptions = SIZE_OPTIONS;
+  readonly colorOptions = COLOR_OPTIONS;
+  readonly priceOptions = PRICE_OPTIONS;
+  readonly productTypeOptions = PRODUCT_TYPE_OPTIONS;
+  readonly materialOptions = MATERIAL_OPTIONS;
 
   currentCollection = computed(() => {
     const collections = this.collections();

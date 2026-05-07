@@ -30,315 +30,84 @@
       class="mt-4 rounded-[28px] bg-[#E7E0D3] p-4 shadow-[0_16px_50px_rgba(0,0,0,0.05)] md:p-5"
     >
       <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center gap-3">
-          <button
-            (click)="openFilterModal()"
-            class="flex items-center gap-3 rounded-full border border-[#1D1D1B]/20 bg-[#F5F1E8] px-4 py-3 text-sm font-medium text-[#334960] transition-colors duration-300 hover:border-[#1D1D1B]/35 hover:bg-white"
-          >
-            <span
-              class="grid size-8 place-items-center rounded-full border border-[#1D1D1B]/25 bg-white text-[#1D1D1B]"
-            >
-              <svg
-                class="size-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 6.75H20M7.5 12H16.5M10 17.25H14"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
-            <span>FILTER</span>
-            <span class="font-normal text-[#55647A]"
-              >({{ filteredProducts().length }} products)</span
-            >
-          </button>
-        </div>
+        <app-collection-filter
+          [filteredCount]="filteredProducts().length"
+          [isOpen]="isFilterModalOpen()"
+          [sizeOptions]="sizeOptions"
+          [colorOptions]="colorOptions"
+          [priceOptions]="priceOptions"
+          [productTypeOptions]="productTypeOptions"
+          [materialOptions]="materialOptions"
+          [isSizeSelected]="isSizeSelected.bind(this)"
+          [isColorSelected]="isColorSelected.bind(this)"
+          [isPriceSelected]="isPriceSelected.bind(this)"
+          [isProductTypeSelected]="isProductTypeSelected.bind(this)"
+          [isMaterialSelected]="isMaterialSelected.bind(this)"
+          (open)="openFilterModal()"
+          (close)="closeFilterModal()"
+          (clearFilters)="clearFilters()"
+          (toggleSize)="toggleSize($event)"
+          (toggleColor)="toggleColor($event)"
+          (togglePrice)="togglePrice($event)"
+          (toggleProductType)="toggleProductType($event)"
+          (toggleMaterial)="toggleMaterial($event)"
+        />
 
-        <div class="flex flex-wrap items-center gap-3 lg:justify-end">
-          <div class="flex rounded-full border border-[#26231F] bg-white p-1">
-            @for (tab of collection.tabs; track tab.slug; let tabIndex = $index) {
-              <app-transition-link
-                [link]="'/collections/' + tab.slug"
-                [ngClass]="
-                  isTabActive(tab, collection, tabIndex)
-                    ? 'bg-[#1C1C1C] text-white'
-                    : 'bg-transparent text-[#1B1B1B]'
-                "
-                class="rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-300"
-              >
-                {{ tab.label }}
-              </app-transition-link>
-            }
-          </div>
-
-          <div class="relative">
-            <button
-              type="button"
-              (click)="toggleSortMenu()"
-              class="flex min-w-45 items-center justify-between rounded-full border border-[#26231F] bg-white px-5 py-3 text-sm font-semibold uppercase tracking-widest text-[#1B1B1B] transition-colors duration-300 hover:bg-[#F7F5EF]"
-            >
-              <span>{{ activeSortLabel() }}</span>
-              <span
-                class="grid size-6 place-items-center rounded-full border border-[#26231F] text-[10px]"
-                >⌄</span
-              >
-            </button>
-
-            @if (isSortMenuOpen()) {
-              <div class="sort-menu">
-                @for (option of collection.sortOptions; track option) {
-                  <button
-                    type="button"
-                    class="sort-menu-item"
-                    [class.is-selected]="option === activeSortLabel()"
-                    (click)="selectSortOption(option)"
-                  >
-                    <span>{{ option }}</span>
-                    @if (option === activeSortLabel()) {
-                      <span>✓</span>
-                    }
-                  </button>
-                }
-              </div>
-            }
-          </div>
-        </div>
+        <app-collection-sort
+          [collection]="collection"
+          [activeSortLabel]="activeSortLabel()"
+          [isSortMenuOpen]="isSortMenuOpen()"
+          [isTabActive]="isTabActive.bind(this)"
+          (toggleSortMenu)="toggleSortMenu()"
+          (selectSortOption)="selectSortOption($event)"
+        />
       </div>
     </section>
 
-    @if (isFilterModalOpen()) {
-      <div
-        class="filter-modal-backdrop"
-        (click)="closeFilterModal()"
-        (keydown.escape)="closeFilterModal()"
-      >
-        <section
-          class="filter-modal-panel"
-          (click)="$event.stopPropagation()"
-          (keydown)="$event.stopPropagation()"
+    <section class="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      @if (displayedProducts().length === 0) {
+        <div
+          class="col-span-full rounded-[22px] border border-dashed border-[#1D1D1B]/25 bg-white/70 p-10 text-center"
         >
-          <button class="filter-modal-collapse" (click)="closeFilterModal()" type="button">
-            <span class="text-lg leading-none">✕</span>
-            <span>COLLAPSE FILTERS</span>
-            <span class="font-normal">({{ filteredProducts().length }} products)</span>
+          <p class="text-xl font-medium text-[#1B1B1B]">No products match these filters.</p>
+          <button type="button" class="mt-4 text-sm underline" (click)="clearFilters()">
+            Reset filters
           </button>
-
-          <div class="filter-modal-grid">
-            <div class="filter-group">
-              <h3>SIZE</h3>
-              <p class="filter-hint">
-                Most of our shoes only come in full sizes. If you're a half size, select your
-                nearest whole size too.
-              </p>
-              <div class="size-grid">
-                @for (size of sizeOptions; track size) {
-                  <button
-                    type="button"
-                    (click)="toggleSize(size)"
-                    [class.is-selected]="isSizeSelected(size)"
-                  >
-                    {{ size }}
-                  </button>
-                }
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <h3>COLOR</h3>
-              <div class="color-grid">
-                @for (color of colorOptions; track color.label) {
-                  <button
-                    type="button"
-                    (click)="toggleColor(color.label)"
-                    [class.is-selected]="isColorSelected(color.label)"
-                  >
-                    <span [style.background-color]="color.swatch"></span>
-                    <span>{{ color.label }}</span>
-                  </button>
-                }
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <h3>PRICE</h3>
-              <div class="checkbox-list">
-                @for (priceOption of priceOptions; track priceOption.label) {
-                  <label>
-                    <input
-                      type="checkbox"
-                      [checked]="isPriceSelected(priceOption.label)"
-                      (change)="togglePrice(priceOption.label)"
-                    />
-                    <span>{{ priceOption.label }}</span>
-                  </label>
-                }
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <h3>PRODUCT TYPE</h3>
-              <div class="checkbox-list">
-                @for (productType of productTypeOptions; track productType) {
-                  <label>
-                    <input
-                      type="checkbox"
-                      [checked]="isProductTypeSelected(productType)"
-                      (change)="toggleProductType(productType)"
-                    />
-                    <span>{{ productType }}</span>
-                  </label>
-                }
-              </div>
-            </div>
-
-            <div class="filter-group">
-              <h3>MATERIAL</h3>
-              <div class="checkbox-list">
-                @for (material of materialOptions; track material) {
-                  <label>
-                    <input
-                      type="checkbox"
-                      [checked]="isMaterialSelected(material)"
-                      (change)="toggleMaterial(material)"
-                    />
-                    <span>{{ material }}</span>
-                  </label>
-                }
-              </div>
-            </div>
-          </div>
-
-          <div class="filter-modal-footer">
-            <button type="button" class="filter-clear-btn" (click)="clearFilters()">
-              Clear all
-            </button>
-            <button type="button" class="filter-apply-btn" (click)="closeFilterModal()">
-              Show {{ filteredProducts().length }} results
-            </button>
-          </div>
-        </section>
-      </div>
-    }
-
-    <section class="mt-5 grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        @for (product of displayedProducts(); track product.name) {
-          <article
-            class="collection-card group flex min-h-130 flex-col rounded-[28px] bg-white p-4 shadow-[0_14px_50px_rgba(0,0,0,0.06)]"
-          >
-            <div class="flex items-start justify-between gap-3">
-              <span
-                class="collection-card-badge inline-flex rounded-full bg-[#E7DFD1] px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-[#1B1B1B]"
-              >
-                {{ product.badge }}
-              </span>
-
-              <button
-                class="collection-card-heart grid size-10 place-items-center rounded-full bg-[#1A1A1A]/10 text-[#1A1A1A]"
-              >
-                <svg
-                  class="size-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 20.9999C11.355 20.4279 10.626 19.8329 9.85502 19.1999H9.84502C7.13002 16.9799 4.05302 14.4679 2.69402 11.4579C2.24754 10.4996 2.01093 9.45703 2.00001 8.3999C1.99703 6.94939 2.57879 5.55889 3.61383 4.54267C4.64887 3.52645 6.04981 2.9703 7.50002 2.9999C8.68065 3.00177 9.83586 3.34298 10.828 3.9829C11.264 4.26587 11.6584 4.60816 12 4.9999C12.3435 4.6097 12.7381 4.26761 13.173 3.9829C14.1648 3.34286 15.3197 3.00162 16.5 2.9999C17.9502 2.9703 19.3512 3.52645 20.3862 4.54267C21.4213 5.55889 22.003 6.94939 22 8.3999C21.9898 9.45872 21.7532 10.5031 21.306 11.4629C19.947 14.4729 16.871 16.9839 14.156 19.1999L14.146 19.2079C13.374 19.8369 12.646 20.4319 12.001 21.0079L12 20.9999ZM7.50002 4.9999C6.56853 4.98825 5.6701 5.34475 5.00002 5.9919C4.35441 6.62607 3.99358 7.49495 3.99994 8.3999C4.01135 9.1704 4.18585 9.92976 4.51202 10.6279C5.15353 11.9266 6.01913 13.102 7.06902 14.0999C8.06002 15.0999 9.20002 16.0679 10.186 16.8819C10.459 17.1069 10.737 17.3339 11.015 17.5609L11.19 17.7039C11.457 17.9219 11.733 18.1479 12 18.3699L12.013 18.3579L12.019 18.3529H12.025L12.034 18.3459H12.039H12.044L12.062 18.3309L12.103 18.2979L12.11 18.2919L12.121 18.2839H12.127L12.136 18.2759L12.8 17.7309L12.974 17.5879C13.255 17.3589 13.533 17.1319 13.806 16.9069C14.792 16.0929 15.933 15.1259 16.924 14.1209C17.9741 13.1235 18.8397 11.9484 19.481 10.6499C19.8131 9.9457 19.9901 9.17841 20.0001 8.3999C20.0042 7.49774 19.6435 6.6322 19 5.9999C18.3312 5.34982 17.4326 4.99039 16.5 4.9999C15.3619 4.99023 14.274 5.46727 13.51 6.3109L12 8.0509L10.49 6.3109C9.72609 5.46727 8.6381 4.99023 7.50002 4.9999Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div
-              class="collection-card-image-wrap mt-4 flex flex-1 items-center justify-center overflow-hidden rounded-3xl bg-[#FBFBF9] px-2 py-4"
-            >
-              <img
-                [src]="product.image"
-                [alt]="product.name"
-                class="collection-card-image h-full w-full max-h-62.5 object-contain"
-              />
-            </div>
-
-            <div class="mt-4 flex flex-1 flex-col justify-end gap-2">
-              <div>
-                <p
-                  class="collection-card-title text-lg font-semibold uppercase tracking-[-0.03em] text-[#1A1A1A]"
-                >
-                  {{ product.name }}
-                </p>
-                <p class="mt-1 text-base text-[#4F4F4F]">{{ product.variant }}</p>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-2">
-                @for (swatch of product.swatches; track swatch) {
-                  <span
-                    class="size-5 rounded-full border border-[#A7A7A7]"
-                    [style.background-color]="swatch"
-                  ></span>
-                }
-                <span class="ml-1 text-sm font-semibold text-[#1A1A1A]">{{
-                  product.moreColors
-                }}</span>
-
-                <span class="ml-auto text-lg font-semibold text-[#1A1A1A]">{{
-                  product.price
-                }}</span>
-              </div>
-
-              <div class="collection-card-sizes">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#7A7A7A]">
-                  Available sizes
-                </p>
-                <div class="mt-2 grid grid-cols-6 gap-2">
-                  @for (size of product.sizes; track size) {
-                    <span class="size-pill">{{ size }}</span>
-                  }
-                </div>
-              </div>
-            </div>
-          </article>
-        } @empty {
-          <div
-            class="col-span-full rounded-[22px] border border-dashed border-[#1D1D1B]/25 bg-white/70 p-10 text-center"
-          >
-            <p class="text-xl font-medium text-[#1B1B1B]">No products match these filters.</p>
-            <button type="button" class="mt-4 text-sm underline" (click)="clearFilters()">
-              Reset filters
-            </button>
-          </div>
+        </div>
+      } @else {
+        @for (product of displayedProducts().slice(0, 3); track product.name) {
+          <app-collection-product-card [product]="product" />
         }
-      </div>
 
-      <aside
-        class="flex min-h-105 flex-col justify-between rounded-[28px] bg-[#ABA996] p-6 text-white shadow-[0_14px_50px_rgba(0,0,0,0.08)]"
-      >
-        <div class="pt-8 text-center">
-          <p class="text-sm font-semibold uppercase tracking-[0.32em] text-white/85">
-            {{ collection.promo.eyebrow }}
-          </p>
-          <h2 class="mt-5 text-3xl font-medium leading-tight md:text-4xl">
-            {{ collection.promo.title }}
-          </h2>
-          <p class="mt-5 text-base text-white/90">{{ collection.promo.description }}</p>
-        </div>
+        <aside
+          class="flex min-h-105 flex-col justify-between rounded-[28px] bg-[#ABA996] p-6 text-white shadow-[0_14px_50px_rgba(0,0,0,0.08)]"
+        >
+          <div class="pt-8 text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-white/85">
+              {{ collection.promo.eyebrow }}
+            </p>
+            <h2 class="mt-5 text-3xl font-medium leading-tight md:text-4xl">
+              {{ collection.promo.title }}
+            </h2>
+            <p class="mt-5 text-base text-white/90">{{ collection.promo.description }}</p>
+          </div>
 
-        <div class="flex flex-col gap-3 pb-2">
-          @for (action of collection.promo.actions; track action.slug) {
-            <app-transition-link
-              [link]="'/collections/' + action.slug"
-              class="rounded-full border border-white/70 px-5 py-3 text-center text-sm font-semibold uppercase tracking-widest text-white transition-colors duration-300 hover:bg-white hover:text-[#1B1B1B]"
-            >
-              {{ action.label }}
-            </app-transition-link>
-          }
-        </div>
-      </aside>
+          <div class="flex flex-col gap-3 pb-2">
+            @for (action of collection.promo.actions; track action.slug) {
+              <app-transition-link
+                [link]="'/collections/' + action.slug"
+                class="rounded-full border border-white/60 bg-white/6 px-5 py-3 text-center text-sm font-semibold uppercase tracking-widest text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white/18 hover:shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
+              >
+                {{ action.label }}
+              </app-transition-link>
+            }
+          </div>
+        </aside>
+
+        @for (product of displayedProducts().slice(3); track product.name) {
+          <app-collection-product-card [product]="product" />
+        }
+      }
     </section>
   } @else {
     <div class="rounded-[28px] bg-white/80 p-8 text-center shadow-[0_14px_50px_rgba(0,0,0,0.06)]">

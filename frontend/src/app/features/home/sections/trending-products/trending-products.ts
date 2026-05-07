@@ -1,32 +1,23 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { RoundedBlackButton } from "../../../../shared/components/rounded-black-button/rounded-black-button";
 import { ProductCard } from "../../../../shared/components/product-card/product-card";
+import {
+  FALLBACK_TRENDING_PRODUCTS,
+  TRENDING_COLORS,
+  TRENDING_FILTERS,
+  TrendingProduct,
+} from './trending-products.constants';
 @Component({
   selector: 'app-trending-products',
   imports: [RoundedBlackButton, ProductCard],
   templateUrl: './trending-products.html',
   styleUrl: './trending-products.css',
 })
-export class TrendingProducts {
-  colors = signal([
-    { name: 'PINK', class: 'bg-[#F44E8A]' },
-    { name: 'DARK GREEN', class: 'bg-[#44936D]' },
-    { name: 'YELLOW', class: 'bg-[#F4CF4E]' },
-    { name: 'BLUE SKY', class: 'bg-[#5FABE2]' },
-    { name: 'NAVY BLUE', class: 'bg-[#233C6B]' },
-    { name: 'CLEAN WHITE', class: 'bg-[#FFFFFF] border border-[#DEDEDE]' },
-    { name: 'RED PASTEL', class: 'bg-[#E25F5F]' },
-  ]);
-
-  products = signal([
-    { name: 'Shiny Dress', price: '$225', imageUrl: 'assets/images/home/trend/Image-1.png' },
-    { name: 'Long Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-2.png' },
-    { name: 'Full Sweater', price: '$125', imageUrl: 'assets/images/home/trend/Image-3.png', span:2 },
-    { name: 'White Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-4.png', span:2 },
-    { name: 'Colorful Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-5.png' },
-    { name: 'White Shirt', price: '$159', imageUrl: 'assets/images/home/trend/Image-6.png' },
-    
-  ])
+export class TrendingProducts implements OnInit {
+  colors = signal(TRENDING_COLORS);
+  filters = TRENDING_FILTERS;
+  selectedFilter = signal<string>(this.filters[0]);
+  products = signal<TrendingProduct[]>([]);
 
   leftColumn = computed(() =>
     this.colors().filter((_, i) => i % 2 === 0)
@@ -36,14 +27,22 @@ export class TrendingProducts {
     this.colors().filter((_, i) => i % 2 !== 0)
   );
 
-  getCardClasses(index: number, isLast: boolean): string {
-  if (isLast) {
-    return 'w-[35vw] hover:w-[17.08vw] group-hover:w-[17.08vw]';
-  } else {
-    return 'w-[17.08vw] hover:w-[35vw] hover:col-span-2';
+  filteredProducts = computed(() => {
+    const selected = this.selectedFilter();
+    return this.products().filter((product) => product.categories.includes(selected));
+  });
+
+  async ngOnInit(): Promise<void> {
+    try {
+      const response = await fetch('/mockData/trending-products.json');
+      const data = (await response.json()) as { products?: TrendingProduct[] };
+      this.products.set(data.products?.length ? data.products : FALLBACK_TRENDING_PRODUCTS);
+    } catch {
+      this.products.set(FALLBACK_TRENDING_PRODUCTS);
+    }
   }
-}
 
-  
-
+  setFilter(filter: string): void {
+    this.selectedFilter.set(filter);
+  }
 }

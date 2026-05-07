@@ -4,14 +4,14 @@
       Make Your <br class="hidden md:block" />Own Trend
     </h2>
     <div class="flex gap-2.5 w-full max-w-full overflow-x-auto hide-scrollbar">
-      <app-rounded-black-button
-        class="ml-auto"
-        placeholder="Men's Fashion"
-      ></app-rounded-black-button>
-      <app-rounded-black-button placeholder="Women's Fashion"></app-rounded-black-button>
-      <app-rounded-black-button placeholder="Men's Accessories"></app-rounded-black-button>
-      <app-rounded-black-button placeholder="Women's Accessories"></app-rounded-black-button>
-      <app-rounded-black-button placeholder="Discount Deals"></app-rounded-black-button>
+      @for (filter of filters; track filter; let isFirst = $first) {
+        <app-rounded-black-button
+          [class.ml-auto]="isFirst"
+          [placeholder]="filter"
+          [buttonClass]="selectedFilter() === filter ? '!bg-black !text-white !border-black' : ''"
+          (click)="setFilter(filter)"
+        ></app-rounded-black-button>
+      }
     </div>
   </div>
   <div class="flex flex-col md:grid grid-cols-[4fr_3fr_26fr] max-md:gap-2">
@@ -60,14 +60,13 @@
     </div>
     <div class="flex flex-col gap-5">
       <div class="product-grid hidden md:flex gap-x-2.5 gap-y-5">
-        @for (product of products().slice(0, 3); track product.name; let isFirst = $last) {
+        @for (product of filteredProducts().slice(0, 3); track product.name; let isWide = $last) {
           <app-product-card
-            [class.col-span-2]="false"
             [title]="product.name"
             [price]="product.price"
-            [url]="product.imageUrl"
+            [url]="product.imageUrl || product.image || ''"
             [class]="
-              isFirst
+              isWide
                 ? 'product-card-1 md:w-[35vw] col-span-2'
                 : 'col-span-1 product-card-1 md:w-[17.08vw] '
             "
@@ -76,26 +75,24 @@
         }
       </div>
       <div class="product-grid hidden md:flex gap-x-2.5 gap-y-5">
-        @for (product of products().slice(3, 6); track product.name; let isFirst = $first) {
+        @for (product of filteredProducts().slice(3, 6); track product.name; let isWide = $first) {
           <app-product-card
-            [class.col-span-2]="false"
             [title]="product.name"
             [price]="product.price"
-            [url]="product.imageUrl"
-            [class]="isFirst ? 'product-card-2 w-[35vw]' : 'product-card-2 w-[17.08vw] '"
+            [url]="product.imageUrl || product.image || ''"
+            [class]="isWide ? 'product-card-2 w-[35vw]' : 'product-card-2 w-[17.08vw] '"
             class="rounded-[20px] hover:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out"
           />
         }
       </div>
       <div class="product-grid hidden md:flex gap-x-2.5 gap-y-5">
-        @for (product of products().slice(0, 3); track product.name; let isFirst = $last) {
+        @for (product of filteredProducts().slice(6, 9); track product.name; let isWide = $last) {
           <app-product-card
-            [class.col-span-2]="false"
             [title]="product.name"
             [price]="product.price"
-            [url]="product.imageUrl"
+            [url]="product.imageUrl || product.image || ''"
             [class]="
-              isFirst
+              isWide
                 ? 'product-card-1 md:w-[35vw] col-span-2'
                 : 'col-span-1 product-card-1 md:w-[17.08vw] '
             "
@@ -104,12 +101,11 @@
         }
       </div>
       <div class="product-grid grid grid-cols-2 md:hidden gap-x-2.5 gap-y-5">
-        @for (product of products(); track product.name) {
+        @for (product of filteredProducts(); track product.name) {
           <app-product-card
-            [class.col-span-2]="false"
             [title]="product.name"
             [price]="product.price"
-            [url]="product.imageUrl"
+            [url]="product.imageUrl || product.image || ''"
             class="rounded-[20px] hover:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out"
           />
         }
