@@ -1,6 +1,7 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { RoundedBlackButton } from "../../../../shared/components/rounded-black-button/rounded-black-button";
 import { ProductCard } from "../../../../shared/components/product-card/product-card";
+import { Router } from '@angular/router';
 import {
   FALLBACK_TRENDING_PRODUCTS,
   TRENDING_COLORS,
@@ -14,6 +15,8 @@ import {
   styleUrl: './trending-products.css',
 })
 export class TrendingProducts implements OnInit {
+  constructor(private readonly router: Router) {}
+
   colors = signal(TRENDING_COLORS);
   filters = TRENDING_FILTERS;
   selectedFilter = signal<string>(this.filters[0]);
@@ -44,5 +47,16 @@ export class TrendingProducts implements OnInit {
 
   setFilter(filter: string): void {
     this.selectedFilter.set(filter);
+  }
+
+  async openCollectionByColor(colorName: string): Promise<void> {
+    const colorSlug = colorName.toLowerCase().replace(/\s+/g, '-');
+    const selected = this.selectedFilter().toLowerCase();
+    const collectionBaseSlug = selected.includes("women")
+      ? 'womens-fashion'
+      : 'mens-fashion';
+    await this.router.navigate(['/collections', collectionBaseSlug], {
+      queryParams: { color: colorSlug },
+    });
   }
 }

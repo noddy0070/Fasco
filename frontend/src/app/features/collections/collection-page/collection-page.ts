@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest } from 'rxjs';
 import { TransitionLink } from '../../../shared/components/transition-link/transition-link';
 import { CollectionFilter } from '../../../shared/collection/collection-filter/collection-filter';
 import { CollectionSort } from '../../../shared/collection/collection-sort/collection-sort';
@@ -103,9 +104,13 @@ export class CollectionPage implements OnInit {
   });
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((paramMap) => {
-      this.currentSlug.set(paramMap.get('collectionSlug') ?? this.defaultSlug);
-      this.clearFilters();
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(([paramMap, queryParamMap]) => {
+      this.applyRouteSelection(
+        paramMap.get('collectionSlug') ?? this.defaultSlug,
+        queryParamMap.get('color') ?? ''
+      );
       this.isFilterModalOpen.set(false);
       this.isSortMenuOpen.set(false);
     });
@@ -234,5 +239,43 @@ export class CollectionPage implements OnInit {
 
       return (orderMap.get(left.name) ?? 0) - (orderMap.get(right.name) ?? 0);
     });
+  }
+
+  private applyRouteSelection(routeSlug: string, colorQuery: string): void {
+    this.clearFilters();
+    const mappedSlug = this.mapCollectionBaseSlug(routeSlug);
+    const matchedColor = this.matchColorFromSlug(colorQuery || routeSlug);
+    if (matchedColor) {
+      this.currentSlug.set(mappedSlug);
+      this.selectedColors.set([matchedColor]);
+      return;
+    }
+
+    this.currentSlug.set(mappedSlug);
+  }
+
+  private matchColorFromSlug(slug: string): string | null {
+    const normalizedSlug = this.normalizeColorToken(slug);
+    const colorMatch = this.colorOptions.find((color) => {
+      const normalizedColor = this.normalizeColorToken(color.label);
+      return normalizedColor === normalizedSlug
+        || normalizedSlug.includes(normalizedColor)
+        || normalizedColor.includes(normalizedSlug);
+    });
+    return colorMatch?.label ?? null;
+  }
+
+  private normalizeColorToken(value: string): string {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  private mapCollectionBaseSlug(routeSlug: string): string {
+    if (routeSlug === 'mens-fashion') {
+      return 'mens-new-arrivals';
+    }
+    if (routeSlug === 'womens-fashion') {
+      return 'womens-new-arrivals';
+    }
+    return routeSlug;
   }
 }
