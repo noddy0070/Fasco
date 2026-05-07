@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
 import { TransitionLink } from "../../../shared/components/transition-link/transition-link";
 import { BlackButton } from "../../../shared/components/black-button/black-button";
 import { AuthFrame } from "../../../layout/auth-frame/auth-frame";
@@ -18,6 +19,7 @@ export class Signup {
   private readonly signupService = inject(SignupService);
   private readonly userStore = inject(UserStore);
   private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   isEyeClosed = signal(true);
   isEyeClosed2 = signal(true);
@@ -29,7 +31,7 @@ export class Signup {
     firstName: ['', [Validators.required]],
     lastName: [''],
     email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
+    phone: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]],
   });
@@ -64,6 +66,7 @@ export class Signup {
           this.signupForm.reset();
           this.isEyeClosed.set(true);
           this.isEyeClosed2.set(true);
+          this.router.navigate(['/signup/verification']);
         },
         error: (error) => {
           this.errorMessage.set(error?.error?.message ?? 'Signup failed. Please try again.');

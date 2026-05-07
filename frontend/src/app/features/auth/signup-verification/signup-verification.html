@@ -1,11 +1,14 @@
 <app-auth-frame>
   <div class="text-left flex flex-col gap-4">
     <h2 class="text-28px-sm md:text-28px-lg underline">Email Verification</h2>
-    @if (token()) {
-      <p>
-        Your email has been successfully verified! You can now log in to your account and start
-        using our services.
-      </p>
+    @if (message()) {
+      <p>{{ message() }}</p>
+    }
+
+    @if (isVerifying()) {
+      <p>Please wait while we verify your email address.</p>
+    } @else if (isVerified()) {
+      <p>You can now log in to your account and start using our services.</p>
     } @else {
       <p>
         Please check your email for a verification link to complete your signup process. If you

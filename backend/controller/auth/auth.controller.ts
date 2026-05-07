@@ -5,6 +5,26 @@ import jwt from 'jsonwebtoken';
 import type { JwtPayload } from "jsonwebtoken";
 import { sendEmail } from '../../utils/mailService.ts';
 
+const getJwtSecret = () => {
+  const secret = process.env.JWT_SECRET;
+
+  if (!secret) {
+    throw new Error("JWT_SECRET is required");
+  }
+
+  return secret;
+};
+
+const getRefreshJwtSecret = () => {
+  const secret = process.env.JWT_REFRESH_SECRET;
+
+  if (!secret) {
+    throw new Error("JWT_REFRESH_SECRET is required");
+  }
+
+  return secret;
+};
+
 
 // ================= SIGNUP =================
 
@@ -37,7 +57,7 @@ const signup = async (req: express.Request, res: express.Response) => {
       lastName,
       email,
       phone,
-      hashedPass,
+      hashedPassword: hashedPass,
     });
 
     await newUser.save();
@@ -47,24 +67,27 @@ const signup = async (req: express.Request, res: express.Response) => {
         userId: newUser._id,
         email: newUser.email,
       },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       {
         expiresIn: "1h",
       }
     );
 
-    const { hashedPassword, ...userData } = newUser.toObject();
+    const userObject = newUser.toObject();
+    const { hashedPassword: _hashedPassword, ...userData } = userObject;
 
     const verificationToken = jwt.sign(
       { userId: newUser._id },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       { expiresIn: "1h" }
     );
+
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:4200";
 
     try {
       await sendEmail(
         email,
-        `${process.env.FRONTEND_URL}/signup/verification?token=${verificationToken}`,
+        `${frontendUrl}/signup/verification?token=${encodeURIComponent(verificationToken)}`,
         newUser._id.toString()
       );
     } catch (mailError) {
@@ -134,7 +157,7 @@ const login = async (req: express.Request, res: express.Response) => {
         userId: user._id,
         email: user.email,
       },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       {
         expiresIn: "1h",
       }
@@ -144,7 +167,7 @@ const login = async (req: express.Request, res: express.Response) => {
       {
         userId: user._id,
       },
-      process.env.JWT_REFRESH_SECRET as string,
+      getRefreshJwtSecret(),
       {
         expiresIn: "7d",
       }
@@ -201,7 +224,7 @@ const googleAuth = async (
         userId: user._id,
         email: user.email,
       },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       {
         expiresIn: "1h",
       }
@@ -243,7 +266,7 @@ const forgotPassword = async (
       {
         userId: user._id,
       },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       {
         expiresIn: "15m",
       }
@@ -279,7 +302,7 @@ const resetPassword = async (
 
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET as string
+      getJwtSecret()
     ) as JwtPayload;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -320,7 +343,7 @@ const me = async (
 
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET as string
+      getJwtSecret()
     ) as JwtPayload;
 
     const user = await User.findById(decoded.userId).select(
@@ -379,7 +402,7 @@ const refresh = async (
 
     const decoded = jwt.verify(
       refreshToken,
-      process.env.JWT_REFRESH_SECRET as string
+      getRefreshJwtSecret()
     ) as JwtPayload;
 
     const user = await User.findById(decoded.userId);
@@ -395,7 +418,7 @@ const refresh = async (
         userId: user._id,
         email: user.email,
       },
-      process.env.JWT_SECRET as string,
+      getJwtSecret(),
       {
         expiresIn: "1h",
       }
