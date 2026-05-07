@@ -17,6 +17,11 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface ResetPasswordPayload {
+  token: string;
+  newPassword: string;
+}
+
 export interface AuthUser {
   _id: string;
   firstName: string;
@@ -69,6 +74,14 @@ export class AuthService {
 
   me(): Observable<CurrentUserResponse> {
     return this.http.get<CurrentUserResponse>(API_ENDPOINTS.auth.me);
+  }
+
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(API_ENDPOINTS.auth.forgotPassword, { email });
+  }
+
+  resetPassword(payload: ResetPasswordPayload): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(API_ENDPOINTS.auth.resetPassword, payload);
   }
 
   logout(): Observable<{ message: string }> {

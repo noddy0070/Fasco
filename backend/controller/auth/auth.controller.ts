@@ -156,5 +156,77 @@ const me = async (req: express.Request, res: express.Response) => {
     }
 };
 
+const forgotPassword = async (req: express.Request, res: express.Response) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" });
+        }
 
-export { signup, login, logout, me };
+        const user = await User.findOne({ email });
+        // Avoid account enumeration: return success even when user doesn't exist.
+        if (!user) {
+            return res.status(200).json({ message: "If this email exists, a reset link has been sent." });
+        }
+
+        const token = jwt.sign(
+            { userId: user._id, email: user.email, type: "password-reset" },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "15m" }
+        );
+
+        await sendEmail(
+            email,
+            `${process.env.FRONTEND_URL}/forgot-password?token=${token}`,
+            user._id.toString(),
+            {
+                subject: "Reset your Fasco password",
+                actionText: "Reset Password",
+            }
+        );
+
+        return res.status(200).json({ message: "If this email exists, a reset link has been sent." });
+    } catch (err) {
+        console.log("Error sending forgot password email", err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const resetPassword = async (req: express.Request, res: express.Response) => {
+    try {
+        const { token, newPassword } = req.body;
+        if (!token || !newPassword) {
+            return res.status(400).json({ message: "Token and newPassword are required" });
+        }
+        if (typeof newPassword !== "string" || newPassword.length < 6) {
+            return res.status(400).json({ message: "Password must be at least 6 characters" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
+            userId?: string;
+            type?: string;
+        };
+        if (!decoded?.userId || decoded.type !== "password-reset") {
+            return res.status(400).json({ message: "Invalid or expired token" });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const user = await User.findByIdAndUpdate(
+            decoded.userId,
+            { hashedPassword },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json({ message: "Password reset successful" });
+    } catch (err) {
+        console.log("Error resetting password", err);
+        return res.status(400).json({ message: "Invalid or expired token" });
+    }
+};
+
+
+export { signup, login, logout, me, forgotPassword, resetPassword };

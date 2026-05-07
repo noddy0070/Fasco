@@ -31,7 +31,7 @@ export class App implements OnInit{
   });
 }
 
-  noHeaderRoutes = signal(['/login', '/signup']);
+  noHeaderRoutes = signal(['/login', '/signup', '/forgot-password', '/404']);
   showHeader = signal(true);
 
   loadCarouselStyles() {
