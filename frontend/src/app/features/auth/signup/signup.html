@@ -18,30 +18,30 @@
       <span> OR </span>
       <span> - </span>
     </div>
-    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]">
+    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]" [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Input Form -->
       <div class="grid grid-cols-2 gap-[2vw] md:gap-[1.5vw]">
         <input
           placeholder="First Name"
-          name="firstName"
+          formControlName="firstName"
           type="text"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Last Name"
-          name="lastName"
+          formControlName="lastName"
           type="text"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Email"
-          name="email"
+          formControlName="email"
           type="email"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
         <input
           placeholder="Phone Number"
-          name="mobileNumber"
+          formControlName="phone"
           type="number"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
         />
@@ -49,7 +49,7 @@
           <input
             [type]="isEyeClosed() ? 'text' : 'password'"
             placeholder="Password"
-            name="password"
+            formControlName="password"
             class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
           <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
@@ -60,7 +60,7 @@
           <input
             [type]="isEyeClosed2() ? 'text' : 'password'"
             placeholder="Confrim Password"
-            name="confrimPassword"
+            formControlName="confirmPassword"
             class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
           <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
@@ -69,11 +69,10 @@
         </div>
       </div>
       <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
-        <app-black-button
-          class="mx-auto w-full md:w-[80%]"
-          buttonClass="w-full py-[8px] xl:py-[10px] "
-          placeholder="Create Account"
-        />
+        @if (errorMessage()) {
+          <p class="text-red-600 text-sm md:w-[80%] mx-auto">{{ errorMessage() }}</p>
+        }
+        <app-black-button class="mx-auto w-full md:w-[80%]" buttonClass="w-full py-[8px] xl:py-[10px] " [placeholder]="isSubmitting() ? 'Creating...' : 'Create Account'" />
         <app-transition-link link="/login" class="mx-auto w-full md:w-[80%]">
           <button
             class="w-full md:-mt-1 lg:mt-0 py-2 hover:bg-accent-blue-light text-16px-sm md:text-16px-lg border-accent-blue text-accent-blue border rounded-lg transition-colors duration-300 ease-in-out"

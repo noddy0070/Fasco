@@ -18,10 +18,10 @@
       <span> OR </span>
       <span> - </span>
     </div>
-    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]">
+    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]" [formGroup]="form" (ngSubmit)="onSubmit()">
       <input
         placeholder="Email"
-        name="email"
+        formControlName="email"
         type="email"
         class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
       />
@@ -29,7 +29,7 @@
         <input
           [type]="isEyeClosed() ? 'text' : 'password'"
           placeholder="Password"
-          name="password"
+          formControlName="password"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
         />
 
@@ -38,10 +38,13 @@
         </button>
       </div>
       <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
+        @if (errorMessage()) {
+          <p class="text-red-600 text-sm md:w-[80%] mx-auto">{{ errorMessage() }}</p>
+        }
         <app-black-button
           class="mx-auto w-full md:w-[80%]"
           buttonClass="w-full py-[8px] xl:py-[10px] "
-          placeholder="Login"
+          [placeholder]="store.isLoading() ? 'Logging in...' : 'Login'"
         />
         <app-transition-link link="/signup" class="mx-auto w-full md:w-[80%]">
           <button

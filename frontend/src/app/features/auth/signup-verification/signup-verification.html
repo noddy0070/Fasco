@@ -2,21 +2,35 @@
   <div class="text-left flex flex-col gap-4">
     <h2 class="text-28px-sm md:text-28px-lg underline">Email Verification</h2>
     @if (token()) {
-      <p>
-        Your email has been successfully verified! You can now log in to your account and start
-        using our services.
-      </p>
+      @if (verifyMessage()) {
+        <p>{{ verifyMessage() }}</p>
+      }
+      @if (isVerified()) {
+        <p>Your email has been successfully verified! You can now log in to your account.</p>
+      }
     } @else {
       <p>
         Please check your email for a verification link to complete your signup process. If you
         didn't receive an email, you can request a new one below.
       </p>
+      @if (resendMessage()) {
+        <p>{{ resendMessage() }}</p>
+      }
       <app-black-button
         class="w-full md:w-[40%]"
         buttonClass="w-full py-[8px] xl:py-[10px] rounded-[0px] "
-        placeholder="Resend Link"
+        [placeholder]="
+          cooldown() > 0 ? 'Resend in ' + cooldown() + 's' : isResending() ? 'Sending...' : 'Resend Link'
+        "
+        (click)="resendLink()"
       >
       </app-black-button>
+    }
+    @if (!email()) {
+      <p>
+        Add an <code>email</code> query param on this page URL to enable resend (for example:
+        <code>/signup/verify?email=you@example.com</code>).
+      </p>
     }
   </div>
 </app-auth-frame>
