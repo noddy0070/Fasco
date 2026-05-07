@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.breadcrumbs {
+  font-family: Poppins, sans-serif;
+  color: #4d5560;
+}
+
+.breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbs-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbs-link {
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.breadcrumbs-link:hover {
+  color: #111111;
+}
+
+.breadcrumbs-current {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.breadcrumbs-separator {
+  font-size: 13px;
+  color: #8a93a1;
+}
