@@ -11,9 +11,46 @@
                 </app-transition-link>
             }
         </nav>
-        <div class="w-auto md:w-auto lg:w-[20vw] flex gap-2 md:gap-5 border-[#E3E3E3] border rounded-full h-min py-2 px-2 lg:px-4">
-            <input type="text" placeholder="Search" class="w-full font-medium  outline-none text-[14px] hidden md:hidden lg:block md:text-[16px] "/>
-            <img src="assets/icons/search.svg" alt="search-icon" class="ml-auto  w-5 md:w-6 lg:w-7.5"/>
+        <div class="relative w-auto md:w-auto lg:w-[20vw]">
+            <div class="flex gap-2 md:gap-5 border-[#E3E3E3] border rounded-full h-min py-2 px-2 lg:px-4">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    class="w-full font-medium outline-none text-[14px] hidden md:hidden lg:block md:text-[16px]"
+                    [ngModel]="searchQuery()"
+                    (ngModelChange)="onSearchInput($event)"
+                    (keydown.enter)="onSearchSubmit()"
+                    (blur)="closeDropdown()"
+                />
+                <button type="button" (click)="onSearchSubmit()" class="ml-auto flex items-center">
+                    <img src="assets/icons/search.svg" alt="search-icon" class="w-5 md:w-6 lg:w-7.5"/>
+                </button>
+            </div>
+            @if (isDropdownOpen()) {
+                <div class="search-dropdown absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0_16px_60px_rgba(0,0,0,0.14)] border border-[#E3E3E3] z-50 overflow-hidden">
+                    @for (product of suggestions(); track product.name) {
+                        <button
+                            type="button"
+                            class="search-suggestion-item w-full flex items-center gap-3 px-4 py-3 hover:bg-[#F5F1E8] transition-colors text-left"
+                            (mousedown)="selectSuggestion(product)"
+                        >
+                            <img [src]="product.image" [alt]="product.name" class="w-12 h-12 object-contain rounded-xl bg-[#FBFBF9] p-1 shrink-0"/>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-semibold text-[#1A1A1A] truncate">{{ product.name }}</p>
+                                <p class="text-xs text-[#4F4F4F] truncate">{{ product.variant }}</p>
+                            </div>
+                            <span class="text-sm font-semibold text-[#1A1A1A] shrink-0">{{ product.price }}</span>
+                        </button>
+                    }
+                    <button
+                        type="button"
+                        class="w-full px-4 py-3 text-xs font-semibold uppercase tracking-widest text-[#55647A] bg-[#F7F5EF] hover:bg-[#EDE9DE] transition-colors text-center"
+                        (mousedown)="onSearchSubmit()"
+                    >
+                        See all results for "{{ searchQuery() }}"
+                    </button>
+                </div>
+            }
         </div>
         @if (store.user()) {
             <app-transition-link link="/profile" class="w-min">
