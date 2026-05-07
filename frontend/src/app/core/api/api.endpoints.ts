@@ -1,4 +1,5 @@
-const API_PREFIX = '/api';
+import {environment} from "../../../environments/environments";
+const API_PREFIX = `${environment.apiUrl}/api`;
 const AUTH_PREFIX = `${API_PREFIX}/auth`;
 
 export const API_ENDPOINTS = {
