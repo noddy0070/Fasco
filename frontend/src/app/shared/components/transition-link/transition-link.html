@@ -1,4 +1,9 @@
 <!-- template: ` -->
-<a href="{{ link }}" class="w-min" (click)="handleClick($event)">
+<a
+  href="{{ link }}"
+  class="inline-block w-min"
+  [ngClass]="hostClasses"
+  (click)="handleClick($event)"
+>
   <ng-content></ng-content>
 </a>

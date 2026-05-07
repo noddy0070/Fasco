@@ -9,9 +9,9 @@ import { TransitionLink } from '../../shared/components/transition-link/transiti
 })
 export class Header {
   navLinks = signal([
-    { name: 'Shop', url: '/shop' },
-    { name: 'Deals', url: '/deals' },
-    { name: 'New Arrivals', url: '/new-arrivals' },
-    { name: 'Packages', url: '/packages' },
+    { name: 'Shop', url: '/collections/mens-new-arrivals' },
+    { name: 'Deals', url: '/collections/sale' },
+    { name: 'New Arrivals', url: '/collections/womens-new-arrivals' },
+    { name: 'Packages', url: '/collections/featured' },
   ]);
 }
