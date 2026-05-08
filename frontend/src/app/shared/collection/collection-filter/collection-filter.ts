@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { FilterColorOption, PriceRangeOption } from '../collection.types';
+import { FilterSlugOption, PriceRangeOption } from '../collection.types';
 
 @Component({
   selector: 'app-collection-filter',
@@ -11,15 +11,15 @@ export class CollectionFilter {
   filteredCount = input.required<number>();
   isOpen = input.required<boolean>();
   sizeOptions = input.required<readonly string[]>();
-  colorOptions = input.required<FilterColorOption[]>();
+  colorOptions = input.required<readonly string[]>();
   priceOptions = input.required<PriceRangeOption[]>();
-  productTypeOptions = input.required<readonly string[]>();
-  materialOptions = input.required<readonly string[]>();
+  categoryOptions = input.required<FilterSlugOption[]>();
+  subCategoryOptions = input.required<FilterSlugOption[]>();
   isSizeSelected = input.required<(value: string) => boolean>();
   isColorSelected = input.required<(value: string) => boolean>();
   isPriceSelected = input.required<(value: string) => boolean>();
-  isProductTypeSelected = input.required<(value: string) => boolean>();
-  isMaterialSelected = input.required<(value: string) => boolean>();
+  isCategorySelected = input.required<(value: string) => boolean>();
+  isSubCategorySelected = input.required<(value: string) => boolean>();
 
   open = output<void>();
   close = output<void>();
@@ -27,6 +27,6 @@ export class CollectionFilter {
   toggleSize = output<string>();
   toggleColor = output<string>();
   togglePrice = output<string>();
-  toggleProductType = output<string>();
-  toggleMaterial = output<string>();
+  toggleCategory = output<string>();
+  toggleSubCategory = output<string>();
 }

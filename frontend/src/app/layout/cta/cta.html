@@ -10,8 +10,24 @@
     <!-- Divider -->
     <!-- Divider2 -->
     <div class="w-full mx-auto  border-t border-[#B5B5B5]"></div>
-    <div class="flex gap-4 md:gap-6  xl:gap-8">
-        <input placeholder="Email Address" class="text-16px-sm md:text-16px-lg py-4 md:py-5 lg:py-6 px-10 w-full  border border-[#B5B5B5] rounded-full"/>
-        <app-black-button buttonClass="px-4 md:px-8 lg:px-12 xl:px-16 py-4 md:py-5 lg:py-6 whitespace-nowrap" placeholder="Buy Now"/>
-    </div>
+    @if (submitted()) {
+        <p class="text-green-600 text-16px-sm md:text-20px-lg font-semibold py-2">
+            Your coupon code: <span class="font-bold tracking-widest">FIRST20</span> — enjoy 20% off!
+        </p>
+    } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+            <div class="flex gap-4 md:gap-6  xl:gap-8">
+                <input
+                    formControlName="email"
+                    type="email"
+                    placeholder="Email Address"
+                    [class]="'text-16px-sm md:text-16px-lg py-4 md:py-5 lg:py-6 px-10 w-full border rounded-full transition-colors duration-200 ' + (emailInvalid ? 'border-red-500' : 'border-[#B5B5B5]')"
+                />
+                <app-black-button buttonClass="px-4 md:px-8 lg:px-12 xl:px-16 py-4 md:py-5 lg:py-6 whitespace-nowrap" placeholder="Get Coupon"/>
+            </div>
+            @if (emailInvalid) {
+                <p class="text-red-500 text-sm px-10">{{ emailError }}</p>
+            }
+        </form>
+    }
 </section>

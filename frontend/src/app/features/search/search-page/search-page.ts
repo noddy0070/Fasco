@@ -133,6 +133,10 @@ export class SearchPage implements OnInit {
       .some((p) => priceValue >= p.min && priceValue <= p.max);
   }
 
+  navigateToProduct(productId: string): void {
+    void this.router.navigate(['/product', productId]);
+  }
+
   openFilterModal(): void { this.isFilterModalOpen.set(true); }
   closeFilterModal(): void { this.isFilterModalOpen.set(false); }
   toggleSortMenu(): void { this.isSortMenuOpen.update((v) => !v); }

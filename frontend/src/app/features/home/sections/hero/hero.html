@@ -78,10 +78,12 @@
           class="font-poppins text-[20px] xs:text-[14px] text-center md:text-[20px] tracking-[10%] mb-3 xl:mb-5"
           >NEW COLLECTION</span
         >
-        <app-black-button
-          placeholder="SHOP NOW "
-          buttonClass="px-4  sm:px-8 py-3 md:py-5"
-        ></app-black-button>
+        <a [routerLink]="['/collections/sale']">
+          <app-black-button
+            placeholder="SHOP NOW "
+            buttonClass="px-4  sm:px-8 py-3 md:py-5"
+          ></app-black-button>
+        </a>
       </div>
       <picture>
         <source srcset="assets/images/home/hero/hero-right.webp" type="image/webp" />

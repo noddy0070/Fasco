@@ -3,11 +3,9 @@
     <section
       class="relative overflow-hidden rounded-[28px] bg-[#DED8C9] shadow-[0_28px_60px_rgba(0,0,0,0.08)]"
     >
+      <div class="absolute inset-0"></div>
       <div
-        class="absolute inset-0 bg-linear-to-r from-[#16120F]/72 via-[#16120F]/28 to-transparent"
-      ></div>
-      <div
-        class="absolute inset-0 bg-cover bg-center opacity-45 mix-blend-multiply"
+        class="absolute inset-0 bg-cover bg-center mix-blend-multiply"
         [style.background-image]="'url(' + collection.heroImage + ')'"
       ></div>
 
@@ -33,24 +31,24 @@
         <app-collection-filter
           [filteredCount]="filteredProducts().length"
           [isOpen]="isFilterModalOpen()"
-          [sizeOptions]="sizeOptions"
-          [colorOptions]="colorOptions"
+          [sizeOptions]="availableSizes()"
+          [colorOptions]="availableColors()"
           [priceOptions]="priceOptions"
-          [productTypeOptions]="productTypeOptions"
-          [materialOptions]="materialOptions"
+          [categoryOptions]="availableCategories()"
+          [subCategoryOptions]="availableSubCategories()"
           [isSizeSelected]="isSizeSelected.bind(this)"
           [isColorSelected]="isColorSelected.bind(this)"
           [isPriceSelected]="isPriceSelected.bind(this)"
-          [isProductTypeSelected]="isProductTypeSelected.bind(this)"
-          [isMaterialSelected]="isMaterialSelected.bind(this)"
+          [isCategorySelected]="isCategorySelected.bind(this)"
+          [isSubCategorySelected]="isSubCategorySelected.bind(this)"
           (open)="openFilterModal()"
           (close)="closeFilterModal()"
           (clearFilters)="clearFilters()"
           (toggleSize)="toggleSize($event)"
           (toggleColor)="toggleColor($event)"
           (togglePrice)="togglePrice($event)"
-          (toggleProductType)="toggleProductType($event)"
-          (toggleMaterial)="toggleMaterial($event)"
+          (toggleCategory)="toggleCategory($event)"
+          (toggleSubCategory)="toggleSubCategory($event)"
         />
 
         <app-collection-sort

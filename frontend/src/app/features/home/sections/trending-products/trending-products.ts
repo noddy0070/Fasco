@@ -38,7 +38,7 @@ export class TrendingProducts implements OnInit {
 
   colors = signal(TRENDING_COLORS);
   filters = TRENDING_FILTERS;
-  selectedFilter = signal<string>(this.filters[0]);
+  selectedFilter = signal<string>(this.filters[1]);
   products = signal<TrendingProduct[]>([]);
 
   leftColumn = computed(() =>
@@ -67,6 +67,10 @@ export class TrendingProducts implements OnInit {
 
   setFilter(filter: string): void {
     this.selectedFilter.set(filter);
+  }
+
+  navigateToProduct(id: string): void {
+    void this.router.navigate(['/product', id]);
   }
 
   async openCollectionByColor(colorName: string): Promise<void> {

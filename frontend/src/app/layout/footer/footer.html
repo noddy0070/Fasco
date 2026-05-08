@@ -22,7 +22,7 @@
                         <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">QUICK LINKS</p>
                         <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw] ">
                             @for (item of footerQuickLinks(); track $index) {
-                                <app-transition-link [link]="item.url">
+                                <app-transition-link [link]="item.url" >
                                     {{item.name}}
                                 </app-transition-link>
                             }

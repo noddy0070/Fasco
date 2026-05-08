@@ -1,4 +1,5 @@
 import { Component, signal, computed , OnDestroy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { BlackButton } from "../../../../shared/components/black-button/black-button";
 import {interval,Subscription} from 'rxjs'
 import { LeadingZeroPipe } from '../../../../shared/pipes/leading-zero-pipe';
@@ -8,7 +9,7 @@ import { LimitedTimeDealCarousal } from "./limited-time-deal-carousal/limited-ti
 
 @Component({
   selector: 'app-limited-time-deal',
-  imports: [BlackButton, LeadingZeroPipe, LimitedTimeDealCarousal],
+  imports: [BlackButton, LeadingZeroPipe, LimitedTimeDealCarousal, RouterLink],
   templateUrl: './limited-time-deal.html',
   styleUrl: './limited-time-deal.css',
 })

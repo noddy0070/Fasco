@@ -35,12 +35,12 @@
 
         <div class="filter-group">
           <h3>COLOR</h3>
-          <div class="color-grid">
-            @for (color of colorOptions(); track color.label) {
-              <button type="button" (click)="toggleColor.emit(color.label)" [class.is-selected]="isColorSelected()(color.label)">
-                <span [style.background-color]="color.swatch"></span>
-                <span>{{ color.label }}</span>
-              </button>
+          <div class="checkbox-list">
+            @for (color of colorOptions(); track color) {
+              <label>
+                <input type="checkbox" [checked]="isColorSelected()(color)" (change)="toggleColor.emit(color)" />
+                <span>{{ color }}</span>
+              </label>
             }
           </div>
         </div>
@@ -58,28 +58,29 @@
         </div>
 
         <div class="filter-group">
-          <h3>PRODUCT TYPE</h3>
+          <h3>CATEGORY</h3>
           <div class="checkbox-list">
-            @for (productType of productTypeOptions(); track productType) {
+            @for (category of categoryOptions(); track category.slug) {
               <label>
-                <input type="checkbox" [checked]="isProductTypeSelected()(productType)" (change)="toggleProductType.emit(productType)" />
-                <span>{{ productType }}</span>
+                <input type="checkbox" [checked]="isCategorySelected()(category.slug)" (change)="toggleCategory.emit(category.slug)" />
+                <span>{{ category.label }}</span>
               </label>
             }
           </div>
         </div>
 
         <div class="filter-group">
-          <h3>MATERIAL</h3>
+          <h3>SUB-CATEGORY</h3>
           <div class="checkbox-list">
-            @for (material of materialOptions(); track material) {
+            @for (subCategory of subCategoryOptions(); track subCategory.slug) {
               <label>
-                <input type="checkbox" [checked]="isMaterialSelected()(material)" (change)="toggleMaterial.emit(material)" />
-                <span>{{ material }}</span>
+                <input type="checkbox" [checked]="isSubCategorySelected()(subCategory.slug)" (change)="toggleSubCategory.emit(subCategory.slug)" />
+                <span>{{ subCategory.label }}</span>
               </label>
             }
           </div>
         </div>
+
       </div>
 
       <div class="filter-modal-footer">

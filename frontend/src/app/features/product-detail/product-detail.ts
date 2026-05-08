@@ -8,6 +8,7 @@ type ProductVariant = {
   sku: string;
   size: string;
   color: string;
+  colorCode?: string;
   price: number;
   discount: number;
   stock: number;
@@ -116,6 +117,18 @@ export class ProductDetail {
     return [...new Set(item.variants.map((variant) => variant.color))];
   });
 
+  colorCodeMap = computed((): Record<string, string> => {
+    const item = this.product();
+    if (!item) return {};
+    const map: Record<string, string> = {};
+    for (const variant of item.variants) {
+      if (variant.color && !map[variant.color]) {
+        map[variant.color] = variant.colorCode ?? '#7f878c';
+      }
+    }
+    return map;
+  });
+
   sizeOptions = computed(() => {
     const item = this.product();
     if (!item) return [];
@@ -179,14 +192,7 @@ export class ProductDetail {
   }
 
   getSwatchColor(color: string): string {
-    const token = color.toLowerCase();
-    if (token.includes('orange')) return '#c95c3b';
-    if (token.includes('black')) return '#2c2c2c';
-    if (token.includes('blue')) return '#2f5f8a';
-    if (token.includes('green')) return '#4da893';
-    if (token.includes('grey') || token.includes('gray')) return '#90a4a9';
-    if (token.includes('stone') || token.includes('sand') || token.includes('beige')) return '#9d9877';
-    return '#7f878c';
+    return this.colorCodeMap()[color] ?? '#7f878c';
   }
 
   private async loadProducts(): Promise<void> {

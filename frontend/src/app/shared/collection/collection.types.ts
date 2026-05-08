@@ -16,8 +16,15 @@ export interface CollectionProduct {
   swatches: string[];
   sizes: string[];
   colors: string[];
-  productType: string;
-  material: string;
+  gender: string;
+  statuses: string[];
+  category: string;
+  subCategory: string;
+}
+
+export interface FilterSlugOption {
+  label: string;
+  slug: string;
 }
 
 export interface CollectionPromoAction {

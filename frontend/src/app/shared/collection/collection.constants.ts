@@ -1,4 +1,4 @@
-import { FilterColorOption, PriceRangeOption } from './collection.types';
+import { FilterColorOption, FilterSlugOption, PriceRangeOption } from './collection.types';
 
 export const SIZE_OPTIONS = [
   'XS', 'S', 'M', 'L', 'XL',
@@ -31,31 +31,31 @@ export const PRICE_OPTIONS: PriceRangeOption[] = [
   { label: 'Over $150', min: 151, max: Number.POSITIVE_INFINITY },
 ];
 
-export const PRODUCT_TYPE_OPTIONS = [
-  'Everyday Sneakers',
-  'Golf',
-  'High Tops',
-  'Hiking Shoes',
-  'Hoodies',
-  'Insoles',
-  'Long Sleeve Tees',
-  'Running Shoes',
-  'Shirts',
-  'Slip Ons',
-  'Slippers',
-  'Socks',
-  'Sweatpants',
-  'Sweatshirts',
-  'Tees',
-  'Water-Repellent Shoes',
-] as const;
+export const GENDER_OPTIONS = ['Men', 'Women', 'Kids', 'Unisex'] as const;
 
-export const MATERIAL_OPTIONS = [
-  'Alternative-Leather',
-  'Canvas',
-  'Cotton',
-  'Sugar',
-  'Tree',
-  'Tree-Fiber-Blend',
-  'Wool',
-] as const;
+export const STATUS_OPTIONS = ['In Stock', 'Trending', 'On Sale'] as const;
+
+export const CATEGORY_OPTIONS: FilterSlugOption[] = [
+  { label: 'Tops', slug: 'tops' },
+  { label: 'Bottoms', slug: 'bottoms' },
+  { label: 'Shoes', slug: 'shoes' },
+  { label: 'Outerwear', slug: 'outerwear' },
+  { label: 'Accessories', slug: 'accessories' },
+];
+
+export const SUBCATEGORY_OPTIONS: FilterSlugOption[] = [
+  { label: 'T-Shirts', slug: 't-shirts' },
+  { label: 'Shirts', slug: 'shirts' },
+  { label: 'Hoodies', slug: 'hoodies' },
+  { label: 'Sweatshirts', slug: 'sweatshirts' },
+  { label: 'Everyday Sneakers', slug: 'everyday-sneakers' },
+  { label: 'Running Shoes', slug: 'running-shoes' },
+  { label: 'Hiking Shoes', slug: 'hiking-shoes' },
+  { label: 'Slip-Ons', slug: 'slip-ons' },
+  { label: 'High Tops', slug: 'high-tops' },
+  { label: 'Jeans', slug: 'jeans' },
+  { label: 'Pants', slug: 'pants' },
+  { label: 'Shorts', slug: 'shorts' },
+  { label: 'Jackets', slug: 'jackets' },
+  { label: 'Dresses', slug: 'dresses' },
+];

@@ -8,12 +8,14 @@ import { CollectionFilter } from '../../../shared/collection/collection-filter/c
 import { CollectionSort } from '../../../shared/collection/collection-sort/collection-sort';
 import { CollectionProductCard } from '../../../shared/collection/collection-product-card/collection-product-card';
 import { CollectionData, CollectionDataFile, CollectionProduct, CollectionTab } from '../../../shared/collection/collection.types';
-import { COLOR_OPTIONS, MATERIAL_OPTIONS, PRICE_OPTIONS, PRODUCT_TYPE_OPTIONS, SIZE_OPTIONS } from '../../../shared/collection/collection.constants';
+import { PRICE_OPTIONS } from '../../../shared/collection/collection.constants';
+import { FilterSlugOption } from '../../../shared/collection/collection.types';
 
 type ProductVariantModel = {
   sku: string;
   size: string;
   color: string;
+  colorCode?: string;
   price: number;
   discount: number;
   stock: number;
@@ -24,6 +26,8 @@ type ProductModel = {
   _id: string;
   title: string;
   gender: 'men' | 'women' | 'kids' | 'unisex';
+  category: string;
+  subCategory: string;
   isTrending?: boolean;
   isLimitedOffer?: boolean;
   variants: ProductVariantModel[];
@@ -51,14 +55,32 @@ export class CollectionPage implements OnInit {
   selectedSizes = signal<string[]>([]);
   selectedColors = signal<string[]>([]);
   selectedPrices = signal<string[]>([]);
-  selectedProductTypes = signal<string[]>([]);
-  selectedMaterials = signal<string[]>([]);
+  selectedCategories = signal<string[]>([]);
+  selectedSubCategories = signal<string[]>([]);
 
-  readonly sizeOptions = SIZE_OPTIONS;
-  readonly colorOptions = COLOR_OPTIONS;
   readonly priceOptions = PRICE_OPTIONS;
-  readonly productTypeOptions = PRODUCT_TYPE_OPTIONS;
-  readonly materialOptions = MATERIAL_OPTIONS;
+
+  availableSizes = computed((): readonly string[] => {
+    const products = this.currentCollection()?.products ?? [];
+    return [...new Set(products.flatMap(p => p.sizes))].sort();
+  });
+
+  availableColors = computed((): readonly string[] => {
+    const products = this.currentCollection()?.products ?? [];
+    return [...new Set(products.flatMap(p => p.colors))].sort();
+  });
+
+  availableCategories = computed((): FilterSlugOption[] => {
+    const products = this.currentCollection()?.products ?? [];
+    const slugs = [...new Set(products.map(p => p.category).filter(Boolean))].sort();
+    return slugs.map(slug => ({ slug, label: this.slugToLabel(slug) }));
+  });
+
+  availableSubCategories = computed((): FilterSlugOption[] => {
+    const products = this.currentCollection()?.products ?? [];
+    const slugs = [...new Set(products.map(p => p.subCategory).filter(Boolean))].sort();
+    return slugs.map(slug => ({ slug, label: this.slugToLabel(slug) }));
+  });
 
   currentCollection = computed(() => {
     const collections = this.collections();
@@ -103,17 +125,17 @@ export class CollectionPage implements OnInit {
     const selectedSizes = this.selectedSizes();
     const selectedColors = this.selectedColors();
     const selectedPrices = this.selectedPrices();
-    const selectedProductTypes = this.selectedProductTypes();
-    const selectedMaterials = this.selectedMaterials();
+    const selectedCategories = this.selectedCategories();
+    const selectedSubCategories = this.selectedSubCategories();
 
     return collection.products.filter((product) => {
       const bySize = selectedSizes.length === 0 || product.sizes.some((size) => selectedSizes.includes(size));
       const byColor = selectedColors.length === 0 || product.colors.some((color) => selectedColors.includes(color));
       const byPrice = selectedPrices.length === 0 || this.matchesAnySelectedPrice(product.priceValue, selectedPrices);
-      const byType = selectedProductTypes.length === 0 || selectedProductTypes.includes(product.productType);
-      const byMaterial = selectedMaterials.length === 0 || selectedMaterials.includes(product.material);
+      const byCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+      const bySubCategory = selectedSubCategories.length === 0 || selectedSubCategories.includes(product.subCategory);
 
-      return bySize && byColor && byPrice && byType && byMaterial;
+      return bySize && byColor && byPrice && byCategory && bySubCategory;
     });
   });
 
@@ -133,8 +155,8 @@ export class CollectionPage implements OnInit {
       this.selectedSizes().length +
       this.selectedColors().length +
       this.selectedPrices().length +
-      this.selectedProductTypes().length +
-      this.selectedMaterials().length
+      this.selectedCategories().length +
+      this.selectedSubCategories().length
     );
   });
 
@@ -191,8 +213,8 @@ export class CollectionPage implements OnInit {
     this.selectedSizes.set([]);
     this.selectedColors.set([]);
     this.selectedPrices.set([]);
-    this.selectedProductTypes.set([]);
-    this.selectedMaterials.set([]);
+    this.selectedCategories.set([]);
+    this.selectedSubCategories.set([]);
   }
 
   toggleSize(value: string): void {
@@ -207,12 +229,12 @@ export class CollectionPage implements OnInit {
     this.selectedPrices.update((current) => this.toggleValue(current, value));
   }
 
-  toggleProductType(value: string): void {
-    this.selectedProductTypes.update((current) => this.toggleValue(current, value));
+  toggleCategory(value: string): void {
+    this.selectedCategories.update((current) => this.toggleValue(current, value));
   }
 
-  toggleMaterial(value: string): void {
-    this.selectedMaterials.update((current) => this.toggleValue(current, value));
+  toggleSubCategory(value: string): void {
+    this.selectedSubCategories.update((current) => this.toggleValue(current, value));
   }
 
   isSizeSelected(value: string): boolean {
@@ -227,12 +249,12 @@ export class CollectionPage implements OnInit {
     return this.selectedPrices().includes(value);
   }
 
-  isProductTypeSelected(value: string): boolean {
-    return this.selectedProductTypes().includes(value);
+  isCategorySelected(value: string): boolean {
+    return this.selectedCategories().includes(value);
   }
 
-  isMaterialSelected(value: string): boolean {
-    return this.selectedMaterials().includes(value);
+  isSubCategorySelected(value: string): boolean {
+    return this.selectedSubCategories().includes(value);
   }
 
   isTabActive(tab: CollectionTab, collection: CollectionData, index: number): boolean {
@@ -247,6 +269,10 @@ export class CollectionPage implements OnInit {
 
   private toggleValue(current: string[], value: string): string[] {
     return current.includes(value) ? current.filter((entry) => entry !== value) : [...current, value];
+  }
+
+  private slugToLabel(slug: string): string {
+    return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   }
 
   private matchesAnySelectedPrice(price: number, selectedPriceLabels: string[]): boolean {
@@ -297,13 +323,16 @@ export class CollectionPage implements OnInit {
 
   private matchColorFromSlug(slug: string): string | null {
     const normalizedSlug = this.normalizeColorToken(slug);
-    const colorMatch = this.colorOptions.find((color) => {
-      const normalizedColor = this.normalizeColorToken(color.label);
+    const allColors = [...new Set(
+      this.allProducts().flatMap(p => p.variants.map(v => v.color).filter((c): c is string => !!c))
+    )];
+    const colorMatch = allColors.find((color) => {
+      const normalizedColor = this.normalizeColorToken(color);
       return normalizedColor === normalizedSlug
         || normalizedSlug.includes(normalizedColor)
         || normalizedColor.includes(normalizedSlug);
     });
-    return colorMatch?.label ?? null;
+    return colorMatch ?? null;
   }
 
   private normalizeColorToken(value: string): string {
@@ -346,7 +375,6 @@ export class CollectionPage implements OnInit {
     const firstVariant = product.variants[0];
     const colorList = [...new Set(product.variants.map((variant) => variant.color).filter(Boolean))];
     const sizeList = [...new Set(product.variants.map((variant) => variant.size).filter(Boolean))];
-    const swatches = ['#2f2f2f', '#a39f95', '#d8d5cd', '#7f8fa4', '#b5ab8d'];
 
     return {
       productId: product._id,
@@ -358,11 +386,39 @@ export class CollectionPage implements OnInit {
       image: firstVariant?.images?.[0] ?? 'assets/images/promotional_banner_1.webp',
       badge: product.isLimitedOffer ? 'SALE' : (product.isTrending ? 'TRENDING' : 'NEW'),
       moreColors: `+${Math.max(colorList.length - 1, 0)}`,
-      swatches: swatches.slice(0, Math.max(colorList.length, 1)),
+      swatches: colorList.map((color) => {
+        const variant = product.variants.find(v => v.color === color);
+        return variant?.colorCode ?? this.colorNameToSwatch(color);
+      }),
       sizes: sizeList.length > 0 ? sizeList : ['M'],
       colors: colorList.length > 0 ? colorList : ['Default'],
-      productType: 'Everyday Sneakers',
-      material: 'Tree',
+      gender: product.gender.charAt(0).toUpperCase() + product.gender.slice(1),
+      statuses: [
+        ...(product.isTrending ? ['Trending'] : []),
+        ...(product.isLimitedOffer || product.variants.some(v => (v.discount ?? 0) > 0) ? ['On Sale'] : []),
+        ...(product.variants.some(v => (v.stock ?? 0) > 0) ? ['In Stock'] : []),
+      ],
+      category: product.category ?? '',
+      subCategory: product.subCategory ?? '',
     };
+  }
+
+  private colorNameToSwatch(color: string): string {
+    const token = color.toLowerCase();
+    if (token.includes('black') || token.includes('coal') || token.includes('ink')) return '#2c2c2c';
+    if (token.includes('white') || token.includes('parchment') || token.includes('cream')) return '#f0ece4';
+    if (token.includes('grey') || token.includes('gray') || token.includes('graphite') || token.includes('ash')) return '#8a8f96';
+    if (token.includes('navy') || token.includes('midnight')) return '#1e3a5f';
+    if (token.includes('blue') || token.includes('steel') || token.includes('cobalt')) return '#3d6fa8';
+    if (token.includes('green') || token.includes('forest') || token.includes('olive')) return '#4a7c6a';
+    if (token.includes('teal') || token.includes('sea') || token.includes('glass')) return '#4ba8a0';
+    if (token.includes('red') || token.includes('crimson') || token.includes('ruby')) return '#c0392b';
+    if (token.includes('pink') || token.includes('rose') || token.includes('blush')) return '#d9828c';
+    if (token.includes('orange') || token.includes('amber') || token.includes('rust')) return '#c95c3b';
+    if (token.includes('yellow') || token.includes('gold')) return '#d4a843';
+    if (token.includes('purple') || token.includes('violet') || token.includes('plum')) return '#6a4fa8';
+    if (token.includes('brown') || token.includes('tan') || token.includes('caramel')) return '#8b5e3c';
+    if (token.includes('sand') || token.includes('stone') || token.includes('beige') || token.includes('khaki')) return '#a89f7a';
+    return '#7f878c';
   }
 }

@@ -54,7 +54,7 @@ export class Header implements OnInit {
   selectSuggestion(product: SearchProduct): void {
     this.searchQuery.set(product.name);
     this.isDropdownOpen.set(false);
-    void this.router.navigate(['/search'], { queryParams: { q: product.name } });
+    void this.router.navigate(['/product', product.productId]);
   }
 
   closeDropdown(): void {
