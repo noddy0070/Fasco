@@ -43,7 +43,7 @@ export class CollectionService {
     const base = collections.find(c => c.slug === slug) ?? collections[0] ?? null;
     if (!base) return null;
 
-    return { ...base, products: resolvedProducts, productCount: resolvedProducts.length };
+    return { ...base, products: resolvedProducts };
   }
 
   filterProducts(

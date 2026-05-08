@@ -90,7 +90,11 @@
         ></app-black-button>
       </app-transition-link>
     }
-    <button class="md:hidden text-white bg-black p-1 rounded-[10px] h-[36px] aspect-square" (click)="openMobileNav()" aria-label="Open navigation menu">
+    <button
+      class="md:hidden text-white bg-black p-1 rounded-[10px] h-[36px] aspect-square"
+      (click)="openMobileNav()"
+      aria-label="Open navigation menu"
+    >
       <svg
         width="24"
         height="24"
@@ -110,11 +114,9 @@
 @if (isMobileNavOpen()) {
   <div class="mobile-nav-overlay" (click)="closeMobileNav()" aria-hidden="true"></div>
   <aside class="mobile-nav-sidebar" role="dialog" aria-modal="true" aria-label="Navigation menu">
-    <button
-      class="mobile-nav-close"
-      (click)="closeMobileNav()"
-      aria-label="Close navigation menu"
-    >✕</button>
+    <button class="mobile-nav-close" (click)="closeMobileNav()" aria-label="Close navigation menu">
+      ✕
+    </button>
     <h2 class="font-volkhov text-2xl text-[#484848] mb-8">FASCO</h2>
     <nav class="flex flex-col gap-6">
       @for (navItem of navLinks(); track $index) {
@@ -122,7 +124,8 @@
           [href]="navItem.url"
           class="text-[#1A1A1A] font-poppins text-lg font-medium hover-underline relative w-min whitespace-nowrap"
           (click)="closeMobileNav()"
-        >{{ navItem.name }}</a>
+          >{{ navItem.name }}</a
+        >
       }
     </nav>
     <div class="mt-10">

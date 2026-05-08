@@ -45,7 +45,6 @@ export interface CollectionData {
   title: string;
   description: string;
   heroImage: string;
-  productCount: number;
   tabs: CollectionTab[];
   sortOptions: string[];
   products: CollectionProduct[];

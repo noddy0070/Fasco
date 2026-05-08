@@ -6,7 +6,6 @@
       "title": "New Arrivals",
       "description": "Start the season with comfort, style, and versatility.",
       "heroImage": "assets/images/home/hero/hero-top.webp",
-      "productCount": 12,
       "tabs": [
         { "label": "MEN", "slug": "mens-new-arrivals" },
         { "label": "WOMEN", "slug": "womens-new-arrivals" }
@@ -28,7 +27,6 @@
       "title": "Soft Layers",
       "description": "Modern essentials with lightweight shapes and easy neutrals.",
       "heroImage": "assets/images/home/hero/hero-right.webp",
-      "productCount": 10,
       "tabs": [
         { "label": "MEN", "slug": "mens-new-arrivals" },
         { "label": "WOMEN", "slug": "womens-new-arrivals" }
@@ -50,7 +48,6 @@
       "title": "Limited Offers",
       "description": "Handpicked markdowns with the best value picks on rotation.",
       "heroImage": "assets/images/home/hero/hero-bottom.webp",
-      "productCount": 8,
       "tabs": [
         { "label": "MEN", "slug": "mens-new-arrivals" },
         { "label": "WOMEN", "slug": "womens-new-arrivals" }
@@ -73,7 +70,6 @@
       "title": "Featured Picks",
       "description": "A focused mix of the strongest everyday silhouettes and seasonal colorways.",
       "heroImage": "assets/images/home/hero/hero-left.webp",
-      "productCount": 8,
       "tabs": [
         { "label": "MEN", "slug": "mens-new-arrivals" },
         { "label": "WOMEN", "slug": "womens-new-arrivals" }
