@@ -1,6 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { ProductModel, ProductStore } from '../../core/store/product-store';
 
 export interface SearchProduct {
   productId: string;
@@ -19,48 +18,15 @@ export interface SearchProduct {
   collectionSlug: string;
 }
 
-type ProductVariantModel = {
-  sku: string;
-  size: string;
-  color: string;
-  colorCode?: string;
-  price: number;
-  discount: number;
-  stock: number;
-  images: string[];
-};
-
-type ProductModel = {
-  _id: string;
-  title: string;
-  gender: 'men' | 'women' | 'kids' | 'unisex';
-  category?: string;
-  subCategory?: string;
-  isTrending?: boolean;
-  isLimitedOffer?: boolean;
-  variants: ProductVariantModel[];
-};
-
-interface ProductDataFile {
-  products?: ProductModel[];
-}
-
 @Injectable({ providedIn: 'root' })
 export class SearchService {
-  private readonly http = inject(HttpClient);
+  private readonly productStore = inject(ProductStore);
   private readonly allProducts = signal<SearchProduct[]>([]);
-  private loaded = false;
 
   async loadProducts(): Promise<void> {
-    if (this.loaded) return;
-    const data = await firstValueFrom(
-      this.http.get<ProductDataFile>('/mockData/products.json'),
-    );
-    const products: SearchProduct[] = (data.products ?? []).flatMap((product) =>
-      this.mapProductToSearch(product)
-    );
-    this.allProducts.set(products);
-    this.loaded = true;
+    if (this.allProducts().length > 0) return;
+    const products = await this.productStore.loadProducts();
+    this.allProducts.set(products.flatMap((product) => this.mapProductToSearch(product)));
   }
 
   private mapProductToSearch(product: ProductModel): SearchProduct[] {

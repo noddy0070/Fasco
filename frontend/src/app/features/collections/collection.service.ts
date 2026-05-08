@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, combineLatest, from, map } from 'rxjs';
 import {
   CollectionData,
   CollectionDataFile,
@@ -13,19 +13,19 @@ import {
   CollectionPageData,
   ProductModel,
 } from './collection.models';
+import { ProductStore } from '../../core/store/product-store';
 
 @Injectable({ providedIn: 'root' })
 export class CollectionService {
   private readonly http = inject(HttpClient);
+  private readonly productStore = inject(ProductStore);
 
   loadPageData(): Observable<CollectionPageData> {
     return combineLatest({
       collections: this.http.get<CollectionDataFile>('/mockData/collections.json').pipe(
         map(data => data.collections ?? [])
       ),
-      allProducts: this.http.get<{ products?: ProductModel[] }>('/mockData/products.json').pipe(
-        map(data => data.products ?? [])
-      ),
+      allProducts: from(this.productStore.loadProducts()),
     });
   }
 

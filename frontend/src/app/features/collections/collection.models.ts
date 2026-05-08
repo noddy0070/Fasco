@@ -1,24 +1,5 @@
-export type ProductVariantModel = {
-  sku: string;
-  size: string;
-  color: string;
-  colorCode?: string;
-  price: number;
-  discount: number;
-  stock: number;
-  images: string[];
-};
-
-export type ProductModel = {
-  _id: string;
-  title: string;
-  gender: 'men' | 'women' | 'kids' | 'unisex';
-  category: string;
-  subCategory: string;
-  isTrending?: boolean;
-  isLimitedOffer?: boolean;
-  variants: ProductVariantModel[];
-};
+import { ProductModel } from '../../core/store/product-store';
+export type { ProductVariantModel, ProductModel } from '../../core/store/product-store';
 
 export interface CollectionFilterParams {
   sizes: string[];

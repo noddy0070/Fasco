@@ -1,36 +1,16 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 import { TrendingProduct } from './trending-products.constants';
-
-export type ProductVariantModel = {
-  sku: string;
-  size: string;
-  color: string;
-  price: number;
-  discount: number;
-  stock: number;
-  images: string[];
-};
-
-export type ProductModel = {
-  _id: string;
-  title: string;
-  gender: 'men' | 'women' | 'kids' | 'unisex';
-  category?: string;
-  subCategory?: string;
-  isLimitedOffer?: boolean;
-  variants: ProductVariantModel[];
-};
+import { ProductModel, ProductStore } from '../../../../core/store/product-store';
 
 @Injectable({ providedIn: 'root' })
 export class TrendingProductsService {
-  private readonly http = inject(HttpClient);
+  private readonly productStore = inject(ProductStore);
 
   loadProducts(): Observable<TrendingProduct[]> {
-    return this.http
-      .get<{ products?: ProductModel[] }>('/mockData/products.json')
-      .pipe(map((data) => (data.products ?? []).flatMap((p) => this.mapProductToTrending(p))));
+    return from(this.productStore.loadProducts()).pipe(
+      map((products) => products.flatMap((p) => this.mapProductToTrending(p))),
+    );
   }
 
   private mapProductToTrending(product: ProductModel): TrendingProduct[] {
