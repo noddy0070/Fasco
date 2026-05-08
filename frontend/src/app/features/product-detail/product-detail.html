@@ -5,10 +5,13 @@
       aria-busy="true"
       aria-label="Loading product details"
     >
-      <div class="grid grid-cols-2 gap-3">
-        @for (item of [1, 2, 3, 4]; track item) {
-          <div class="rounded-2xl bg-gray-200 aspect-square"></div>
-        }
+      <div class="gallery-panel">
+        <div class="gallery-thumbs">
+          @for (item of [1, 2, 3, 4]; track item) {
+            <div class="rounded-xl bg-gray-200 aspect-square"></div>
+          }
+        </div>
+        <div class="gallery-main bg-gray-200 rounded-2xl"></div>
       </div>
       <div class="flex flex-col gap-4">
         <div class="h-8 bg-gray-200 rounded w-3/4"></div>
@@ -31,16 +34,21 @@
     </div>
   } @else if (product(); as item) {
     <div class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)]">
-      <div class="grid grid-cols-2 gap-3">
-        @for (image of galleryImages(); track image) {
-          <button
-            class="gallery-tile"
-            [class.is-active]="selectedImage() === image"
-            (click)="setImage(image)"
-          >
-            <img [src]="image" [alt]="item.title" />
-          </button>
-        }
+      <div class="gallery-panel">
+        <div class="gallery-thumbs">
+          @for (image of galleryImages(); track image) {
+            <button
+              class="gallery-thumb"
+              [class.is-active]="selectedImage() === image"
+              (click)="setImage(image)"
+            >
+              <img [src]="image" [alt]="item.title" />
+            </button>
+          }
+        </div>
+        <div class="gallery-main">
+          <img [src]="selectedImage()" [alt]="item.title" />
+        </div>
       </div>
 
       <div class="details-panel">
