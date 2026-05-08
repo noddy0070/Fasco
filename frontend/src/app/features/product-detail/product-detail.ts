@@ -1,90 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
-
-type ProductVariant = {
-  sku: string;
-  size: string;
-  color: string;
-  colorCode?: string;
-  price: number;
-  discount: number;
-  stock: number;
-  images: string[];
-};
-
-type ProductDetailModel = {
-  _id: string;
-  title: string;
-  slug: string;
-  description?: string;
-  variants: ProductVariant[];
-  averageRating: number;
-  totalReviews: number;
-  specifications: Array<{ title: string; value: string }>;
-};
-
-const FALLBACK_PRODUCTS: ProductDetailModel[] = [
-  {
-    _id: 'p1001',
-    title: 'Capilene Cool Sun Hoody',
-    slug: 'capilene-cool-sun-hoody',
-    description: 'Our Capilene Cool Sun Hoody provides 40+ UPF sun protection, plus moisture-wicking and fast-drying performance for active days outdoors.',
-    averageRating: 4.4,
-    totalReviews: 29,
-    specifications: [
-      { title: 'Fit', value: 'Regular fit, true to size.' },
-      { title: 'Specs & Features', value: '40+ UPF, moisture-wicking, fast-drying.' },
-      { title: 'Materials & Care Instructions', value: '100% recycled polyester jersey. Machine wash cold.' },
-    ],
-    variants: [
-      {
-        sku: 'CCSH-COAL-XS',
-        size: 'XS',
-        color: 'Coal Orange',
-        price: 89,
-        discount: 0,
-        stock: 6,
-        images: ['assets/images/promotional_banner_1.webp', 'assets/images/promotional_banner_1.webp'],
-      },
-      {
-        sku: 'CCSH-NAVY-M',
-        size: 'M',
-        color: 'Navy Blue',
-        price: 92,
-        discount: 5,
-        stock: 5,
-        images: ['assets/images/promotional_banner_1.webp', 'assets/images/promotional_banner_1.webp'],
-      },
-    ],
-  },
-  {
-    _id: 'p1005',
-    title: "Women's Glide Loafer",
-    slug: 'womens-glide-loafer',
-    description: 'Soft slip-on loafer with lightweight comfort.',
-    averageRating: 4.6,
-    totalReviews: 21,
-    specifications: [
-      { title: 'Fit', value: 'Comfort fit.' },
-      { title: 'Specs & Features', value: 'Flexible sole and soft upper.' },
-      { title: 'Materials & Care Instructions', value: 'Spot clean only.' },
-    ],
-    variants: [
-      {
-        sku: 'WGL-SAND-S',
-        size: 'S',
-        color: 'Light Sand',
-        price: 125,
-        discount: 0,
-        stock: 9,
-        images: ['assets/images/promotional_banner_1.webp', 'assets/images/promotional_banner_1.webp'],
-      },
-    ],
-  },
-];
+import { ProductDetailService } from './product-detail.service';
+import { ProductDetailModel } from './product.models';
 
 @Component({
   selector: 'app-product-detail',
@@ -92,16 +12,18 @@ const FALLBACK_PRODUCTS: ProductDetailModel[] = [
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
-export class ProductDetail {
+export class ProductDetail implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly productDetailService = inject(ProductDetailService);
 
   products = signal<ProductDetailModel[]>([]);
   product = signal<ProductDetailModel | null>(null);
   selectedSku = signal('');
   selectedImage = signal('');
   openSpec = signal('Fit');
+  isLoading = signal(true);
 
   selectedVariant = computed(() => {
     const item = this.product();
@@ -141,15 +63,22 @@ export class ProductDetail {
     return Math.round((variant.price * (100 - (variant.discount || 0))) / 100);
   });
 
-  async ngOnInit(): Promise<void> {
-    await this.loadProducts();
-    combineLatest([this.route.paramMap, this.route.queryParamMap])
+  ngOnInit(): void {
+    this.isLoading.set(true);
+    this.productDetailService
+      .loadProducts()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([paramMap, queryParamMap]) => {
-      const id = paramMap.get('id') ?? '';
-      const querySku = queryParamMap.get('variant') ?? this.extractVariantFromUrl();
-      this.bindProduct(id, querySku);
-    });
+      .subscribe((products) => {
+        this.products.set(products);
+        this.isLoading.set(false);
+        combineLatest([this.route.paramMap, this.route.queryParamMap])
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(([paramMap, queryParamMap]) => {
+            const id = paramMap.get('id') ?? '';
+            const querySku = queryParamMap.get('variant') ?? this.extractVariantFromUrl();
+            this.bindProduct(id, querySku);
+          });
+      });
   }
 
   selectColor(color: string): void {
@@ -195,28 +124,6 @@ export class ProductDetail {
     return this.colorCodeMap()[color] ?? '#7f878c';
   }
 
-  private async loadProducts(): Promise<void> {
-    const cacheBust = `v=${Date.now()}`;
-    const paths = [`/mockData/products.json?${cacheBust}`, `mockData/products.json?${cacheBust}`, '/mockData/products.json', 'mockData/products.json'];
-
-    for (const path of paths) {
-      try {
-        const response = await fetch(path);
-        if (!response.ok) {
-          continue;
-        }
-
-        const data = (await response.json()) as { products?: ProductDetailModel[] };
-        this.products.set((data.products?.length ? data.products : FALLBACK_PRODUCTS));
-        return;
-      } catch {
-        // try next path
-      }
-    }
-
-    this.products.set(FALLBACK_PRODUCTS);
-  }
-
   private bindProduct(idOrSlug: string, querySku: string): void {
     const normalizedId = (idOrSlug || '').trim().toLowerCase();
     const item = this.products().find((product) =>
@@ -232,10 +139,10 @@ export class ProductDetail {
   }
 
   private extractVariantFromUrl(): string {
-    if (typeof window === 'undefined') {
+    if (globalThis.window === undefined) {
       return '';
     }
-    const match = window.location.search.match(/[?&]variant[=-]([^&]+)/i);
+    const match = /[?&]variant[=-]([^&]+)/i.exec(globalThis.window.location.search);
     return match?.[1] ?? '';
   }
 }

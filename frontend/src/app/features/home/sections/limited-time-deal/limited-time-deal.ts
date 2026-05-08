@@ -1,7 +1,8 @@
-import { Component, signal, computed , OnDestroy } from '@angular/core';
+import { Component, signal, computed, OnDestroy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { BlackButton } from "../../../../shared/components/black-button/black-button";
-import {interval,Subscription} from 'rxjs'
+import { interval, Subscription } from 'rxjs';
 import { LeadingZeroPipe } from '../../../../shared/pipes/leading-zero-pipe';
 import { LimitedTimeDealCarousal } from "./limited-time-deal-carousal/limited-time-deal-carousal";
 
@@ -14,19 +15,26 @@ import { LimitedTimeDealCarousal } from "./limited-time-deal-carousal/limited-ti
   styleUrl: './limited-time-deal.css',
 })
 export class LimitedTimeDeal implements OnDestroy {
-  timeLeft = signal(60*60*24*7);
-  
-  private timerSub!:Subscription
+  private readonly http = inject(HttpClient);
 
-  constructor(){
-    this.startTimer();
+  timeLeft = signal(0);
+  
+  private timerSub!: Subscription;
+
+  constructor() {
+    this.http.get<{ limitedTimeDeal: { durationSeconds: number } }>('/mockData/config.json').subscribe((config) => {
+      this.timeLeft.set(config.limitedTimeDeal.durationSeconds);
+      this.startTimer();
+    });
   }
-  startTimer(){
-     this.timerSub = interval(1000).subscribe(()=>{
-      this.timeLeft.update((t)=>t>0?t-1:0)
-     })
+
+  startTimer() {
+    this.timerSub = interval(1000).subscribe(() => {
+      this.timeLeft.update((t) => t > 0 ? t - 1 : 0);
+    });
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.timerSub?.unsubscribe();
   }
   

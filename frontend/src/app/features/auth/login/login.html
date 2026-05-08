@@ -18,24 +18,67 @@
       <span> OR </span>
       <span> - </span>
     </div>
-    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input
-        placeholder="Email"
-        formControlName="email"
-        type="email"
-        class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
-      />
-      <div class="relative w-full">
+    <form
+      class="flex flex-col gap-[2vw] md:gap-[1.5vw]"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      aria-label="Login form"
+      novalidate
+    >
+      <div class="flex flex-col">
+        <label for="login-email" class="sr-only">Email address</label>
         <input
-          [type]="isEyeClosed() ? 'text' : 'password'"
+          id="login-email"
+          placeholder="Email"
+          formControlName="email"
+          type="email"
+          autocomplete="email"
+          aria-required="true"
+          [attr.aria-invalid]="
+            form.get('email')?.invalid && form.get('email')?.touched ? 'true' : null
+          "
+          aria-describedby="login-email-error"
+          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+        />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <p id="login-email-error" role="alert" class="text-red-500 text-xs mt-1">
+            @if (form.get('email')?.errors?.['required']) {
+              Email is required.
+            } @else if (
+              form.get('email')?.errors?.['email'] || form.get('email')?.errors?.['invalidEmail']
+            ) {
+              Please enter a valid email address.
+            }
+          </p>
+        }
+      </div>
+      <div class="relative w-full flex flex-col">
+        <label for="login-password" class="sr-only">Password</label>
+        <input
+          id="login-password"
+          [type]="isEyeClosed() ? 'password' : 'text'"
           placeholder="Password"
           formControlName="password"
+          [attr.autocomplete]="isEyeClosed() ? 'current-password' : 'off'"
+          aria-required="true"
+          [attr.aria-invalid]="
+            form.get('password')?.invalid && form.get('password')?.touched ? 'true' : null
+          "
+          aria-describedby="login-password-error"
           class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
         />
-
-        <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
+        <button
+          type="button"
+          aria-label="Toggle password visibility"
+          class="absolute right-0 top-1/2 -translate-y-1/2"
+        >
           <app-eye-track [isEyeClosed]="isEyeClosed" />
         </button>
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <p id="login-password-error" role="alert" class="text-red-500 text-xs mt-1">
+            Password is required.
+          </p>
+        }
       </div>
       <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
         @if (errorMessage()) {

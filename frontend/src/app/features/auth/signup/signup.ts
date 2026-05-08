@@ -1,11 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TransitionLink } from '../../../shared/components/transition-link/transition-link';
 import { BlackButton } from '../../../shared/components/black-button/black-button';
 import { AuthFrame } from '../../../layout/auth-frame/auth-frame';
 import { EyeTrack } from '../../../shared/components/eye-track/eye-track';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { inject } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../auth.service';
+import { emailFormatValidator } from '../../../shared/validators/email.validator';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +25,7 @@ export class Signup {
   form = this.fb.nonNullable.group({
     firstName: ['', [Validators.required]],
     lastName: [''],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email, emailFormatValidator]],
     phone: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required]],

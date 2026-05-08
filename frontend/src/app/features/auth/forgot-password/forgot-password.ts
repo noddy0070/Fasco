@@ -1,11 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthFrame } from '../../../layout/auth-frame/auth-frame';
 import { BlackButton } from '../../../shared/components/black-button/black-button';
 import { EyeTrack } from '../../../shared/components/eye-track/eye-track';
-import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { emailFormatValidator } from '../../../shared/validators/email.validator';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.css',
 })
-export class ForgotPassword {
+export class ForgotPassword implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
@@ -27,7 +27,7 @@ export class ForgotPassword {
   isEyeClosed2 = signal(true);
 
   emailForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email, emailFormatValidator]],
   });
 
   resetForm = this.fb.nonNullable.group({

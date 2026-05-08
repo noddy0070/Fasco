@@ -14,27 +14,42 @@
     </nav>
     <div class="relative w-auto md:w-auto lg:w-[20vw]">
       <div class="flex gap-2 md:gap-5 border-[#E3E3E3] border rounded-full h-min py-2 px-2 lg:px-4">
+        <label for="header-search-input" class="sr-only">Search products</label>
         <input
-          type="text"
+          id="header-search-input"
+          type="search"
           placeholder="Search"
           class="w-full font-medium outline-none text-[14px] hidden md:hidden lg:block md:text-[16px]"
           [ngModel]="searchQuery()"
           (ngModelChange)="onSearchInput($event)"
           (keydown.enter)="onSearchSubmit()"
           (blur)="closeDropdown()"
+          aria-label="Search products"
+          aria-autocomplete="list"
+          aria-controls="search-suggestions-listbox"
+          [attr.aria-expanded]="isDropdownOpen()"
+          autocomplete="off"
         />
-        <button type="button" (click)="onSearchSubmit()" class="ml-auto flex items-center">
-          <img src="assets/icons/search.svg" alt="search-icon" class="w-5 md:w-6 lg:w-7.5" />
+        <button
+          type="button"
+          (click)="onSearchSubmit()"
+          class="ml-auto flex items-center"
+          aria-label="Submit search"
+        >
+          <img src="assets/icons/search.svg" alt="" class="w-5 md:w-6 lg:w-7.5" />
         </button>
       </div>
       @if (isDropdownOpen()) {
         <div
+          id="search-suggestions-listbox"
+          aria-label="Search suggestions"
           class="search-dropdown absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0_16px_60px_rgba(0,0,0,0.14)] border border-[#E3E3E3] z-50 overflow-hidden"
         >
-          @for (product of suggestions(); track product.name) {
+          @for (product of suggestions(); track product.name; let idx = $index) {
             <button
               type="button"
               class="search-suggestion-item w-full flex items-center gap-3 px-4 py-3 hover:bg-[#F5F1E8] transition-colors text-left"
+              [attr.aria-label]="product.name + ', ' + product.variant + ', ' + product.price"
               (mousedown)="selectSuggestion(product)"
             >
               <img
@@ -52,6 +67,7 @@
           <button
             type="button"
             class="w-full px-4 py-3 text-xs font-semibold uppercase tracking-widest text-[#55647A] bg-[#F7F5EF] hover:bg-[#EDE9DE] transition-colors text-center"
+            [attr.aria-label]="'See all results for ' + searchQuery()"
             (mousedown)="onSearchSubmit()"
           >
             See all results for "{{ searchQuery() }}"
@@ -74,7 +90,7 @@
         ></app-black-button>
       </app-transition-link>
     }
-    <button class="md:hidden text-white bg-black p-1 rounded-[10px] h-[36px] aspect-square">
+    <button class="md:hidden text-white bg-black p-1 rounded-[10px] h-[36px] aspect-square" (click)="openMobileNav()" aria-label="Open navigation menu">
       <svg
         width="24"
         height="24"
@@ -90,3 +106,35 @@
     </button>
   </div>
 </header>
+
+@if (isMobileNavOpen()) {
+  <div class="mobile-nav-overlay" (click)="closeMobileNav()" aria-hidden="true"></div>
+  <aside class="mobile-nav-sidebar" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button
+      class="mobile-nav-close"
+      (click)="closeMobileNav()"
+      aria-label="Close navigation menu"
+    >✕</button>
+    <h2 class="font-volkhov text-2xl text-[#484848] mb-8">FASCO</h2>
+    <nav class="flex flex-col gap-6">
+      @for (navItem of navLinks(); track $index) {
+        <a
+          [href]="navItem.url"
+          class="text-[#1A1A1A] font-poppins text-lg font-medium hover-underline relative w-min whitespace-nowrap"
+          (click)="closeMobileNav()"
+        >{{ navItem.name }}</a>
+      }
+    </nav>
+    <div class="mt-10">
+      @if (store.user()) {
+        <app-transition-link link="/profile" class="w-min" (click)="closeMobileNav()">
+          <app-black-button placeholder="Profile" buttonClass="px-8 py-3"></app-black-button>
+        </app-transition-link>
+      } @else {
+        <app-transition-link link="/login" class="w-min" (click)="closeMobileNav()">
+          <app-black-button placeholder="Login" buttonClass="px-8 py-3"></app-black-button>
+        </app-transition-link>
+      }
+    </div>
+  </aside>
+}

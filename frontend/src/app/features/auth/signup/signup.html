@@ -18,61 +18,167 @@
       <span> OR </span>
       <span> - </span>
     </div>
-    <form class="flex flex-col gap-[2vw] md:gap-[1.5vw]" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form
+      class="flex flex-col gap-[2vw] md:gap-[1.5vw]"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      aria-label="Create account form"
+      novalidate
+    >
       <!-- Input Form -->
       <div class="grid grid-cols-2 gap-[2vw] md:gap-[1.5vw]">
-        <input
-          placeholder="First Name"
-          formControlName="firstName"
-          type="text"
-          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
-        />
-        <input
-          placeholder="Last Name"
-          formControlName="lastName"
-          type="text"
-          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
-        />
-        <input
-          placeholder="Email"
-          formControlName="email"
-          type="email"
-          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
-        />
-        <input
-          placeholder="Phone Number"
-          formControlName="phone"
-          type="number"
-          class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
-        />
-        <div class="relative w-full">
+        <div class="flex flex-col">
+          <label for="signup-firstName" class="sr-only">First Name</label>
           <input
-            [type]="isEyeClosed() ? 'text' : 'password'"
+            id="signup-firstName"
+            placeholder="First Name"
+            formControlName="firstName"
+            type="text"
+            autocomplete="given-name"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('firstName')?.invalid && form.get('firstName')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-firstName-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('firstName')?.invalid && form.get('firstName')?.touched) {
+            <p id="signup-firstName-error" role="alert" class="text-red-500 text-xs mt-1">
+              First name is required.
+            </p>
+          }
+        </div>
+        <div class="flex flex-col">
+          <label for="signup-lastName" class="sr-only">Last Name</label>
+          <input
+            id="signup-lastName"
+            placeholder="Last Name"
+            formControlName="lastName"
+            type="text"
+            autocomplete="family-name"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="signup-email" class="sr-only">Email address</label>
+          <input
+            id="signup-email"
+            placeholder="Email"
+            formControlName="email"
+            type="email"
+            autocomplete="email"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('email')?.invalid && form.get('email')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-email-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <p id="signup-email-error" role="alert" class="text-red-500 text-xs mt-1">
+              @if (form.get('email')?.errors?.['required']) {
+                Email is required.
+              } @else if (
+                form.get('email')?.errors?.['email'] || form.get('email')?.errors?.['invalidEmail']
+              ) {
+                Please enter a valid email address.
+              }
+            </p>
+          }
+        </div>
+        <div class="flex flex-col">
+          <label for="signup-phone" class="sr-only">Phone Number</label>
+          <input
+            id="signup-phone"
+            placeholder="Phone Number"
+            formControlName="phone"
+            type="tel"
+            autocomplete="tel"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('phone')?.invalid && form.get('phone')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-phone-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+            <p id="signup-phone-error" role="alert" class="text-red-500 text-xs mt-1">
+              Phone number is required.
+            </p>
+          }
+        </div>
+        <div class="relative w-full flex flex-col">
+          <label for="signup-password" class="sr-only">Password</label>
+          <input
+            id="signup-password"
+            [type]="isEyeClosed() ? 'password' : 'text'"
             placeholder="Password"
             formControlName="password"
+            [attr.autocomplete]="isEyeClosed() ? 'new-password' : 'off'"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('password')?.invalid && form.get('password')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-password-error"
             class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
-          <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
+          <button
+            type="button"
+            aria-label="Toggle password visibility"
+            class="absolute right-0 top-1/2 -translate-y-1/2"
+          >
             <app-eye-track [isEyeClosed]="isEyeClosed" />
           </button>
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <p id="signup-password-error" role="alert" class="text-red-500 text-xs mt-1">
+              @if (form.get('password')?.errors?.['required']) {
+                Password is required.
+              } @else if (form.get('password')?.errors?.['minlength']) {
+                Password must be at least 6 characters.
+              }
+            </p>
+          }
         </div>
-        <div class="relative w-full">
+        <div class="relative w-full flex flex-col">
+          <label for="signup-confirmPassword" class="sr-only">Confirm Password</label>
           <input
-            [type]="isEyeClosed2() ? 'text' : 'password'"
-            placeholder="Confrim Password"
+            id="signup-confirmPassword"
+            [type]="isEyeClosed2() ? 'password' : 'text'"
+            placeholder="Confirm Password"
             formControlName="confirmPassword"
+            [attr.autocomplete]="isEyeClosed2() ? 'new-password' : 'off'"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched
+                ? 'true'
+                : null
+            "
+            aria-describedby="signup-confirmPassword-error"
             class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
           />
-          <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2">
+          <button
+            type="button"
+            aria-label="Toggle confirm password visibility"
+            class="absolute right-0 top-1/2 -translate-y-1/2"
+          >
             <app-eye-track [isEyeClosed]="isEyeClosed2" />
           </button>
+          @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
+            <p id="signup-confirmPassword-error" role="alert" class="text-red-500 text-xs mt-1">
+              Please confirm your password.
+            </p>
+          }
         </div>
       </div>
       <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
         @if (errorMessage()) {
           <p class="text-red-600 text-sm md:w-[80%] mx-auto">{{ errorMessage() }}</p>
         }
-        <app-black-button class="mx-auto w-full md:w-[80%]" buttonClass="w-full py-[8px] xl:py-[10px] " [placeholder]="isSubmitting() ? 'Creating...' : 'Create Account'" />
+        <app-black-button
+          class="mx-auto w-full md:w-[80%]"
+          buttonClass="w-full py-[8px] xl:py-[10px] "
+          [placeholder]="isSubmitting() ? 'Creating...' : 'Create Account'"
+        />
         <app-transition-link link="/login" class="mx-auto w-full md:w-[80%]">
           <button
             class="w-full md:-mt-1 lg:mt-0 py-2 hover:bg-accent-blue-light text-16px-sm md:text-16px-lg border-accent-blue text-accent-blue border rounded-lg transition-colors duration-300 ease-in-out"

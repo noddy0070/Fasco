@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { AuthFrame } from '../../../layout/auth-frame/auth-frame';
 import { BlackButton } from '../../../shared/components/black-button/black-button';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-signup-verification',
   imports: [AuthFrame, BlackButton],

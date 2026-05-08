@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, input, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class TransitionLink implements OnInit {
  private readonly router = inject(Router);
  private readonly hostElement = inject(ElementRef<HTMLElement>);
 
-  @Input() link!: string;
+  link = input.required<string>();
   hostClasses = '';
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class TransitionLink implements OnInit {
 
     await this.sleep(200);
 
-    await this.router.navigateByUrl(this.link);
+    await this.router.navigateByUrl(this.link());
 
     await this.sleep(200);
 

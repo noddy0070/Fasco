@@ -116,7 +116,7 @@
           <div class="filter-group">
             <h3>SIZE</h3>
             <div class="size-grid">
-              @for (size of sizeOptions; track size) {
+              @for (size of availableSizes(); track size) {
                 <button
                   type="button"
                   (click)="toggleSize(size)"
@@ -131,7 +131,7 @@
           <div class="filter-group">
             <h3>COLOR</h3>
             <div class="color-grid">
-              @for (color of colorOptions; track color.label) {
+              @for (color of availableColors(); track color.label) {
                 <button
                   type="button"
                   (click)="toggleColor(color.label)"
@@ -163,7 +163,7 @@
           <div class="filter-group">
             <h3>PRODUCT TYPE</h3>
             <div class="checkbox-list">
-              @for (productType of productTypeOptions; track productType) {
+              @for (productType of availableProductTypes(); track productType) {
                 <label>
                   <input
                     type="checkbox"
@@ -179,7 +179,7 @@
           <div class="filter-group">
             <h3>MATERIAL</h3>
             <div class="checkbox-list">
-              @for (material of materialOptions; track material) {
+              @for (material of availableMaterials(); track material) {
                 <label>
                   <input
                     type="checkbox"

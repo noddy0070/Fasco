@@ -6,9 +6,9 @@ import { SignupVerification } from './features/auth/signup-verification/signup-v
 import { Profile } from './features/profile/profile';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 import { NotFound } from './features/not-found/not-found';
-import { CollectionPage } from './features/collections/collection-page/collection-page';
+import { CollectionPage } from './features/collections/collection-page';
 import { ProductDetail } from './features/product-detail/product-detail';
-import { SearchPage } from './features/search/search-page/search-page';
+import { SearchPage } from './features/search/search-page';
 import { authGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
     {path:'',component:Home, title:'Home Page' },

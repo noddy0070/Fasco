@@ -3,18 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { SearchService, SearchProduct } from '../../../services/search.service';
-
-interface FilterColorOption {
-  label: string;
-  swatch: string;
-}
-
-interface PriceRangeOption {
-  label: string;
-  min: number;
-  max: number;
-}
+import { SearchService, SearchProduct } from './search.service';
+import { COLOR_OPTIONS, PRICE_OPTIONS, SIZE_OPTIONS } from '../../shared/collection/collection.constants';
 
 @Component({
   selector: 'app-search-page',
@@ -41,49 +31,29 @@ export class SearchPage implements OnInit {
   selectedMaterials = signal<string[]>([]);
 
   readonly sortOptions = ['Featured', 'Best Selling', 'Price: Low to High', 'Price: High to Low'];
+  readonly priceOptions = PRICE_OPTIONS;
 
-  readonly sizeOptions = [
-    'XS', 'S', 'M', 'L', 'XL',
-    'XXL', 'XXXL', '8', '8.5', '9',
-    '9.5', '10', '10.5', '11', '11.5',
-    '12', '12.5', '13', '13.5', '14',
-    '15', 'One Size',
-  ];
+  availableSizes = computed(() => {
+    const productSizes = new Set(this.allResults().flatMap((p) => p.sizes));
+    return SIZE_OPTIONS.filter((s) => productSizes.has(s));
+  });
 
-  readonly colorOptions: FilterColorOption[] = [
-    { label: 'Black', swatch: '#1E1F23' },
-    { label: 'Grey', swatch: '#778092' },
-    { label: 'White', swatch: '#F4F5F6' },
-    { label: 'Beige', swatch: '#EFE2B4' },
-    { label: 'Brown', swatch: '#AF4B02' },
-    { label: 'Red', swatch: '#FF3040' },
-    { label: 'Pink', swatch: '#EE9AC7' },
-    { label: 'Orange', swatch: '#FF6C00' },
-    { label: 'Yellow', swatch: '#F6BE00' },
-    { label: 'Green', swatch: '#0FA748' },
-    { label: 'Blue', swatch: '#3079E9' },
-    { label: 'Purple', swatch: '#A54AEA' },
-  ];
+  availableColors = computed(() => {
+    const productColors = new Set(this.allResults().flatMap((p) => p.colors));
+    return COLOR_OPTIONS.filter((c) => productColors.has(c.label));
+  });
 
-  readonly priceOptions: PriceRangeOption[] = [
-    { label: 'Under $75', min: 0, max: 74 },
-    { label: '$75 - $100', min: 75, max: 100 },
-    { label: '$101 - $125', min: 101, max: 125 },
-    { label: '$126 - $150', min: 126, max: 150 },
-    { label: 'Over $150', min: 151, max: Number.POSITIVE_INFINITY },
-  ];
+  availableProductTypes = computed(() =>
+    [...new Set(this.allResults().map((p) => p.productType).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b)
+    )
+  );
 
-  readonly productTypeOptions = [
-    'Everyday Sneakers', 'Golf', 'High Tops', 'Hiking Shoes',
-    'Hoodies', 'Insoles', 'Long Sleeve Tees', 'Running Shoes',
-    'Shirts', 'Slip Ons', 'Slippers', 'Socks',
-    'Sweatpants', 'Sweatshirts', 'Tees', 'Water-Repellent Shoes',
-  ];
-
-  readonly materialOptions = [
-    'Alternative-Leather', 'Canvas', 'Cotton',
-    'Sugar', 'Tree', 'Tree-Fiber-Blend', 'Wool',
-  ];
+  availableMaterials = computed(() =>
+    [...new Set(this.allResults().map((p) => p.material).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b)
+    )
+  );
 
   filteredProducts = computed(() => {
     const products = this.allResults();

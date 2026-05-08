@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BlackButton } from "../../shared/components/black-button/black-button";
 import { TransitionLink } from '../../shared/components/transition-link/transition-link';
 import { UserStore } from '../../core/store/user-store';
-import { SearchService, SearchProduct } from '../../services/search.service';
+import { SearchService, SearchProduct } from '../../features/search/search.service';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +28,10 @@ export class Header implements OnInit {
   searchQuery = signal('');
   suggestions = signal<SearchProduct[]>([]);
   isDropdownOpen = signal(false);
+  isMobileNavOpen = signal(false);
+
+  openMobileNav(): void { this.isMobileNavOpen.set(true); }
+  closeMobileNav(): void { this.isMobileNavOpen.set(false); }
 
   ngOnInit(): void {
     void this.searchService.loadProducts();

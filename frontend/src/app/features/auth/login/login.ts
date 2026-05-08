@@ -6,6 +6,7 @@ import { EyeTrack } from '../../../shared/components/eye-track/eye-track';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserStore } from '../../../core/store/user-store';
 import { Router } from '@angular/router';
+import { emailFormatValidator } from '../../../shared/validators/email.validator';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class Login {
   store = inject(UserStore);
 
   form = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email, emailFormatValidator]],
     password: ['', [Validators.required]],
   });
 

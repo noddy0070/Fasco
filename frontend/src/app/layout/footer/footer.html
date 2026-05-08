@@ -1,71 +1,102 @@
 <section class="relative flex w-full">
-    <div class="absolute bg-[#DADADA] h-full inset-0 translate-y-[50%]"></div>
-    <div class="responsive-padding-x flex  justify-center items-center w-full">
-        <app-cta
-            class=" relative flex-1 flex justify-center"
-        />
-    </div>
+  <div class="absolute bg-[#DADADA] h-full inset-0 translate-y-[50%]"></div>
+  <div class="responsive-padding-x flex justify-center items-center w-full">
+    <app-cta class="relative flex-1 flex justify-center" />
+  </div>
 </section>
 
-<footer class="relative mt-0 md:mt-15 lg:mt-20 px-5 md:px-10 lg:px-30 items-center py-8 md:py-15 bg-[#DADADA] w-full grid grid-cols-1 md:grid-cols-3" style="margin-bottom: 0px;">
-    <div class="col-span-1 md:col-span-2 flex flex-col md:gap-16 mt-auto" >
-        <div class="grid grid-cols-1  md:grid-cols-7 gap-6 md:gap-0 mb-10">
-            <div class="flex flex-col gap-[1.5vw] col-span-1  md:col-span-3 mb-auto ">
-                <img src="assets/images/fasco-logo.png" class="w-15 md:w-[5.2vw]"/>
-                <p class="text-[#9D9EA2] text-16px-sm md:text-16px-lg leading-[150%] font-medium font-poppins md:max-w-[90%] text-justify">
-                    #1 Canadian top rated online dispensary that meets the customers needs in every single medical marijuana aspect. The team here at TopShelfBC is heavily involved in the Canadian cannabis industry for over 15 years. We strive to provide the top quality products, service and care at the lowest prices you’ll ever find.
-                </p>
+<footer
+  class="relative mt-0 md:mt-15 lg:mt-20 px-5 md:px-10 lg:px-30 items-center py-8 md:py-15 bg-[#DADADA] w-full grid grid-cols-1 md:grid-cols-3"
+  style="margin-bottom: 0px"
+>
+  <div class="col-span-1 md:col-span-2 flex flex-col md:gap-16 mt-auto">
+    <div class="grid grid-cols-1 md:grid-cols-7 gap-6 md:gap-0 mb-10">
+      <div class="flex flex-col gap-[1.5vw] col-span-1 md:col-span-3 mb-auto">
+        <img src="assets/images/fasco-logo.png" class="w-15 md:w-[5.2vw]" />
+        <p
+          class="text-[#9D9EA2] text-16px-sm md:text-16px-lg leading-[150%] font-medium font-poppins md:max-w-[90%] text-justify"
+        >
+          #1 Canadian top rated online dispensary that meets the customers needs in every single
+          medical marijuana aspect. The team here at TopShelfBC is heavily involved in the Canadian
+          cannabis industry for over 15 years. We strive to provide the top quality products,
+          service and care at the lowest prices you’ll ever find.
+        </p>
+      </div>
+      <div class="col-span-1 md:col-span-4">
+        <div class="flex flex-col gap-6 md:gap-[1.5vw] text-16px-sm md:text-16px-lg">
+          <div class="flex flex-col gap-2 md:gap-[.83vw]">
+            <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">
+              QUICK LINKS
+            </p>
+            <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw]">
+              @for (item of footerQuickLinks(); track $index) {
+                <app-transition-link [link]="item.url">
+                  {{ item.name }}
+                </app-transition-link>
+              }
             </div>
-            <div class="col-span-1 md:col-span-4">
-                <div class="flex flex-col gap-6 md:gap-[1.5vw] text-16px-sm md:text-16px-lg">
-                    <div class="flex flex-col gap-2 md:gap-[.83vw]">    
-                        <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">QUICK LINKS</p>
-                        <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw] ">
-                            @for (item of footerQuickLinks(); track $index) {
-                                <app-transition-link [link]="item.url" >
-                                    {{item.name}}
-                                </app-transition-link>
-                            }
-                        </div>
-                    </div>       
-                    <div class="flex flex-col  gap-2 md:gap-[.83vw]">    
-                        <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">Contact Us</p>
-                        <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw] ">
-                            @for (item of footerContactLinks(); track $index) {
-                                <p>{{item.name}}</p>
-                            }
-                        </div>
-                    </div>    
-                    <div class="flex flex-col gap-2 md:gap-[.83vw]">    
-                        <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">More</p>
-                        <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw] ">
-                            @for (item of footerMoreLinks(); track $index) {
-                                <app-transition-link [link]="item.url">
-                                    {{item.name}}
-                                </app-transition-link>}
-                        </div>
-                    </div>
-                    <div class="flex gap-2 md:gap-[.83vw]">
-                        <img src="assets/images/footer/mastercard.png" class="w-15 md:w-[2.9vw] h-auto"/>
-                        <img src="assets/images/footer/visa.png" class="w-15 md:w-[2.9vw] h-auto"/>
-                        <img src="assets/images/footer/bitcoin.png" class="w-15 md:w-[2.9vw] h-auto"/>
-                        <img src="assets/images/footer/debit.png" class="w-15 md:w-[2.9vw] h-auto"/>
-                        
-                    </div>
-                </div>
+          </div>
+          <div class="flex flex-col gap-2 md:gap-[.83vw]">
+            <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">
+              Contact Us
+            </p>
+            <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw]">
+              @for (item of footerContactLinks(); track $index) {
+                <p>{{ item.name }}</p>
+              }
             </div>
+          </div>
+          <div class="flex flex-col gap-2 md:gap-[.83vw]">
+            <p class="text-[#FFFFFF] font-medium leading-[150%] text-20px-sm md:text-20px-lg">
+              More
+            </p>
+            <div class="grid grid-cols-2 text-[#9D9EA2] gap-1 md:gap-[.5vw]">
+              @for (item of footerMoreLinks(); track $index) {
+                <app-transition-link [link]="item.url">
+                  {{ item.name }}
+                </app-transition-link>
+              }
+            </div>
+          </div>
+          <div class="flex gap-2 md:gap-[.83vw]">
+            <img src="assets/images/footer/mastercard.png" class="w-15 md:w-[2.9vw] h-auto" />
+            <img src="assets/images/footer/visa.png" class="w-15 md:w-[2.9vw] h-auto" />
+            <img src="assets/images/footer/bitcoin.png" class="w-15 md:w-[2.9vw] h-auto" />
+            <img src="assets/images/footer/debit.png" class="w-15 md:w-[2.9vw] h-auto" />
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="pt-4 md:pt-10 border-[#46494F] border-t flex flex-col-reverse md:flex-row gap-2 md:gap-0 md:justify-between  md:items-center text-16px-sm md:text-16px-lg">
-            <span class="text-[#717378]">© 2022 Top Shelf BC. All Rights Reserved. </span>
-            <div class="text-[#9D9EA2] flex gap-[2vw] whitespace-nowrap flex-wrap justify-between items-center">
-                <app-transition-link class="relative  hover-underline " style="--after-color:#9D9EA2">Out of Stock</app-transition-link>
-                <app-transition-link class="relative  hover-underline " style="--after-color:#9D9EA2">Privacy Policy</app-transition-link>
-                <app-transition-link class="relative  hover-underline " style="--after-color:#9D9EA2">Terms & Conditions</app-transition-link>
-            </div>
-        </div>
+    <div
+      class="pt-4 md:pt-10 border-[#46494F] border-t flex flex-col-reverse md:flex-row gap-2 md:gap-0 md:justify-between md:items-center text-16px-sm md:text-16px-lg"
+    >
+      <span class="text-[#717378]">© 2022 Top Shelf BC. All Rights Reserved. </span>
+      <div
+        class="text-[#9D9EA2] flex gap-[2vw] whitespace-nowrap flex-wrap justify-between items-center"
+      >
+        <app-transition-link
+          [link]="'/'"
+          class="relative hover-underline"
+          style="--after-color: #9d9ea2"
+          >Out of Stock</app-transition-link
+        >
+        <app-transition-link
+          [link]="'/privacy-policy'"
+          class="relative hover-underline"
+          style="--after-color: #9d9ea2"
+          >Privacy Policy</app-transition-link
+        >
+        <app-transition-link
+          [link]="'/terms-conditions'"
+          class="relative hover-underline"
+          style="--after-color: #9d9ea2"
+          >Terms & Conditions</app-transition-link
+        >
+      </div>
     </div>
-    <div class=" overflow-visible md:col-span-1 hidden md:flex">
-        <img  src="assets/images/footer/thumbnail.png"/>
-    </div>
+  </div>
+  <div class="overflow-visible md:col-span-1 hidden md:flex">
+    <img src="assets/images/footer/thumbnail.png" />
+  </div>
 </footer>

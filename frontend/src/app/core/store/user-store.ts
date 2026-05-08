@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { signalStore, withMethods, withState, patchState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
-import { AuthService, AuthUser, LoginPayload } from '../../services/auth.service';
-
+import { AuthService } from '../../features/auth/auth.service';
+import { AuthUser, LoginPayload } from '../../features/auth/auth.models';
 type UserState = {
   user: AuthUser | null;
   isLoading: boolean;

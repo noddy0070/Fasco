@@ -1,10 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-/**
- * Reusable email format validator.
- * Use alongside Validators.required when the field is mandatory.
- * Returns { invalidEmail: true } when the value is present but not a valid email.
- */
 export function emailFormatValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value as string;
   if (!value) {
