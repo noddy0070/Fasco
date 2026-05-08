@@ -50,6 +50,7 @@ export class AuthService {
     private readonly router: Router,
   ) {}
 
+
   signup(data: SignupPayload): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(API_ENDPOINTS.auth.signup, data).pipe(
       tap(() => {

@@ -388,7 +388,7 @@ export class CollectionPage implements OnInit {
       moreColors: `+${Math.max(colorList.length - 1, 0)}`,
       swatches: colorList.map((color) => {
         const variant = product.variants.find(v => v.color === color);
-        return variant?.colorCode ?? this.colorNameToSwatch(color);
+        return variant?.colorCode ?? '#7f878c';
       }),
       sizes: sizeList.length > 0 ? sizeList : ['M'],
       colors: colorList.length > 0 ? colorList : ['Default'],
@@ -403,22 +403,4 @@ export class CollectionPage implements OnInit {
     };
   }
 
-  private colorNameToSwatch(color: string): string {
-    const token = color.toLowerCase();
-    if (token.includes('black') || token.includes('coal') || token.includes('ink')) return '#2c2c2c';
-    if (token.includes('white') || token.includes('parchment') || token.includes('cream')) return '#f0ece4';
-    if (token.includes('grey') || token.includes('gray') || token.includes('graphite') || token.includes('ash')) return '#8a8f96';
-    if (token.includes('navy') || token.includes('midnight')) return '#1e3a5f';
-    if (token.includes('blue') || token.includes('steel') || token.includes('cobalt')) return '#3d6fa8';
-    if (token.includes('green') || token.includes('forest') || token.includes('olive')) return '#4a7c6a';
-    if (token.includes('teal') || token.includes('sea') || token.includes('glass')) return '#4ba8a0';
-    if (token.includes('red') || token.includes('crimson') || token.includes('ruby')) return '#c0392b';
-    if (token.includes('pink') || token.includes('rose') || token.includes('blush')) return '#d9828c';
-    if (token.includes('orange') || token.includes('amber') || token.includes('rust')) return '#c95c3b';
-    if (token.includes('yellow') || token.includes('gold')) return '#d4a843';
-    if (token.includes('purple') || token.includes('violet') || token.includes('plum')) return '#6a4fa8';
-    if (token.includes('brown') || token.includes('tan') || token.includes('caramel')) return '#8b5e3c';
-    if (token.includes('sand') || token.includes('stone') || token.includes('beige') || token.includes('khaki')) return '#a89f7a';
-    return '#7f878c';
-  }
 }
