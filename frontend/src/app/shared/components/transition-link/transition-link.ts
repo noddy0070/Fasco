@@ -1,16 +1,23 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, ElementRef, inject, input, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transition-link',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './transition-link.html',
   styleUrl: './transition-link.css',
 })
-export class TransitionLink {
- private router = inject(Router);
+export class TransitionLink implements OnInit {
+ private readonly router = inject(Router);
+ private readonly hostElement = inject(ElementRef<HTMLElement>);
 
-  @Input() link!: string;
+  link = input.required<string>();
+  hostClasses = '';
+
+  ngOnInit(): void {
+    this.hostClasses = this.hostElement.nativeElement.className;
+  }
 
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,7 +30,7 @@ export class TransitionLink {
 
     await this.sleep(200);
 
-    await this.router.navigateByUrl(this.link);
+    await this.router.navigateByUrl(this.link());
 
     await this.sleep(200);
 

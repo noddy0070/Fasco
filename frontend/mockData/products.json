@@ -1,0 +1,2623 @@
+{
+  "products": [
+    {
+      "_id": "p1001",
+      "title": "Capilene Cool Sun Hoody",
+      "slug": "capilene-cool-sun-hoody",
+      "description": "Our Capilene Cool Sun Hoody provides 40+ UPF sun protection, plus moisture-wicking and fast-drying performance for active days outdoors.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "tops",
+      "subCategory": "hoodies",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "CCSH-COAL-XS",
+          "size": "XS",
+          "color": "Coal Orange",
+          "colorCode": "#8B4513",
+          "price": 89,
+          "discount": 0,
+          "stock": 6,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800"
+          ]
+        },
+        {
+          "sku": "CCSH-COAL-S",
+          "size": "S",
+          "color": "Coal Orange",
+          "colorCode": "#8B4513",
+          "price": 89,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800"
+          ]
+        },
+        {
+          "sku": "CCSH-NAVY-M",
+          "size": "M",
+          "color": "Navy Blue",
+          "colorCode": "#1B2951",
+          "price": 92,
+          "discount": 5,
+          "stock": 5,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800"
+          ]
+        },
+        {
+          "sku": "CCSH-NAVY-L",
+          "size": "L",
+          "color": "Navy Blue",
+          "colorCode": "#1B2951",
+          "price": 92,
+          "discount": 5,
+          "stock": 4,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800"
+          ]
+        },
+        {
+          "sku": "CCSH-GREY-M",
+          "size": "M",
+          "color": "Heather Grey",
+          "colorCode": "#9E9E9E",
+          "price": 89,
+          "discount": 0,
+          "stock": 7,
+          "images": [
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800"
+          ]
+        },
+        {
+          "sku": "CCSH-GREY-L",
+          "size": "L",
+          "color": "Heather Grey",
+          "colorCode": "#9E9E9E",
+          "price": 89,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 29,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit, true to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "40+ UPF, moisture-wicking, fast-drying."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% recycled polyester jersey. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "sun protection",
+        "performance",
+        "hoodie"
+      ],
+      "metaTitle": "Capilene Cool Sun Hoody",
+      "metaDescription": "Lightweight sun hoody for hiking, running and fishing.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1002",
+      "title": "Men's Aero Street",
+      "slug": "mens-aero-street",
+      "description": "Urban running sneaker with all-day cushioning and breathable knit upper.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "running-shoes",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "MAS-GREY-9",
+          "size": "9",
+          "color": "Cloud Grey",
+          "colorCode": "#D3D3D3",
+          "price": 159,
+          "discount": 10,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800"
+          ]
+        },
+        {
+          "sku": "MAS-GREY-10",
+          "size": "10",
+          "color": "Cloud Grey",
+          "colorCode": "#D3D3D3",
+          "price": 159,
+          "discount": 10,
+          "stock": 11,
+          "images": [
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800"
+          ]
+        },
+        {
+          "sku": "MAS-BLACK-9",
+          "size": "9",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 159,
+          "discount": 10,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+          ]
+        },
+        {
+          "sku": "MAS-BLACK-10",
+          "size": "10",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 159,
+          "discount": 10,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.6,
+      "totalReviews": 18,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Runs true to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Lightweight midsole and anti-slip outsole."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean with damp cloth."
+        }
+      ],
+      "tags": [
+        "running",
+        "street",
+        "shoe"
+      ],
+      "metaTitle": "Men's Aero Street",
+      "metaDescription": "Aero Street sneaker for daily movement.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1003",
+      "title": "Men's Trail Core",
+      "slug": "mens-trail-core",
+      "description": "Trail-ready sneaker with cushioned support and rugged outsole.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "hiking-shoes",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MTC-FOREST-9",
+          "size": "9",
+          "color": "Forest Ash",
+          "colorCode": "#355E3B",
+          "price": 146,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800",
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800"
+          ]
+        },
+        {
+          "sku": "MTC-FOREST-10",
+          "size": "10",
+          "color": "Forest Ash",
+          "colorCode": "#355E3B",
+          "price": 146,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800",
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800"
+          ]
+        },
+        {
+          "sku": "MTC-BROWN-9",
+          "size": "9",
+          "color": "Earth Brown",
+          "colorCode": "#8B4513",
+          "price": 146,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 16,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Rugged outsole and breathable upper."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Wipe clean with damp cloth."
+        }
+      ],
+      "tags": [
+        "trail",
+        "hiking",
+        "shoe"
+      ],
+      "metaTitle": "Men's Trail Core",
+      "metaDescription": "Trail-ready comfort by Fasco.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1004",
+      "title": "Men's Court Lite",
+      "slug": "mens-court-lite",
+      "description": "Minimal court sneaker for everyday wear.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "everyday-sneakers",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MCL-BLACK-10",
+          "size": "10",
+          "color": "Satin Black",
+          "colorCode": "#2C2C2C",
+          "price": 121,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800",
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800"
+          ]
+        },
+        {
+          "sku": "MCL-WHITE-10",
+          "size": "10",
+          "color": "Pure White",
+          "colorCode": "#FFFFFF",
+          "price": 121,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800",
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800"
+          ]
+        },
+        {
+          "sku": "MCL-BLACK-11",
+          "size": "11",
+          "color": "Satin Black",
+          "colorCode": "#2C2C2C",
+          "price": 121,
+          "discount": 0,
+          "stock": 7,
+          "images": [
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800",
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.2,
+      "totalReviews": 11,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "True to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Soft insole and lightweight sole."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean."
+        }
+      ],
+      "tags": [
+        "court",
+        "daily",
+        "shoe"
+      ],
+      "metaTitle": "Men's Court Lite",
+      "metaDescription": "Everyday court style.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1005",
+      "title": "Women's Glide Loafer",
+      "slug": "womens-glide-loafer",
+      "description": "Soft slip-on loafer with lightweight comfort.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "shoes",
+      "subCategory": "slip-ons",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WGL-SAND-S",
+          "size": "S",
+          "color": "Light Sand",
+          "colorCode": "#F4E4BC",
+          "price": 125,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800"
+          ]
+        },
+        {
+          "sku": "WGL-SAND-M",
+          "size": "M",
+          "color": "Light Sand",
+          "colorCode": "#F4E4BC",
+          "price": 125,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800"
+          ]
+        },
+        {
+          "sku": "WGL-BLACK-S",
+          "size": "S",
+          "color": "Classic Black",
+          "colorCode": "#000000",
+          "price": 125,
+          "discount": 0,
+          "stock": 6,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.6,
+      "totalReviews": 21,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Comfort fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Flexible sole and soft upper."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean only."
+        }
+      ],
+      "tags": [
+        "women",
+        "loafer",
+        "slip-on"
+      ],
+      "metaTitle": "Women's Glide Loafer",
+      "metaDescription": "Effortless loafer style.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1006",
+      "title": "Women's Cloud Runner",
+      "slug": "womens-cloud-runner",
+      "description": "Performance-focused runner with breathable comfort.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "shoes",
+      "subCategory": "running-shoes",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WCR-SEA-M",
+          "size": "M",
+          "color": "Sea Glass",
+          "colorCode": "#9FE2BF",
+          "price": 135,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "WCR-SEA-L",
+          "size": "L",
+          "color": "Sea Glass",
+          "colorCode": "#9FE2BF",
+          "price": 135,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "WCR-PINK-M",
+          "size": "M",
+          "color": "Blush Pink",
+          "colorCode": "#FFC0CB",
+          "price": 135,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.7,
+      "totalReviews": 24,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Snug fit, true size recommended."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Breathable mesh and responsive cushioning."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Machine wash cold."
+        }
+      ],
+      "tags": [
+        "women",
+        "runner",
+        "performance"
+      ],
+      "metaTitle": "Women's Cloud Runner",
+      "metaDescription": "Light and breathable running shoes.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1007",
+      "title": "Women's Weekend Low",
+      "slug": "womens-weekend-low",
+      "description": "Lifestyle sneaker designed for all-day wear.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "shoes",
+      "subCategory": "everyday-sneakers",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "WWL-STONE-L",
+          "size": "L",
+          "color": "Stone",
+          "colorCode": "#928E85",
+          "price": 115,
+          "discount": 10,
+          "stock": 7,
+          "images": [
+            "assets/images/home/trend/Image-3.png",
+            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800"
+          ]
+        },
+        {
+          "sku": "WWL-WHITE-L",
+          "size": "L",
+          "color": "Crisp White",
+          "colorCode": "#F8F8FF",
+          "price": 115,
+          "discount": 10,
+          "stock": 9,
+          "images": [
+            "assets/images/home/trend/Image-3.png",
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.3,
+      "totalReviews": 13,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Relaxed fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Soft lining and durable rubber sole."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean recommended."
+        }
+      ],
+      "tags": [
+        "weekend",
+        "casual",
+        "women"
+      ],
+      "metaTitle": "Women's Weekend Low",
+      "metaDescription": "Casual comfort for every day.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1008",
+      "title": "Men's Metro Sneaker",
+      "slug": "mens-metro-sneaker",
+      "description": "Urban sneaker with premium comfort and support.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "everyday-sneakers",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "MMS-NAVY-11",
+          "size": "11",
+          "color": "Ink Navy",
+          "colorCode": "#1B2951",
+          "price": 118,
+          "discount": 12,
+          "stock": 15,
+          "images": [
+            "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800",
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800"
+          ]
+        },
+        {
+          "sku": "MMS-GREY-11",
+          "size": "11",
+          "color": "Urban Grey",
+          "colorCode": "#708090",
+          "price": 118,
+          "discount": 12,
+          "stock": 13,
+          "images": [
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800",
+            "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 19,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Stability sole and cushioned footbed."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Wipe with dry cloth."
+        }
+      ],
+      "tags": [
+        "men",
+        "sneaker",
+        "metro"
+      ],
+      "metaTitle": "Men's Metro Sneaker",
+      "metaDescription": "Urban-ready comfort sneaker.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1009",
+      "title": "Men's Dasher Knit",
+      "slug": "mens-dasher-knit",
+      "description": "Breathable knit runner built for all-day comfort.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "running-shoes",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MDK-GRAPHITE-10",
+          "size": "10",
+          "color": "Graphite",
+          "colorCode": "#41424C",
+          "price": 140,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+          ]
+        },
+        {
+          "sku": "MDK-BLUE-10",
+          "size": "10",
+          "color": "Ocean Blue",
+          "colorCode": "#006994",
+          "price": 140,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+            "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 15,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "True to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Breathable knit and responsive sole."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean."
+        }
+      ],
+      "tags": [
+        "knit",
+        "runner",
+        "men"
+      ],
+      "metaTitle": "Men's Dasher Knit",
+      "metaDescription": "Comfort knit runner.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1010",
+      "title": "Men's Canvas Cruiser",
+      "slug": "mens-canvas-cruiser",
+      "description": "Canvas daily sneaker with a lightweight feel.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "everyday-sneakers",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MCC-BLUE-9",
+          "size": "9",
+          "color": "Steel Blue",
+          "colorCode": "#4682B4",
+          "price": 115,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800",
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800"
+          ]
+        },
+        {
+          "sku": "MCC-WHITE-9",
+          "size": "9",
+          "color": "Canvas White",
+          "colorCode": "#F5F5DC",
+          "price": 115,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800",
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.3,
+      "totalReviews": 10,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Canvas upper and flexible outsole."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Wipe clean."
+        }
+      ],
+      "tags": [
+        "canvas",
+        "men",
+        "sneaker"
+      ],
+      "metaTitle": "Men's Canvas Cruiser",
+      "metaDescription": "Everyday canvas sneaker.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1011",
+      "title": "Men's Varsity Flex",
+      "slug": "mens-varsity-flex",
+      "description": "Classic high-top with modern comfort.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "high-tops",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MVF-PARCH-11",
+          "size": "11",
+          "color": "Parchment",
+          "colorCode": "#F1E9D2",
+          "price": 125,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800",
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800"
+          ]
+        },
+        {
+          "sku": "MVF-BLACK-11",
+          "size": "11",
+          "color": "Classic Black",
+          "colorCode": "#000000",
+          "price": 125,
+          "discount": 0,
+          "stock": 6,
+          "images": [
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800",
+            "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 12,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "High-top ankle support."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Spot clean only."
+        }
+      ],
+      "tags": [
+        "high-top",
+        "men",
+        "varsity"
+      ],
+      "metaTitle": "Men's Varsity Flex",
+      "metaDescription": "Classic varsity sneaker.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1012",
+      "title": "Women's Active Flex Leggings",
+      "slug": "womens-active-flex-leggings",
+      "description": "High-performance leggings with four-way stretch and moisture-wicking technology.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "bottoms",
+      "subCategory": "leggings",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WAFL-BLACK-XS",
+          "size": "XS",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 78,
+          "discount": 0,
+          "stock": 15,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WAFL-BLACK-S",
+          "size": "S",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 78,
+          "discount": 0,
+          "stock": 18,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WAFL-NAVY-S",
+          "size": "S",
+          "color": "Deep Navy",
+          "colorCode": "#000080",
+          "price": 78,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WAFL-GREY-M",
+          "size": "M",
+          "color": "Charcoal Grey",
+          "colorCode": "#36454F",
+          "price": 78,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.8,
+      "totalReviews": 42,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "High-waisted, compression fit."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Four-way stretch, moisture-wicking, squat-proof."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "87% Nylon, 13% Spandex. Machine wash cold, hang dry."
+        }
+      ],
+      "tags": [
+        "leggings",
+        "activewear",
+        "yoga",
+        "running"
+      ],
+      "metaTitle": "Women's Active Flex Leggings",
+      "metaDescription": "Premium performance leggings for all activities.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1013",
+      "title": "Men's Performance Tank",
+      "slug": "mens-performance-tank",
+      "description": "Lightweight tank top with quick-dry technology for intense workouts.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "tops",
+      "subCategory": "tank-tops",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "MPT-BLACK-M",
+          "size": "M",
+          "color": "Carbon Black",
+          "colorCode": "#2C2C2C",
+          "price": 32,
+          "discount": 15,
+          "stock": 22,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        },
+        {
+          "sku": "MPT-WHITE-M",
+          "size": "M",
+          "color": "Pure White",
+          "colorCode": "#FFFFFF",
+          "price": 32,
+          "discount": 15,
+          "stock": 19,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        },
+        {
+          "sku": "MPT-GREY-L",
+          "size": "L",
+          "color": "Heather Grey",
+          "colorCode": "#9E9E9E",
+          "price": 32,
+          "discount": 15,
+          "stock": 16,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 28,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Athletic fit, slightly loose."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Quick-dry, anti-odor, UPF 30+."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Polyester. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "tank",
+        "workout",
+        "quick-dry",
+        "men"
+      ],
+      "metaTitle": "Men's Performance Tank",
+      "metaDescription": "High-performance tank for serious training.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1014",
+      "title": "Women's Yoga Flow Top",
+      "slug": "womens-yoga-flow-top",
+      "description": "Soft, breathable yoga top with built-in shelf bra for medium support.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "tops",
+      "subCategory": "sports-bras",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WYFT-ROSE-XS",
+          "size": "XS",
+          "color": "Dusty Rose",
+          "colorCode": "#DCAE96",
+          "price": 58,
+          "discount": 0,
+          "stock": 13,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WYFT-SAGE-S",
+          "size": "S",
+          "color": "Sage Green",
+          "colorCode": "#9CAF88",
+          "price": 58,
+          "discount": 0,
+          "stock": 17,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WYFT-LAVENDER-M",
+          "size": "M",
+          "color": "Soft Lavender",
+          "colorCode": "#E6E6FA",
+          "price": 58,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.7,
+      "totalReviews": 35,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Relaxed fit with built-in bra."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Medium support, moisture-wicking, seamless design."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "92% Nylon, 8% Spandex. Hand wash recommended."
+        }
+      ],
+      "tags": [
+        "yoga",
+        "sports-bra",
+        "women",
+        "medium-support"
+      ],
+      "metaTitle": "Women's Yoga Flow Top",
+      "metaDescription": "Comfortable yoga top with built-in support.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1015",
+      "title": "Men's Cargo Shorts",
+      "slug": "mens-cargo-shorts",
+      "description": "Durable cargo shorts with multiple pockets for outdoor adventures.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "bottoms",
+      "subCategory": "shorts",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MCS-KHAKI-32",
+          "size": "32",
+          "color": "Desert Khaki",
+          "colorCode": "#C3B091",
+          "price": 65,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800",
+            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800"
+          ]
+        },
+        {
+          "sku": "MCS-OLIVE-34",
+          "size": "34",
+          "color": "Olive Drab",
+          "colorCode": "#6B8E23",
+          "price": 65,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800",
+            "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800"
+          ]
+        },
+        {
+          "sku": "MCS-NAVY-36",
+          "size": "36",
+          "color": "Navy Blue",
+          "colorCode": "#1B2951",
+          "price": 65,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800",
+            "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.3,
+      "totalReviews": 18,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Relaxed fit with adjustable waist."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "6 pockets, water-resistant, UPF 50+."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Ripstop Nylon. Machine wash warm."
+        }
+      ],
+      "tags": [
+        "cargo",
+        "outdoor",
+        "shorts",
+        "men"
+      ],
+      "metaTitle": "Men's Cargo Shorts",
+      "metaDescription": "Functional cargo shorts for outdoor activities.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1016",
+      "title": "Women's High-Impact Sports Bra",
+      "slug": "womens-high-impact-sports-bra",
+      "description": "Maximum support sports bra designed for high-intensity workouts.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "tops",
+      "subCategory": "sports-bras",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "WHISB-BLACK-S",
+          "size": "S",
+          "color": "Jet Black",
+          "colorCode": "#343434",
+          "price": 68,
+          "discount": 20,
+          "stock": 8,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WHISB-CORAL-M",
+          "size": "M",
+          "color": "Coral Reef",
+          "colorCode": "#FF7F50",
+          "price": 68,
+          "discount": 20,
+          "stock": 6,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WHISB-PURPLE-L",
+          "size": "L",
+          "color": "Royal Purple",
+          "colorCode": "#7851A9",
+          "price": 68,
+          "discount": 20,
+          "stock": 4,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.9,
+      "totalReviews": 52,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Compression fit, true to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Maximum support, moisture-wicking, removable cups."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "88% Nylon, 12% Spandex. Machine wash cold, air dry."
+        }
+      ],
+      "tags": [
+        "high-impact",
+        "sports-bra",
+        "women",
+        "maximum-support"
+      ],
+      "metaTitle": "Women's High-Impact Sports Bra",
+      "metaDescription": "Ultimate support for high-intensity training.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1017",
+      "title": "Men's Thermal Base Layer",
+      "slug": "mens-thermal-base-layer",
+      "description": "Merino wool base layer for superior warmth and moisture management.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "tops",
+      "subCategory": "base-layers",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MTBL-BLACK-M",
+          "size": "M",
+          "color": "Charcoal Black",
+          "colorCode": "#36454F",
+          "price": 95,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MTBL-GREY-L",
+          "size": "L",
+          "color": "Smoke Grey",
+          "colorCode": "#708090",
+          "price": 95,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MTBL-NAVY-XL",
+          "size": "XL",
+          "color": "Deep Navy",
+          "colorCode": "#000080",
+          "price": 95,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.6,
+      "totalReviews": 23,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Slim fit, next-to-skin."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Merino wool, odor-resistant, temperature regulating."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Merino Wool. Hand wash cold, lay flat to dry."
+        }
+      ],
+      "tags": [
+        "thermal",
+        "base-layer",
+        "merino-wool",
+        "men"
+      ],
+      "metaTitle": "Men's Thermal Base Layer",
+      "metaDescription": "Premium merino wool base layer for cold weather.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1018",
+      "title": "Women's Running Shorts",
+      "slug": "womens-running-shorts",
+      "description": "Lightweight running shorts with built-in compression liner.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "bottoms",
+      "subCategory": "shorts",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WRS-BLACK-XS",
+          "size": "XS",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 45,
+          "discount": 0,
+          "stock": 16,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WRS-TEAL-S",
+          "size": "S",
+          "color": "Ocean Teal",
+          "colorCode": "#008080",
+          "price": 45,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WRS-PINK-M",
+          "size": "M",
+          "color": "Sunset Pink",
+          "colorCode": "#FA8072",
+          "price": 45,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 31,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Athletic fit with 5-inch inseam."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Built-in liner, side pockets, reflective details."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "90% Polyester, 10% Spandex. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "running",
+        "shorts",
+        "women",
+        "compression-liner"
+      ],
+      "metaTitle": "Women's Running Shorts",
+      "metaDescription": "Performance running shorts with built-in support.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1019",
+      "title": "Men's Hiking Boots",
+      "slug": "mens-hiking-boots",
+      "description": "Waterproof hiking boots with superior traction and ankle support.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "shoes",
+      "subCategory": "hiking-boots",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MHB-BROWN-9",
+          "size": "9",
+          "color": "Leather Brown",
+          "colorCode": "#8B4513",
+          "price": 185,
+          "discount": 0,
+          "stock": 7,
+          "images": [
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800",
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+          ]
+        },
+        {
+          "sku": "MHB-BLACK-10",
+          "size": "10",
+          "color": "Tactical Black",
+          "colorCode": "#2C2C2C",
+          "price": 185,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800",
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+          ]
+        },
+        {
+          "sku": "MHB-GREY-11",
+          "size": "11",
+          "color": "Storm Grey",
+          "colorCode": "#708090",
+          "price": 185,
+          "discount": 0,
+          "stock": 5,
+          "images": [
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800",
+            "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.7,
+      "totalReviews": 38,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "True to size with room for thick socks."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Waterproof, Vibram sole, ankle support."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Full-grain leather upper. Clean with leather conditioner."
+        }
+      ],
+      "tags": [
+        "hiking",
+        "boots",
+        "waterproof",
+        "men"
+      ],
+      "metaTitle": "Men's Hiking Boots",
+      "metaDescription": "Professional-grade hiking boots for serious trails.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1020",
+      "title": "Women's Casual Dress",
+      "slug": "womens-casual-dress",
+      "description": "Comfortable midi dress perfect for everyday wear and casual outings.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "dresses",
+      "subCategory": "casual-dresses",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "WCD-NAVY-S",
+          "size": "S",
+          "color": "Navy Stripe",
+          "colorCode": "#1B2951",
+          "price": 72,
+          "discount": 25,
+          "stock": 8,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "WCD-FLORAL-M",
+          "size": "M",
+          "color": "Spring Floral",
+          "colorCode": "#FFB6C1",
+          "price": 72,
+          "discount": 25,
+          "stock": 6,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "WCD-BLACK-L",
+          "size": "L",
+          "color": "Classic Black",
+          "colorCode": "#000000",
+          "price": 72,
+          "discount": 25,
+          "stock": 4,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.2,
+      "totalReviews": 17,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Relaxed fit, midi length."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Side pockets, adjustable waist tie."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "95% Cotton, 5% Spandex. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "dress",
+        "casual",
+        "midi",
+        "women"
+      ],
+      "metaTitle": "Women's Casual Dress",
+      "metaDescription": "Versatile midi dress for everyday comfort.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1021",
+      "title": "Men's Windbreaker Jacket",
+      "slug": "mens-windbreaker-jacket",
+      "description": "Lightweight windbreaker with packable design for outdoor activities.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "outerwear",
+      "subCategory": "jackets",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MWJ-BLUE-M",
+          "size": "M",
+          "color": "Electric Blue",
+          "colorCode": "#7DF9FF",
+          "price": 89,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MWJ-BLACK-L",
+          "size": "L",
+          "color": "Stealth Black",
+          "colorCode": "#2C2C2C",
+          "price": 89,
+          "discount": 0,
+          "stock": 15,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MWJ-GREEN-XL",
+          "size": "XL",
+          "color": "Forest Green",
+          "colorCode": "#355E3B",
+          "price": 89,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 26,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit, packable design."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Wind-resistant, water-repellent, packable."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Nylon ripstop. Machine wash cold, air dry."
+        }
+      ],
+      "tags": [
+        "windbreaker",
+        "packable",
+        "outdoor",
+        "men"
+      ],
+      "metaTitle": "Men's Windbreaker Jacket",
+      "metaDescription": "Packable windbreaker for outdoor adventures.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1022",
+      "title": "Women's Cross-Training Shoes",
+      "slug": "womens-cross-training-shoes",
+      "description": "Versatile cross-training shoes designed for multiple workout types.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "shoes",
+      "subCategory": "training-shoes",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WCTS-WHITE-7",
+          "size": "7",
+          "color": "Pure White",
+          "colorCode": "#FFFFFF",
+          "price": 128,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "assets/images/home/trend/Image-3.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800"
+          ]
+        },
+        {
+          "sku": "WCTS-PINK-8",
+          "size": "8",
+          "color": "Rose Pink",
+          "colorCode": "#FF69B4",
+          "price": 128,
+          "discount": 0,
+          "stock": 9,
+          "images": [
+            "assets/images/home/trend/Image-3.png",
+            "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800",
+            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800"
+          ]
+        },
+        {
+          "sku": "WCTS-GREY-9",
+          "size": "9",
+          "color": "Cool Grey",
+          "colorCode": "#9E9E9E",
+          "price": 128,
+          "discount": 0,
+          "stock": 13,
+          "images": [
+            "assets/images/home/trend/Image-3.png",
+            "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 33,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "True to size, medium width."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Multi-directional traction, lateral support."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Synthetic upper, rubber outsole. Spot clean."
+        }
+      ],
+      "tags": [
+        "cross-training",
+        "versatile",
+        "women",
+        "gym"
+      ],
+      "metaTitle": "Women's Cross-Training Shoes",
+      "metaDescription": "Multi-purpose training shoes for all workouts.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1023",
+      "title": "Men's Polo Shirt",
+      "slug": "mens-polo-shirt",
+      "description": "Classic polo shirt with moisture-wicking fabric for casual and active wear.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "tops",
+      "subCategory": "polo-shirts",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MPS-NAVY-M",
+          "size": "M",
+          "color": "Navy Blue",
+          "colorCode": "#1B2951",
+          "price": 52,
+          "discount": 0,
+          "stock": 18,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MPS-WHITE-L",
+          "size": "L",
+          "color": "Classic White",
+          "colorCode": "#FFFFFF",
+          "price": 52,
+          "discount": 0,
+          "stock": 16,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MPS-GREY-XL",
+          "size": "XL",
+          "color": "Heather Grey",
+          "colorCode": "#9E9E9E",
+          "price": 52,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.3,
+      "totalReviews": 22,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Classic fit, true to size."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Moisture-wicking, wrinkle-resistant."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "65% Cotton, 35% Polyester. Machine wash warm."
+        }
+      ],
+      "tags": [
+        "polo",
+        "casual",
+        "moisture-wicking",
+        "men"
+      ],
+      "metaTitle": "Men's Polo Shirt",
+      "metaDescription": "Classic polo with modern performance features.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1024",
+      "title": "Women's Fleece Jacket",
+      "slug": "womens-fleece-jacket",
+      "description": "Cozy fleece jacket perfect for layering in cool weather.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "outerwear",
+      "subCategory": "fleece",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WFJ-PURPLE-S",
+          "size": "S",
+          "color": "Plum Purple",
+          "colorCode": "#8E4585",
+          "price": 75,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WFJ-TEAL-M",
+          "size": "M",
+          "color": "Teal Blue",
+          "colorCode": "#008080",
+          "price": 75,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WFJ-GREY-L",
+          "size": "L",
+          "color": "Soft Grey",
+          "colorCode": "#D3D3D3",
+          "price": 75,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "assets/images/home/trend/Image-4.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.6,
+      "totalReviews": 29,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Relaxed fit, perfect for layering."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Full-zip, side pockets, anti-pill fleece."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Polyester fleece. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "fleece",
+        "layering",
+        "cozy",
+        "women"
+      ],
+      "metaTitle": "Women's Fleece Jacket",
+      "metaDescription": "Warm and comfortable fleece for cool days.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1025",
+      "title": "Men's Swim Trunks",
+      "slug": "mens-swim-trunks",
+      "description": "Quick-dry swim trunks with mesh lining and secure pockets.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "swimwear",
+      "subCategory": "swim-trunks",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "MST-BLUE-M",
+          "size": "M",
+          "color": "Ocean Blue",
+          "colorCode": "#006994",
+          "price": 42,
+          "discount": 30,
+          "stock": 14,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MST-CORAL-L",
+          "size": "L",
+          "color": "Coral Reef",
+          "colorCode": "#FF7F50",
+          "price": 42,
+          "discount": 30,
+          "stock": 11,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MST-BLACK-XL",
+          "size": "XL",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 42,
+          "discount": 30,
+          "stock": 9,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.2,
+      "totalReviews": 19,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit with 7-inch inseam."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Quick-dry, mesh lining, secure zip pocket."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Polyester. Machine wash cold, air dry."
+        }
+      ],
+      "tags": [
+        "swim",
+        "quick-dry",
+        "beach",
+        "men"
+      ],
+      "metaTitle": "Men's Swim Trunks",
+      "metaDescription": "Performance swim trunks for beach and pool.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1026",
+      "title": "Women's Yoga Pants",
+      "slug": "womens-yoga-pants",
+      "description": "High-waisted yoga pants with four-way stretch for ultimate flexibility.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "bottoms",
+      "subCategory": "yoga-pants",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WYP-BLACK-XS",
+          "size": "XS",
+          "color": "Deep Black",
+          "colorCode": "#000000",
+          "price": 68,
+          "discount": 0,
+          "stock": 13,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WYP-BURGUNDY-S",
+          "size": "S",
+          "color": "Wine Burgundy",
+          "colorCode": "#800020",
+          "price": 68,
+          "discount": 0,
+          "stock": 15,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WYP-OLIVE-M",
+          "size": "M",
+          "color": "Olive Green",
+          "colorCode": "#6B8E23",
+          "price": 68,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "assets/images/home/trend/Image-5.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.8,
+      "totalReviews": 47,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "High-waisted, full length."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Four-way stretch, non-see-through, side pockets."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "87% Nylon, 13% Spandex. Machine wash cold, hang dry."
+        }
+      ],
+      "tags": [
+        "yoga",
+        "high-waisted",
+        "stretch",
+        "women"
+      ],
+      "metaTitle": "Women's Yoga Pants",
+      "metaDescription": "Premium yoga pants for practice and lifestyle.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1027",
+      "title": "Men's Compression Shorts",
+      "slug": "mens-compression-shorts",
+      "description": "Performance compression shorts for training and recovery.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "bottoms",
+      "subCategory": "compression-shorts",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MCS-BLACK-M",
+          "size": "M",
+          "color": "Carbon Black",
+          "colorCode": "#2C2C2C",
+          "price": 38,
+          "discount": 0,
+          "stock": 20,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MCS-BLUE-L",
+          "size": "L",
+          "color": "Royal Blue",
+          "colorCode": "#4169E1",
+          "price": 38,
+          "discount": 0,
+          "stock": 17,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MCS-GREY-XL",
+          "size": "XL",
+          "color": "Steel Grey",
+          "colorCode": "#708090",
+          "price": 38,
+          "discount": 0,
+          "stock": 15,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 25,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Compression fit, 9-inch inseam."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Muscle support, moisture-wicking, flatlock seams."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "85% Polyester, 15% Spandex. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "compression",
+        "training",
+        "recovery",
+        "men"
+      ],
+      "metaTitle": "Men's Compression Shorts",
+      "metaDescription": "Professional compression shorts for athletes.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1028",
+      "title": "Women's Rain Jacket",
+      "slug": "womens-rain-jacket",
+      "description": "Waterproof rain jacket with breathable membrane and adjustable hood.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "outerwear",
+      "subCategory": "rain-jackets",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WRJ-YELLOW-S",
+          "size": "S",
+          "color": "Bright Yellow",
+          "colorCode": "#FFFF00",
+          "price": 125,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WRJ-NAVY-M",
+          "size": "M",
+          "color": "Navy Blue",
+          "colorCode": "#1B2951",
+          "price": 125,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WRJ-BLACK-L",
+          "size": "L",
+          "color": "Jet Black",
+          "colorCode": "#343434",
+          "price": 125,
+          "discount": 0,
+          "stock": 6,
+          "images": [
+            "assets/images/home/trend/Image-6.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.7,
+      "totalReviews": 34,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit with room for layers."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Waterproof, breathable, adjustable hood, pit zips."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "3-layer membrane. Machine wash cold, tumble dry low."
+        }
+      ],
+      "tags": [
+        "rain",
+        "waterproof",
+        "breathable",
+        "women"
+      ],
+      "metaTitle": "Women's Rain Jacket",
+      "metaDescription": "Professional waterproof jacket for all weather.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1029",
+      "title": "Men's Basketball Shorts",
+      "slug": "mens-basketball-shorts",
+      "description": "Lightweight basketball shorts with moisture-wicking fabric and side pockets.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "bottoms",
+      "subCategory": "athletic-shorts",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MBS-BLACK-M",
+          "size": "M",
+          "color": "Midnight Black",
+          "colorCode": "#191970",
+          "price": 48,
+          "discount": 0,
+          "stock": 16,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MBS-RED-L",
+          "size": "L",
+          "color": "Fire Red",
+          "colorCode": "#DC143C",
+          "price": 48,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MBS-BLUE-XL",
+          "size": "XL",
+          "color": "Electric Blue",
+          "colorCode": "#7DF9FF",
+          "price": 48,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.3,
+      "totalReviews": 21,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Athletic fit with 11-inch inseam."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Moisture-wicking, side pockets, elastic waistband."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "100% Polyester. Machine wash cold, tumble dry low."
+        }
+      ],
+      "tags": [
+        "basketball",
+        "athletic",
+        "moisture-wicking",
+        "men"
+      ],
+      "metaTitle": "Men's Basketball Shorts",
+      "metaDescription": "Performance basketball shorts for court and training.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1030",
+      "title": "Women's Hiking Pants",
+      "slug": "womens-hiking-pants",
+      "description": "Durable hiking pants with UPF protection and convertible legs.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "bottoms",
+      "subCategory": "hiking-pants",
+      "isActive": true,
+      "isTrending": false,
+      "isLimitedOffer": true,
+      "variants": [
+        {
+          "sku": "WHP-KHAKI-S",
+          "size": "S",
+          "color": "Desert Khaki",
+          "colorCode": "#C3B091",
+          "price": 85,
+          "discount": 20,
+          "stock": 7,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WHP-OLIVE-M",
+          "size": "M",
+          "color": "Olive Green",
+          "colorCode": "#6B8E23",
+          "price": 85,
+          "discount": 20,
+          "stock": 9,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WHP-GREY-L",
+          "size": "L",
+          "color": "Stone Grey",
+          "colorCode": "#928E85",
+          "price": 85,
+          "discount": 20,
+          "stock": 5,
+          "images": [
+            "assets/images/home/trend/Image-1.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.5,
+      "totalReviews": 16,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit, convertible to shorts."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "UPF 50+, water-resistant, multiple pockets."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "96% Nylon, 4% Spandex. Machine wash cold, air dry."
+        }
+      ],
+      "tags": [
+        "hiking",
+        "convertible",
+        "UPF",
+        "women"
+      ],
+      "metaTitle": "Women's Hiking Pants",
+      "metaDescription": "Versatile hiking pants that convert to shorts.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1031",
+      "title": "Men's Insulated Vest",
+      "slug": "mens-insulated-vest",
+      "description": "Lightweight insulated vest perfect for layering in variable conditions.",
+      "brand": "Fasco",
+      "gender": "men",
+      "category": "outerwear",
+      "subCategory": "vests",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "MIV-BLACK-M",
+          "size": "M",
+          "color": "Carbon Black",
+          "colorCode": "#2C2C2C",
+          "price": 95,
+          "discount": 0,
+          "stock": 11,
+          "images": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MIV-NAVY-L",
+          "size": "L",
+          "color": "Deep Navy",
+          "colorCode": "#000080",
+          "price": 95,
+          "discount": 0,
+          "stock": 13,
+          "images": [
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        },
+        {
+          "sku": "MIV-GREY-XL",
+          "size": "XL",
+          "color": "Charcoal Grey",
+          "colorCode": "#36454F",
+          "price": 95,
+          "discount": 0,
+          "stock": 8,
+          "images": [
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
+            "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.6,
+      "totalReviews": 27,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "Regular fit, perfect for layering."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Synthetic insulation, packable, water-resistant."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "Nylon shell with synthetic fill. Machine wash cold."
+        }
+      ],
+      "tags": [
+        "vest",
+        "insulated",
+        "layering",
+        "men"
+      ],
+      "metaTitle": "Men's Insulated Vest",
+      "metaDescription": "Versatile insulated vest for core warmth.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    },
+    {
+      "_id": "p1032",
+      "title": "Women's Capri Leggings",
+      "slug": "womens-capri-leggings",
+      "description": "Mid-length capri leggings with side pockets and moisture-wicking fabric.",
+      "brand": "Fasco",
+      "gender": "women",
+      "category": "bottoms",
+      "subCategory": "capri-leggings",
+      "isActive": true,
+      "isTrending": true,
+      "isLimitedOffer": false,
+      "variants": [
+        {
+          "sku": "WCL-BLACK-XS",
+          "size": "XS",
+          "color": "Jet Black",
+          "colorCode": "#343434",
+          "price": 58,
+          "discount": 0,
+          "stock": 14,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WCL-MINT-S",
+          "size": "S",
+          "color": "Mint Green",
+          "colorCode": "#98FB98",
+          "price": 58,
+          "discount": 0,
+          "stock": 12,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=800"
+          ]
+        },
+        {
+          "sku": "WCL-PURPLE-M",
+          "size": "M",
+          "color": "Deep Purple",
+          "colorCode": "#663399",
+          "price": 58,
+          "discount": 0,
+          "stock": 10,
+          "images": [
+            "assets/images/home/trend/Image-2.png",
+            "https://images.unsplash.com/photo-1506629905607-c52b1b8e8d19?w=800",
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800"
+          ]
+        }
+      ],
+      "averageRating": 4.4,
+      "totalReviews": 30,
+      "specifications": [
+        {
+          "title": "Fit",
+          "value": "High-waisted, capri length."
+        },
+        {
+          "title": "Specs & Features",
+          "value": "Side pockets, moisture-wicking, four-way stretch."
+        },
+        {
+          "title": "Materials & Care Instructions",
+          "value": "87% Nylon, 13% Spandex. Machine wash cold, hang dry."
+        }
+      ],
+      "tags": [
+        "capri",
+        "leggings",
+        "pockets",
+        "women"
+      ],
+      "metaTitle": "Women's Capri Leggings",
+      "metaDescription": "Comfortable capri leggings with convenient pockets.",
+      "createdBy": "system",
+      "updatedBy": "system"
+    }
+  ]
+}

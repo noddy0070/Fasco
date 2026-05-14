@@ -1,68 +1,144 @@
 <section class="mx-2 md:mx-4 lg:mx-0 grid md:grid-cols-16 lg:grid-cols-24 gap-4 md:gap-[1.8vw]">
-    <div class="col-span-4 hidden lg:flex flex-col   lg:justify-between">
-        <picture class="w-full">
-            <source srcset="assets/images/home/hero/hero-top-left.webp" type="image/webp" />
-            <img src="assets/images/home/hero/hero-top-left.png" alt="Hero Image" class="rounded-r-[10px] w-full h-full" loading="lazy" fetchpriority="high"/>
-        </picture>
+  <div class="col-span-4 hidden lg:flex flex-col lg:justify-between">
+    <picture class="w-full">
+      <source srcset="assets/images/home/hero/hero-top-left.webp" type="image/webp" />
+      <img
+        src="assets/images/home/hero/hero-top-left.png"
+        alt="Hero"
+        class="rounded-r-[10px] w-full h-full"
+        loading="lazy"
+        fetchpriority="high"
+      />
+    </picture>
 
-        <picture>
-            <source srcset="assets/images/home/hero/hero-bottom-left.webp" type="image/webp" />
-            <img src="assets/images/home/hero/hero-bottom-left.png" alt="Hero Image" class="rounded-r-[10px] w-full h-full" loading="lazy" fetchpriority="high"/>
-        </picture>
+    <picture>
+      <source srcset="assets/images/home/hero/hero-bottom-left.webp" type="image/webp" />
+      <img
+        src="assets/images/home/hero/hero-bottom-left.png"
+        alt="Hero"
+        class="rounded-r-[10px] w-full h-full"
+        loading="lazy"
+        fetchpriority="high"
+      />
+    </picture>
+  </div>
+  <div class="md:col-span-5 lg:col-span-5 hidden md:flex h-full bg-grey-bg rounded-[10px] flex-col">
+    <picture class="mt-auto">
+      <source srcset="assets/images/home/hero/hero-left.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        class="w-full rounded-[10px] object-contain"
+        src="assets/images/home/hero/hero-left.png"
+        alt="Hero"
+      />
+    </picture>
+  </div>
+  <div class="col-span-6 flex flex-col justify-between gap-5 md:gap-2">
+    <picture>
+      <source srcset="assets/images/home/hero/hero-top.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        class="bg-beige rounded-[10px] w-full h-auto object-contain"
+        src="assets/images/home/hero/hero-top.png"
+        alt="Hero"
+      />
+    </picture>
+    <div class="block xs:grid grid-cols-3 md:block gap-2 xl:gap-4 mx-auto">
+      <picture>
+        <source srcset="assets/images/home/hero/hero-left.webp" type="image/webp" />
+        <img
+          loading="lazy"
+          fetchpriority="high"
+          class="hidden xs:block md:hidden col-span-1 w-full rounded-[10px] object-contain bg-grey-bg mt-auto"
+          src="assets/images/home/hero/hero-left.png"
+          alt="Hero"
+        />
+      </picture>
+      <div class="col-span-1 my-auto flex flex-col items-center">
+        <h2
+          class="text-primary font-medium font-roboto leading-[100%] tracking-[-4.5%] text-90px-xs xs:text-90px-sm md:text-[54px] lg:text-90px-lg"
+        >
+          ULTIMATE
+        </h2>
+        <h2
+          class="font-medium font-roboto text-white leading-[100%] tracking-[-3%] text-180px-xs xs:text-180px-sm md:text-[108px] lg:text-180px-lg 2xl:text-180px-2xl"
+          style="
+            text-shadow:
+              -1px -1px 0 #000,
+              1px -1px 0 #000,
+              -1px 1px 0 #000,
+              1px 1px 0 #000;
+          "
+        >
+          SALE
+        </h2>
+        <span
+          class="font-poppins text-[20px] xs:text-[14px] text-center md:text-[20px] tracking-[10%] mb-3 xl:mb-5"
+          >NEW COLLECTION</span
+        >
+        <a [routerLink]="['/collections/sale']">
+          <app-black-button
+            placeholder="SHOP NOW "
+            buttonClass="px-4  sm:px-8 py-3 md:py-5"
+          ></app-black-button>
+        </a>
+      </div>
+      <picture>
+        <source srcset="assets/images/home/hero/hero-right.webp" type="image/webp" />
+        <img
+          loading="lazy"
+          fetchpriority="high"
+          class="hidden xs:block md:hidden col-span-1 w-full rounded-[10px] object-contain mt-auto bg-grey-bg"
+          src="assets/images/home/hero/hero-right.png"
+          alt="Hero"
+        />
+      </picture>
     </div>
-    <div class="md:col-span-5 lg:col-span-5 hidden md:flex h-full bg-grey-bg  rounded-[10px] flex-col">
-        <picture class="mt-auto">
-            <source srcset="assets/images/home/hero/hero-left.webp" type="image/webp" />
-            <img loading="lazy" fetchpriority="high" class="w-full rounded-[10px] object-contain " src="assets/images/home/hero/hero-left.png" alt="Hero Image"/>
-        </picture>
-    </div>
-    <div class="col-span-6 flex flex-col justify-between gap-5 md:gap-2">
-            <picture>
-                <source srcset="assets/images/home/hero/hero-top.webp"  type="image/webp" />
-                <img loading="lazy" fetchpriority="high" class="bg-[#C7B4A0]  rounded-[10px] w-full h-auto object-contain" src="assets/images/home/hero/hero-top.png" alt="Hero Image"/>
-            </picture>
-        <div class="block xs:grid grid-cols-3 md:block gap-2 xl:gap-4 mx-auto">
-            <picture>
-                <source srcset="assets/images/home/hero/hero-left.webp" type="image/webp" />
-                <img loading="lazy" fetchpriority="high" class="hidden xs:block md:hidden col-span-1 w-full rounded-[10px] object-contain bg-grey-bg mt-auto" src="assets/images/home/hero/hero-left.png" alt="Hero Image"/>
-            </picture>
-            <div class="col-span-1 my-auto flex flex-col items-center">
-                <h2 class="text-[#484848] font-medium font-roboto leading-[100%] tracking-[-4.5%] 
-                text-90px-xs xs:text-90px-sm md:text-[54px] lg:text-90px-lg">ULTIMATE</h2>
-                <h2 class="font-medium font-roboto text-white leading-[100%] tracking-[-3%]
-                text-180px-xs xs:text-180px-sm md:text-[108px] lg:text-180px-lg 2xl:text-180px-2xl 
-                " style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-                SALE</h2>
-                <span class="font-poppins text-[20px] xs:text-[14px] text-center md:text-[20px] tracking-[10%] mb-3 xl:mb-5">NEW COLLECTION</span> 
-                <app-black-button placeholder="SHOP NOW " buttonClass="px-4  sm:px-8 py-3 md:py-5"></app-black-button>
-            </div>
-                <picture>
-                    <source srcset="assets/images/home/hero/hero-right.webp" type="image/webp" />
-                    <img loading="lazy" fetchpriority="high" class=" hidden xs:block md:hidden col-span-1 w-full rounded-[10px] object-contain mt-auto bg-grey-bg" src="assets/images/home/hero/hero-right.png" alt="Hero Image"/>      
-                </picture>
-
-        </div>
-        <picture>
-            <source srcset="assets/images/home/hero/hero-bottom.webp" type="image/webp" />
-            <img loading="lazy" fetchpriority="high" src="assets/images/home/hero/hero-bottom.png" alt="Hero Image" class="w-full rounded-[10px] object-contain"/>  
-        </picture>
-
-    </div>
-    <div class="col-span-5 hidden md:flex flex-col h-full bg-grey-bg rounded-[10px]">
-        <picture class="mt-auto">
-            <source srcset="assets/images/home/hero/hero-right.webp" type="image/webp" />
-            <img loading="lazy" fetchpriority="high" class="w-full rounded-[10px] object-contain mt-auto" src="assets/images/home/hero/hero-right.png" alt="Hero Image"/>   
-        </picture>
-    </div>
-    <div class="col-span-4 hidden lg:flex flex-col gap-[1vw] lg:justify-between">
-        <picture>
-            <source srcset="assets/images/home/hero/hero-top-right.webp" type="image/webp" />
-            <img loading="lazy" fetchpriority="high" src="assets/images/home/hero/hero-top-right.png" alt="Hero Image" class="rounded-l-[10px] w-full h-auto">
-        </picture>
-        <picture>
-            <source srcset="assets/images/home/hero/hero-bottom-right.webp" type="image/webp" />
-            <img loading="lazy" fetchpriority="high" src="assets/images/home/hero/hero-bottom-right.png" alt="Hero Image" class="rounded-l-[10px] w-full h-auto" >
-        </picture>
-    </div>
-
+    <picture>
+      <source srcset="assets/images/home/hero/hero-bottom.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        src="assets/images/home/hero/hero-bottom.png"
+        alt="Hero"
+        class="w-full rounded-[10px] object-contain"
+      />
+    </picture>
+  </div>
+  <div class="col-span-5 hidden md:flex flex-col h-full bg-grey-bg rounded-[10px]">
+    <picture class="mt-auto">
+      <source srcset="assets/images/home/hero/hero-right.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        class="w-full rounded-[10px] object-contain mt-auto"
+        src="assets/images/home/hero/hero-right.png"
+        alt="Hero"
+      />
+    </picture>
+  </div>
+  <div class="col-span-4 hidden lg:flex flex-col gap-[1vw] lg:justify-between">
+    <picture>
+      <source srcset="assets/images/home/hero/hero-top-right.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        src="assets/images/home/hero/hero-top-right.png"
+        alt="Hero"
+        class="rounded-l-[10px] w-full h-auto"
+      />
+    </picture>
+    <picture>
+      <source srcset="assets/images/home/hero/hero-bottom-right.webp" type="image/webp" />
+      <img
+        loading="lazy"
+        fetchpriority="high"
+        src="assets/images/home/hero/hero-bottom-right.png"
+        alt="Hero"
+        class="rounded-l-[10px] w-full h-auto"
+      />
+    </picture>
+  </div>
 </section>

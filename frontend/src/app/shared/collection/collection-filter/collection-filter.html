@@ -1,0 +1,131 @@
+<div class="flex items-center gap-3">
+  <button
+    (click)="open.emit()"
+    class="flex items-center gap-3 rounded-full border border-[#1D1D1B]/20 bg-[#F5F1E8] px-4 py-3 text-sm font-medium text-[#334960] transition-colors duration-300 hover:border-[#1D1D1B]/35 hover:bg-white"
+  >
+    <span
+      class="grid size-8 place-items-center rounded-full border border-[#1D1D1B]/25 bg-white text-[#1D1D1B]"
+    >
+      <svg class="size-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M4 6.75H20M7.5 12H16.5M10 17.25H14"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
+      </svg>
+    </span>
+    <span>FILTER</span>
+    <span class="font-normal text-[#55647A]">({{ filteredCount() }} products)</span>
+  </button>
+</div>
+
+@if (isOpen()) {
+  <div class="filter-modal-backdrop" (click)="close.emit()" (keydown.escape)="close.emit()">
+    <section
+      class="filter-modal-panel"
+      (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
+    >
+      <button class="filter-modal-collapse" (click)="close.emit()" type="button">
+        <span class="text-lg leading-none">✕</span>
+        <span>COLLAPSE FILTERS</span>
+        <span class="font-normal">({{ filteredCount() }} products)</span>
+      </button>
+
+      <div class="filter-modal-grid">
+        <div class="filter-group">
+          <h3>SIZE</h3>
+          <p class="filter-hint">
+            Most of our shoes only come in full sizes. If you're a half size, select your nearest
+            whole size too.
+          </p>
+          <div class="size-grid">
+            @for (size of sizeOptions(); track size) {
+              <button
+                type="button"
+                (click)="toggleSize.emit(size)"
+                [class.is-selected]="isSizeSelected()(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>COLOR</h3>
+          <div class="checkbox-list">
+            @for (color of colorOptions(); track color) {
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="isColorSelected()(color)"
+                  (change)="toggleColor.emit(color)"
+                />
+                <span>{{ color }}</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>PRICE</h3>
+          <div class="checkbox-list">
+            @for (priceOption of priceOptions(); track priceOption.label) {
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="isPriceSelected()(priceOption.label)"
+                  (change)="togglePrice.emit(priceOption.label)"
+                />
+                <span>{{ priceOption.label }}</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>CATEGORY</h3>
+          <div class="checkbox-list">
+            @for (category of categoryOptions(); track category.slug) {
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="isCategorySelected()(category.slug)"
+                  (change)="toggleCategory.emit(category.slug)"
+                />
+                <span>{{ category.label }}</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h3>SUB-CATEGORY</h3>
+          <div class="checkbox-list">
+            @for (subCategory of subCategoryOptions(); track subCategory.slug) {
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="isSubCategorySelected()(subCategory.slug)"
+                  (change)="toggleSubCategory.emit(subCategory.slug)"
+                />
+                <span>{{ subCategory.label }}</span>
+              </label>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-modal-footer">
+        <button type="button" class="filter-clear-btn" (click)="clearFilters.emit()">
+          Clear all
+        </button>
+        <button type="button" class="filter-apply-btn" (click)="close.emit()">
+          Show {{ filteredCount() }} results
+        </button>
+      </div>
+    </section>
+  </div>
+}

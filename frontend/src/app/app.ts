@@ -1,9 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from "./layout/header/header";
 import { Footer } from "./layout/footer/footer";
-import {ActivatedRoute} from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
+import { UserStore } from './core/store/user-store';
 @Component({
   selector: 'app-root',
   styleUrl: './app.css',
@@ -12,19 +12,26 @@ import { filter } from 'rxjs/internal/operators/filter';
 })
 export class App implements OnInit{
   protected readonly title=signal('Ecommerce App');
-   ngOnInit() {
+  private readonly userStore = inject(UserStore);
+
+   async ngOnInit() {
+    await this.userStore.hydrateFromSession();
     this.loadCarouselStyles();
   }
 
-  constructor(private router: Router) {
+  constructor(readonly router: Router) {
   this.router.events.pipe(
     filter(event => event instanceof NavigationEnd)
   ).subscribe((event: NavigationEnd) => {
-    this.showHeader.set(!this.noHeaderRoutes().includes(event.urlAfterRedirects));
+    this.showHeader.set(
+  !this.noHeaderRoutes().some(route =>
+    event.urlAfterRedirects.startsWith(route)
+  )
+);
   });
 }
 
-  noHeaderRoutes = signal(['/login', '/signup']);
+  noHeaderRoutes = signal(['/login', '/signup', '/forgot-password', '/404']);
   showHeader = signal(true);
 
   loadCarouselStyles() {

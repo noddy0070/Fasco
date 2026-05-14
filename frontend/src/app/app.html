@@ -1,9 +1,9 @@
 <div>
-    @if (showHeader()) {
-        <app-header></app-header>
-    }
-        <router-outlet></router-outlet>
-    @if (showHeader()) {
-        <app-footer></app-footer>
-    }
+  @if (showHeader()) {
+    <app-header></app-header>
+  }
+  <router-outlet></router-outlet>
+  @if (showHeader()) {
+    <app-footer></app-footer>
+  }
 </div>

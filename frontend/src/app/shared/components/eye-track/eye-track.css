@@ -1,0 +1,94 @@
+
+
+.container {
+  text-align: center;
+}
+
+#button {
+  display: inline-block;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.eye {
+  fill: none;
+  stroke: #9D9D9D;
+  stroke-width: 10;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+}
+
+svg {
+  display: block;
+  width: 30px;
+  overflow: visible; /* Ensure SVG doesn't clip */
+}
+
+.lid {
+  stroke-dasharray: 222;
+  stroke-dashoffset: 0;
+  
+}
+
+.pupil {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 0;
+  stroke: #515151;
+  transform-origin: center center; /* Changed to center center */
+  transition: transform 0.15s ease-out;
+  /* Remove the default rotation that was causing issues */
+}
+
+/* When eye is closed, ensure pupil stays in center */
+.pupil--close {
+  animation: pupil--close .5s ease-in-out forwards;
+}
+
+.pupil--open {
+  animation: pupil--open .5s ease-in-out forwards;
+}
+
+.lid--close {
+  animation: lid--close .5s ease-in-out forwards;
+}
+
+.lid--open {
+  animation: lid--open .5s ease-in-out forwards;
+}
+
+@keyframes lid--close {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -222;
+  }
+}
+
+@keyframes lid--open {
+  from {
+    stroke-dashoffset: -222;
+  }
+  to {
+    stroke-dashoffset: -444;
+  }
+}
+
+@keyframes pupil--close {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -150;
+  }
+}
+
+@keyframes pupil--open {
+  from {
+    stroke-dashoffset: -150;
+  }
+  to {
+    stroke-dashoffset: -300;
+  }
+}

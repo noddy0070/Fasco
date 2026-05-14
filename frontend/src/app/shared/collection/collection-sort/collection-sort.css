@@ -1,0 +1,38 @@
+.sort-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 240px;
+  z-index: 40;
+  border-radius: 18px;
+  border: 1px solid rgba(18, 18, 18, 0.12);
+  background: #ffffff;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.16);
+  padding: 8px;
+}
+
+.sort-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #1f2731;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.sort-menu-item:hover,
+.sort-menu-item.is-selected {
+  background: #f2efe8;
+  color: #111111;
+}
+
+@media (max-width: 768px) {
+  .sort-menu {
+    width: min(240px, 88vw);
+  }
+}

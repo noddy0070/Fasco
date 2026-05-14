@@ -1,0 +1,46 @@
+<div class="flex flex-wrap items-center gap-3 lg:justify-end">
+  <div class="flex rounded-full border border-[#26231F] bg-white p-1">
+    @for (tab of collection().tabs; track tab.slug; let tabIndex = $index) {
+      <app-transition-link
+        [link]="'/collections/' + tab.slug"
+        [ngClass]="
+          isTabActive()(tab, collection(), tabIndex)
+            ? 'bg-[#1C1C1C] text-white'
+            : 'bg-transparent text-[#1B1B1B]'
+        "
+        class="rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-300"
+      >
+        {{ tab.label }}
+      </app-transition-link>
+    }
+  </div>
+
+  <div class="relative">
+    <button
+      type="button"
+      (click)="toggleSortMenu.emit()"
+      class="flex min-w-45 items-center justify-between rounded-full border border-[#26231F] bg-white px-5 py-3 text-sm font-semibold uppercase tracking-widest text-[#1B1B1B] transition-colors duration-300 hover:bg-[#F7F5EF]"
+    >
+      <span>{{ activeSortLabel() }}</span>
+      <span class="grid size-6 place-items-center rounded-full border border-[#26231F] text-[10px]">⌄</span>
+    </button>
+
+    @if (isSortMenuOpen()) {
+      <div class="sort-menu">
+        @for (option of collection().sortOptions; track option) {
+          <button
+            type="button"
+            class="sort-menu-item"
+            [class.is-selected]="option === activeSortLabel()"
+            (click)="selectSortOption.emit(option)"
+          >
+            <span>{{ option }}</span>
+            @if (option === activeSortLabel()) {
+              <span>✓</span>
+            }
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>

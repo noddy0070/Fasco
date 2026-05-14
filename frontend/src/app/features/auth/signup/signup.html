@@ -1,71 +1,199 @@
-<div class="relative">
-     <!-- background image -->
-      <!-- overlay -->
-      <div class="absolute inset-0 bg-[url('/assets/images/auth/thumbnail.png')] bg-cover bg-center -z-[10]"></div>
-      <div class="absolute inset-0 bg-black/50 -z-[10]"></div>
-
-
-    <section class="  overflow-hidden h-dvh md:max-h-dvh flex md:flex-col justify-center bg-no-repeat bg-center bg-cover b " >
-        <div class=" responsive-margin-x bg-white  font-poppins border-[#DBDBDB] md:border-none my-auto 
-        border shadow-[0px_20px_21.7px_rgba(68,68,68,0.4)] md:shadow-[0px_20px_21.7px_rgba(68,68,68,0.04)] md:rounded-l-none rounded-l-2xl rounded-r-2xl md:rounded-r-[30px] w-full md:w-auto max-w-140 md:max-w-none   grid grid-cols-1 md:grid-cols-2">
-            <img src="assets/images/auth/thumbnail.png" class="hidden md:block col-span-1 aspect-square md:aspect-auto h-full w-full  object-cover"/>
-            <div class="col-span-1 flex flex-col responsive-margin-x   my-8   items-center ">
-                    <div class="flex flex-col gap-[2vw]  w-full  max-w-125 my-auto">
-                        <h1 class="text-[#484848] text-60px-sm md:text-60px-lg font-volkhov leading-[100%]">FASCO</h1>
-                        <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] text-30px-sm sm:text-28px-lg leading-[120%] max-w-125 i">
-                            <h2 class="font-volkhov ">Sign In To FASCO</h2>
-                            <div class="flex font-poppins gap-4  text-16px-sm md:text-16px-lg">
-                                <button class="flex items-center gap-2 justify-center w-full border-[#484848] hover:bg-black text-black hover:text-white border py-2 px-8 rounded-lg transition-colors duration-300 ease-in-out">
-                                    <img src="assets/images/auth/google.png" class="size-6 mr-2"/>
-                                    <span>Sign In with Google</span>
-                                </button>
-                            
-                            </div>
-                            <div class="text-[#838383] font-poppins mx-auto mt-[1vw] xl:mt-[2vw] text-28px-sm md:text-28px-lg  font-bold">
-                                <span>
-                                    -
-                                </span>
-                                <span>
-                                    OR                        
-                                </span>
-                                <span>
-                                    -
-                                </span>
-                            </div>
-                            <form class="flex flex-col gap-[2vw] md:gap-[1.5vw] ">
-                                <input placeholder="Email" name="email" type="email" class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%]  text-16px-sm md:text-16px-lg border-b  border-[#DBDBDB] " />
-                                <div class="relative w-full">
-                                    <input
-                                        [type]="showPassword ? 'text' : 'password'"
-                                        placeholder="Password"
-                                        name="password"
-                                        class="focus:outline-none text-black placeholder:text-[#9D9D9D] leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-[#DBDBDB] pr-10"
-                                    />
-
-                                    <button
-                                        type="button"
-                                        (click)="togglePassword()"
-                                        class="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-[#5B86E5]"
-                                    >
-                                        {{ showPassword ? 'Hide' : 'Show' }}
-                                    </button>
-                                </div>
-                                <app-black-button class="mx-auto w-[80%] xl:mt-[12px]" buttonClass="w-full py-[8px] xl:py-[10px] " placeholder="Sign In"/>
-                                <button class=" mx-auto w-[80%] md:mt-[-4px] lg:mt-[-10px] py-[8px] xl:py-[10px] hover:bg-[#dbe5f9] text-16px-sm md:text-16px-lg border-[#5B86E5] text-[#5B86E5] border  rounded-lg transition-colors duration-300 ease-in-out">
-                                    <span>Register Now</span>
-                                </button>
-                                <app-transition-link link="/forgot-password" class="relative ml-auto mr-[10%] mt-[-8px] lg:mt-[-16px] font-semibold tracking-[8%] text-16px-sm md:text-16px-lg text-[#5B86E5]
-                                    w-min whitespace-nowrap hover-underline" style="--after-color:#5B86E5">
-                                    Forgot Password?
-                                </app-transition-link>
-                            </form>
-                        </div>
-                    </div>
-                    <app-transition-link link="/terms" class="relative mt-auto pt-[16px] ml-auto  w-min whitespace-nowrap  hover-underline">
-                        <p class="text-16px-sm md:text-16px-lg">FASCO Terms & Conditions</p>
-                    </app-transition-link>
-            </div>
+<app-auth-frame>
+  <div
+    class="flex flex-col gap-[2vw] md:gap-[1.5vw] text-30px-sm sm:text-28px-lg leading-[120%] max-w-125 i"
+  >
+    <h2 class="font-volkhov">Create Account in FASCO</h2>
+    <div class="flex font-poppins gap-4 text-16px-sm md:text-16px-lg">
+      <button
+        class="flex items-center gap-2 justify-center w-full border-primary hover:bg-black text-black hover:text-white border py-2 px-8 rounded-lg transition-colors duration-300 ease-in-out"
+      >
+        <img alt="" src="assets/images/auth/google.png" class="size-6 mr-2" />
+        <span>Create Account with Google</span>
+      </button>
+    </div>
+    <div
+      class="text-gray-dark font-poppins mx-auto mt-[1vw] xl:mt-[2vw] text-28px-sm md:text-28px-lg font-bold"
+    >
+      <span> - </span>
+      <span> OR </span>
+      <span> - </span>
+    </div>
+    <form
+      class="flex flex-col gap-[2vw] md:gap-[1.5vw]"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      aria-label="Create account form"
+      novalidate
+    >
+      <!-- Input Form -->
+      <div class="grid grid-cols-2 gap-[2vw] md:gap-[1.5vw]">
+        <div class="flex flex-col">
+          <label for="signup-firstName" class="sr-only">First Name</label>
+          <input
+            id="signup-firstName"
+            placeholder="First Name"
+            formControlName="firstName"
+            type="text"
+            autocomplete="given-name"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('firstName')?.invalid && form.get('firstName')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-firstName-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('firstName')?.invalid && form.get('firstName')?.touched) {
+            <p id="signup-firstName-error" role="alert" class="text-red-500 text-xs mt-1">
+              First name is required.
+            </p>
+          }
         </div>
-
-    </section>
-</div>
+        <div class="flex flex-col">
+          <label for="signup-lastName" class="sr-only">Last Name</label>
+          <input
+            id="signup-lastName"
+            placeholder="Last Name"
+            formControlName="lastName"
+            type="text"
+            autocomplete="family-name"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="signup-email" class="sr-only">Email address</label>
+          <input
+            id="signup-email"
+            placeholder="Email"
+            formControlName="email"
+            type="email"
+            autocomplete="email"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('email')?.invalid && form.get('email')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-email-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <p id="signup-email-error" role="alert" class="text-red-500 text-xs mt-1">
+              @if (form.get('email')?.errors?.['required']) {
+                Email is required.
+              } @else if (
+                form.get('email')?.errors?.['email'] || form.get('email')?.errors?.['invalidEmail']
+              ) {
+                Please enter a valid email address.
+              }
+            </p>
+          }
+        </div>
+        <div class="flex flex-col">
+          <label for="signup-phone" class="sr-only">Phone Number</label>
+          <input
+            id="signup-phone"
+            placeholder="Phone Number"
+            formControlName="phone"
+            type="tel"
+            autocomplete="tel"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('phone')?.invalid && form.get('phone')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-phone-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light"
+          />
+          @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+            <p id="signup-phone-error" role="alert" class="text-red-500 text-xs mt-1">
+              Phone number is required.
+            </p>
+          }
+        </div>
+        <div class="relative w-full flex flex-col">
+          <label for="signup-password" class="sr-only">Password</label>
+          <input
+            id="signup-password"
+            [type]="isEyeClosed() ? 'password' : 'text'"
+            placeholder="Password"
+            formControlName="password"
+            [attr.autocomplete]="isEyeClosed() ? 'new-password' : 'off'"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('password')?.invalid && form.get('password')?.touched ? 'true' : null
+            "
+            aria-describedby="signup-password-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
+          />
+          <button
+            type="button"
+            aria-label="Toggle password visibility"
+            class="absolute right-0 top-1/2 -translate-y-1/2"
+          >
+            <app-eye-track [isEyeClosed]="isEyeClosed" />
+          </button>
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <p id="signup-password-error" role="alert" class="text-red-500 text-xs mt-1">
+              @if (form.get('password')?.errors?.['required']) {
+                Password is required.
+              } @else if (form.get('password')?.errors?.['minlength']) {
+                Password must be at least 6 characters.
+              }
+            </p>
+          }
+        </div>
+        <div class="relative w-full flex flex-col">
+          <label for="signup-confirmPassword" class="sr-only">Confirm Password</label>
+          <input
+            id="signup-confirmPassword"
+            [type]="isEyeClosed2() ? 'password' : 'text'"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            [attr.autocomplete]="isEyeClosed2() ? 'new-password' : 'off'"
+            aria-required="true"
+            [attr.aria-invalid]="
+              form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched
+                ? 'true'
+                : null
+            "
+            aria-describedby="signup-confirmPassword-error"
+            class="focus:outline-none text-black placeholder:text-gray-light leading-[250%] w-full tracking-[8%] text-16px-sm md:text-16px-lg border-b border-gray-light pr-10"
+          />
+          <button
+            type="button"
+            aria-label="Toggle confirm password visibility"
+            class="absolute right-0 top-1/2 -translate-y-1/2"
+          >
+            <app-eye-track [isEyeClosed]="isEyeClosed2" />
+          </button>
+          @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
+            <p id="signup-confirmPassword-error" role="alert" class="text-red-500 text-xs mt-1">
+              Please confirm your password.
+            </p>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col gap-[2vw] md:gap-[1.5vw] lg:gap-[1vw] mt-[2vw]">
+        @if (errorMessage()) {
+          <p class="text-red-600 text-sm md:w-[80%] mx-auto">{{ errorMessage() }}</p>
+        }
+        <app-black-button
+          class="mx-auto w-full md:w-[80%]"
+          buttonClass="w-full py-[8px] xl:py-[10px] "
+          [placeholder]="isSubmitting() ? 'Creating...' : 'Create Account'"
+        />
+        <app-transition-link link="/login" class="mx-auto w-full md:w-[80%]">
+          <button
+            class="w-full md:-mt-1 lg:mt-0 py-2 hover:bg-accent-blue-light text-16px-sm md:text-16px-lg border-accent-blue text-accent-blue border rounded-lg transition-colors duration-300 ease-in-out"
+          >
+            <span>Already have an account? Login In</span>
+          </button>
+        </app-transition-link>
+        <app-transition-link
+          link="/forgot-password"
+          class="relative ml-auto mr-[10%] -mt-2 lg:mt-0 font-semibold tracking-[8%] text-16px-sm md:text-16px-lg text-accent-blue w-min whitespace-nowrap hover-underline"
+          style="--after-color: #5b86e5"
+        >
+          Forgot Password?
+        </app-transition-link>
+      </div>
+    </form>
+  </div>
+</app-auth-frame>

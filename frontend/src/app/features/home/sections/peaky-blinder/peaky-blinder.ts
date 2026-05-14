@@ -1,9 +1,9 @@
 import { Component ,signal} from '@angular/core';
 import { BlackButton } from "../../../../shared/components/black-button/black-button";
-
+import {RoundedBlackButton} from "../../../../shared/components/rounded-black-button/rounded-black-button";
 @Component({
   selector: 'app-peaky-blinder',
-  imports: [BlackButton],
+  imports: [BlackButton, RoundedBlackButton],
   templateUrl: './peaky-blinder.html',
   styleUrl: './peaky-blinder.css',
 })

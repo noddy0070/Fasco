@@ -1,32 +1,30 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RoundedBlackButton } from "../../../../shared/components/rounded-black-button/rounded-black-button";
 import { ProductCard } from "../../../../shared/components/product-card/product-card";
+import { Router } from '@angular/router';
+import {
+  TRENDING_COLORS,
+  TRENDING_FILTERS,
+  TrendingProduct,
+} from './trending-products.constants';
+import { TrendingProductsService } from './trending-products.service';
 @Component({
   selector: 'app-trending-products',
   imports: [RoundedBlackButton, ProductCard],
   templateUrl: './trending-products.html',
   styleUrl: './trending-products.css',
 })
-export class TrendingProducts {
-  colors = signal([
-    { name: 'PINK', class: 'bg-[#F44E8A]' },
-    { name: 'DARK GREEN', class: 'bg-[#44936D]' },
-    { name: 'YELLOW', class: 'bg-[#F4CF4E]' },
-    { name: 'BLUE SKY', class: 'bg-[#5FABE2]' },
-    { name: 'NAVY BLUE', class: 'bg-[#233C6B]' },
-    { name: 'CLEAN WHITE', class: 'bg-[#FFFFFF] border border-[#DEDEDE]' },
-    { name: 'RED PASTEL', class: 'bg-[#E25F5F]' },
-  ]);
+export class TrendingProducts implements OnInit {
+  private readonly router = inject(Router);
+  private readonly trendingProductsService = inject(TrendingProductsService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  products = signal([
-    { name: 'Shiny Dress', price: '$225', imageUrl: 'assets/images/home/trend/Image-1.png' },
-    { name: 'Long Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-2.png' },
-    { name: 'Full Sweater', price: '$125', imageUrl: 'assets/images/home/trend/Image-3.png', span:2 },
-    { name: 'White Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-4.png', span:2 },
-    { name: 'Colorful Dress', price: '$125', imageUrl: 'assets/images/home/trend/Image-5.png' },
-    { name: 'White Shirt', price: '$159', imageUrl: 'assets/images/home/trend/Image-6.png' },
-    
-  ])
+  colors = signal(TRENDING_COLORS);
+  filters = TRENDING_FILTERS;
+  selectedFilter = signal<string>(this.filters[1]);
+  products = signal<TrendingProduct[]>([]);
+  isLoading = signal(true);
 
   leftColumn = computed(() =>
     this.colors().filter((_, i) => i % 2 === 0)
@@ -36,14 +34,44 @@ export class TrendingProducts {
     this.colors().filter((_, i) => i % 2 !== 0)
   );
 
-  getCardClasses(index: number, isLast: boolean): string {
-  if (isLast) {
-    return 'w-[35vw] hover:w-[17.08vw] group-hover:w-[17.08vw]';
-  } else {
-    return 'w-[17.08vw] hover:w-[35vw] hover:col-span-2';
+  filteredProducts = computed(() => {
+    const selected = this.selectedFilter();
+    return this.products().filter((product) => product.categories.includes(selected));
+  });
+
+  ngOnInit(): void {
+    this.isLoading.set(true);
+    this.trendingProductsService
+      .loadProducts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (products) => {
+          this.products.set(products);
+          this.isLoading.set(false);
+        },
+        error: () => {
+          this.products.set([]);
+          this.isLoading.set(false);
+        },
+      });
   }
-}
 
-  
+  setFilter(filter: string): void {
+    this.selectedFilter.set(filter);
+  }
 
+  navigateToProduct(id: string): void {
+    void this.router.navigate(['/product', id]);
+  }
+
+  async openCollectionByColor(colorName: string): Promise<void> {
+    const colorSlug = colorName.toLowerCase().replaceAll(' ', '-');
+    const selected = this.selectedFilter().toLowerCase();
+    const collectionBaseSlug = selected.includes("women")
+      ? 'womens-fashion'
+      : 'mens-fashion';
+    await this.router.navigate(['/collections', collectionBaseSlug], {
+      queryParams: { color: colorSlug },
+    });
+  }
 }

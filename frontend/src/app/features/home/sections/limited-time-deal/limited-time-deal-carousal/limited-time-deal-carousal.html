@@ -1,61 +1,88 @@
-<div class="flex w-full min-w-0 max-w-full flex-col-reverse gap-5 sm:flex-row md:flex-col-reverse lg:flex-row ">
-    <div class=" shrink-0 flex justify-center sm:justify-start md:justify-start">
-        <!-- Arrows -->
-        <div class="flex gap-4 mt-auto ">
-            <button
-                #carouselPrev
-                type="button"
-                class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5"
-            >
-                <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <button
-                #carouselNext
-                type="button"
-                class="rotate-180 rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5"
-            >
-                <svg width="9" height="16" class="h-auto w-3" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-    
-    </div>
-
-    <div class="relative min-w-0 max-w-full flex-1">
-        <div
-            #swiperHost
-            class="swiper limited-deal-swiper w-full min-w-0 max-w-full overflow-hidden pb-10"
+<div
+  class="flex w-full min-w-0 max-w-full flex-col-reverse gap-5 sm:flex-row md:flex-col-reverse lg:flex-row"
+>
+  <div class="shrink-0 flex justify-center sm:justify-start md:justify-start">
+    <!-- Arrows -->
+    <div class="flex gap-4 mt-auto">
+      <button
+        #carouselPrev
+        type="button"
+        class="rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5"
+      >
+        <svg
+          width="9"
+          height="16"
+          class="h-auto w-3"
+          viewBox="0 0 9 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-            <div class="swiper-wrapper">
-                @for (image of images(); track $index) {
-                    <div class="swiper-slide">
-                        <div class="limited-deal-slide-inner rounded-[18px] relative h-min">
-                            <img
-                                loading="lazy"
-                                [src]="image.src"
-                                alt=""
-                                class="deal-img h-min aspect-3/4 rounded-[18px] object-cover"
-                            />
-                            <div
-                                class="deal-overlay absolute flex flex-col gap-1 md:gap-2 rounded-[18px] bg-white px-2 md:px-4 lg:px-6 py-4 md:py-6 lg:py-8 font-poppins leading-[120%] text-[#484848] text-16px-sm md:text- lg:text-16px-lg"
-                            >
-                                <div class="flex items-center gap-2">
-                                    <p >{{ $index + 1 | leadingZero }}</p>
-                                    <div class="w-1 md:w-4 xl:w-7 border-t border-[#484848]"></div>
-                                    <p class="">{{ image.name }}</p>
-                                </div>
-                                <p class="text-20px-sm md:text-20px-lg lg:text-28px-lg">{{ image.discount }}</p>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
+          <path
+            d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
 
-            <div class="swiper-pagination limited-deal-pagination"></div>
-        </div>
+      <button
+        #carouselNext
+        type="button"
+        class="rotate-180 rounded-full shadow-[0px_4px_14px_1px_rgba(0,0,0,0.16)] transition-all duration-300 hover:scale-105 ease-in-out text-[#B6B6B6] hover:text-black bg-white py-4 px-5"
+      >
+        <svg
+          width="9"
+          height="16"
+          class="h-auto w-3"
+          viewBox="0 0 9 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.90723 14.8999L0.899934 7.8999L7.90723 0.899902"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </div>
+  </div>
+
+  <div class="relative min-w-0 max-w-full flex-1">
+    <div
+      #swiperHost
+      class="swiper limited-deal-swiper w-full min-w-0 max-w-full overflow-hidden pb-10"
+    >
+      <div class="swiper-wrapper">
+        @for (image of images(); track $index) {
+          <div class="swiper-slide">
+            <div class="limited-deal-slide-inner rounded-[18px] relative h-min">
+              <img
+                loading="lazy"
+                [src]="image.src"
+                alt=""
+                class="deal-img h-min aspect-3/4 rounded-[18px] object-cover"
+              />
+              <div
+                class="deal-overlay absolute flex flex-col gap-1 md:gap-2 rounded-[18px] bg-white px-2 md:px-4 lg:px-6 py-4 md:py-6 lg:py-8 font-poppins leading-[120%] text-[#484848] text-16px-sm md:text- lg:text-16px-lg"
+              >
+                <div class="flex items-center gap-2">
+                  <p>{{ $index + 1 | leadingZero }}</p>
+                  <div class="w-1 md:w-4 xl:w-7 border-t border-[#484848]"></div>
+                  <p class="">{{ image.name }}</p>
+                </div>
+                <p class="text-20px-sm md:text-20px-lg lg:text-28px-lg">{{ image.discount }}</p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="swiper-pagination limited-deal-pagination"></div>
+    </div>
+  </div>
 </div>

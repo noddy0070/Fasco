@@ -1,0 +1,89 @@
+{
+  "collections": [
+    {
+      "slug": "mens-new-arrivals",
+      "eyebrow": "Home / Mens / New Arrivals",
+      "title": "New Arrivals",
+      "description": "Start the season with comfort, style, and versatility.",
+      "heroImage": "assets/images/home/hero/hero-top.webp",
+      "tabs": [
+        { "label": "MEN", "slug": "mens-new-arrivals" },
+        { "label": "WOMEN", "slug": "womens-new-arrivals" }
+      ],
+      "sortOptions": ["Featured", "Best Selling", "Price: Low to High", "Price: High to Low"],
+      "promo": {
+        "eyebrow": "SALE ON SALE",
+        "title": "Extra 25% Off Sale",
+        "description": "Discount applied in cart",
+        "actions": [
+          { "label": "Shop Men", "slug": "mens-new-arrivals" },
+          { "label": "Shop Women", "slug": "womens-new-arrivals" }
+        ]
+      }
+    },
+    {
+      "slug": "womens-new-arrivals",
+      "eyebrow": "Home / Women / New Arrivals",
+      "title": "Soft Layers",
+      "description": "Modern essentials with lightweight shapes and easy neutrals.",
+      "heroImage": "assets/images/home/hero/hero-right.webp",
+      "tabs": [
+        { "label": "MEN", "slug": "mens-new-arrivals" },
+        { "label": "WOMEN", "slug": "womens-new-arrivals" }
+      ],
+      "sortOptions": ["Featured", "Newest", "Price: Low to High", "Price: High to Low"],
+      "promo": {
+        "eyebrow": "EDITORIAL DROP",
+        "title": "Built to Move Through the Day",
+        "description": "Lightweight shoes and elevated basics for everything ahead.",
+        "actions": [
+          { "label": "Shop Women", "slug": "womens-new-arrivals" },
+          { "label": "Explore Men", "slug": "mens-new-arrivals" }
+        ]
+      }
+    },
+    {
+      "slug": "sale",
+      "eyebrow": "Home / Sale",
+      "title": "Limited Offers",
+      "description": "Handpicked markdowns with the best value picks on rotation.",
+      "heroImage": "assets/images/home/hero/hero-bottom.webp",
+      "tabs": [
+        { "label": "MEN", "slug": "mens-new-arrivals" },
+        { "label": "WOMEN", "slug": "womens-new-arrivals" }
+      ],
+      "sortOptions": ["Featured", "Discounted", "Price: Low to High", "Price: High to Low"],
+
+      "promo": {
+        "eyebrow": "SALE ON SALE",
+        "title": "Extra 25% Off Sale",
+        "description": "Discount applied in cart",
+        "actions": [
+          { "label": "Shop Men", "slug": "mens-new-arrivals" },
+          { "label": "Shop Women", "slug": "womens-new-arrivals" }
+        ]
+      }
+    },
+    {
+      "slug": "featured",
+      "eyebrow": "Home / Featured",
+      "title": "Featured Picks",
+      "description": "A focused mix of the strongest everyday silhouettes and seasonal colorways.",
+      "heroImage": "assets/images/home/hero/hero-left.webp",
+      "tabs": [
+        { "label": "MEN", "slug": "mens-new-arrivals" },
+        { "label": "WOMEN", "slug": "womens-new-arrivals" }
+      ],
+      "sortOptions": ["Featured", "Trending", "Price: Low to High", "Price: High to Low"],
+      "promo": {
+        "eyebrow": "CURATED DROP",
+        "title": "Standout shapes, easy wear",
+        "description": "A tighter edit of the most useful silhouettes in the collection.",
+        "actions": [
+          { "label": "Shop Men", "slug": "mens-new-arrivals" },
+          { "label": "Shop Women", "slug": "womens-new-arrivals" }
+        ]
+      }
+    }
+  ]
+}

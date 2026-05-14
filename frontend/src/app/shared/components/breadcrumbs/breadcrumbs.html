@@ -1,0 +1,21 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs-list">
+    @for (item of items(); track item.label; let isLast = $last) {
+      <li class="breadcrumbs-item">
+        @if (item.link && !isLast) {
+          <app-transition-link [link]="item.link" class="breadcrumbs-link">
+            {{ item.label }}
+          </app-transition-link>
+        } @else {
+          <span class="breadcrumbs-current" aria-current="page">
+            {{ item.label }}
+          </span>
+        }
+
+        @if (!isLast) {
+          <span class="breadcrumbs-separator" aria-hidden="true">{{ separator() }}</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

@@ -3,7 +3,7 @@ owl-carousel-o {
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: calc(25vw);
+  height: clamp(260px, 32vw, 520px);
 }
 
 ::ng-deep .owl-carousel {
@@ -61,7 +61,7 @@ owl-carousel-o {
 ::ng-deep .owl-dots {
   position: absolute;
   display: block;
-  bottom: -80px;
+  bottom: -54px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -87,4 +87,31 @@ owl-carousel-o {
               box-shadow 0.6s ease;
   margin-right: 20px;
 
+}
+
+@media (max-width: 767px) {
+  owl-carousel-o {
+    height: 340px;
+  }
+
+  .follow-slide {
+    transform: scale(0.94) translateY(8px) translateZ(0);
+    opacity: 0.95;
+  }
+
+  ::ng-deep .owl-item.center .follow-slide {
+    transform: scale(1.03) translateY(0) translateZ(0);
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  ::ng-deep .owl-item:has(+ .owl-item.center),
+  ::ng-deep .owl-item.center + .owl-item {
+    transform: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  ::ng-deep .owl-dots {
+    bottom: -36px;
+  }
 }

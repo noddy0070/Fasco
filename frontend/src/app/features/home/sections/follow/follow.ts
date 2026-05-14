@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RoundedBlackButton } from "../../../../shared/components/rounded-black-button/rounded-black-button";
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { SlidesOutputData } from 'ngx-owl-carousel-o';
+import { CarouselModule,OwlOptions,SlidesOutputData } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-follow',
   imports: [RoundedBlackButton, CarouselModule],
