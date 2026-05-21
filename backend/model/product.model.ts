@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import type ProductI from "../model.interfaces/product.interface";
+import type ProductI from "../model.interfaces/product.interface.ts";
 
 const productSchema = new Schema<ProductI>({
 
@@ -77,3 +77,4 @@ productSchema.index({ gender: 1, category: 1 });
 productSchema.index({ isFeatured: 1, isActive: 1 });
 
 export const Product = mongoose.model<ProductI>('Product', productSchema);
+export default Product;

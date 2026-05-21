@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { role } from "../model.interfaces/customEnum.ts";
+import { adminRole } from "../model.interfaces/customEnum.ts";
 import type UserI from "../model.interfaces/user.interface.ts";
 const userSchema = new Schema<UserI>({
   firstName: { type: String, required: true, trim: true },
@@ -28,7 +28,7 @@ const userSchema = new Schema<UserI>({
 
   role: {
     type: String,
-    enum: role,
+    enum: ['user', 'admin', ...Object.values(adminRole)],
     default: 'user',
   },
 

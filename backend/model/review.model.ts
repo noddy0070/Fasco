@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import type ReviewI from "../model.interfaces/review.interface";
+import type ReviewI from "../model.interfaces/review.interface.ts";
 
 const reviewSchema = new Schema<ReviewI>({
 

@@ -24,6 +24,14 @@ export class ProductDetail implements OnInit {
   selectedImage = signal('');
   openSpec = signal('Fit');
   isLoading = signal(true);
+constructor(){
+  console.log('Constructor called:' + Date.now())
+  console.log('Initial params id:', this.route.snapshot.paramMap.get('id'))
+}
+
+ngOnDestroy(): void {
+  console.log('ngOnDestroy called')
+}
 
   selectedVariant = computed(() => {
     const item = this.product();
@@ -64,6 +72,8 @@ export class ProductDetail implements OnInit {
   });
 
   ngOnInit(): void {
+    console.log('ngOnInit called')
+
     this.isLoading.set(true);
     this.productDetailService
       .loadProducts()
@@ -79,6 +89,8 @@ export class ProductDetail implements OnInit {
             this.bindProduct(id, querySku);
           });
       });
+
+      this.router.navigate(['/product', 'p1006']);
   }
 
   selectColor(color: string): void {

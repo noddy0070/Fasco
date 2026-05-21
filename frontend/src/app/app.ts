@@ -14,8 +14,8 @@ export class App implements OnInit{
   protected readonly title=signal('Ecommerce App');
   private readonly userStore = inject(UserStore);
 
-   async ngOnInit() {
-    await this.userStore.hydrateFromSession();
+  ngOnInit(): void {
+    this.userStore.hydrateFromSession();
     this.loadCarouselStyles();
   }
 
@@ -31,7 +31,7 @@ export class App implements OnInit{
   });
 }
 
-  noHeaderRoutes = signal(['/login', '/signup', '/forgot-password', '/404']);
+  noHeaderRoutes = signal(['/login', '/signup', '/forgot-password', '/404', '/admin']);
   showHeader = signal(true);
 
   loadCarouselStyles() {

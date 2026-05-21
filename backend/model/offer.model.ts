@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { offerType } from "../model.interfaces/customEnum";
-import type OfferI from "../model.interfaces/offer.interface";
+import { offerType } from "../model.interfaces/customEnum.ts";
+import type OfferI from "../model.interfaces/offer.interface.ts";
 const limitedTimeOfferSchema = new Schema<OfferI>({
   title: { type: String, required: true },
   description: String,

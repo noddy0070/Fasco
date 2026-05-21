@@ -1,0 +1,107 @@
+<div class="panel">
+  <header class="panel__header">
+    <h2 class="panel__title">Analytics</h2>
+  </header>
+
+  @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+  }
+
+  @if (isLoading() && !overview()) {
+    <div class="loading-state">Loading analytics…</div>
+  }
+
+  <!-- KPI Cards -->
+  @if (overview()) {
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-card__label">Total Revenue</span>
+        <span class="kpi-card__value">{{ overview()!.totalRevenue | currency:'INR':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Total Orders</span>
+        <span class="kpi-card__value">{{ overview()!.totalOrders | number }}</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Total Users</span>
+        <span class="kpi-card__value">{{ overview()!.totalUsers | number }}</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-card__label">Total Products</span>
+        <span class="kpi-card__value">{{ overview()!.totalProducts | number }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="charts-grid">
+
+    <!-- Revenue chart (bar) -->
+    <section class="chart-card">
+      <h3 class="chart-card__title">Daily Revenue (last 30 days)</h3>
+      @if (revenueChart().length === 0) {
+        <p class="chart-empty">No revenue data available</p>
+      } @else {
+        <div class="bar-chart">
+          @for (day of revenueChart(); track day.date) {
+            <div
+              class="bar-chart__bar"
+              [style.height.%]="(day.revenue / maxRevenue()) * 100"
+              [title]="day.date + ': ₹' + day.revenue"
+            ></div>
+          }
+        </div>
+        <div class="bar-chart__labels">
+          <span>{{ revenueChart()[0]?.date | date:'d MMM' }}</span>
+          <span>{{ revenueChart()[revenueChart().length - 1]?.date | date:'d MMM' }}</span>
+        </div>
+      }
+    </section>
+
+    <!-- Order status breakdown -->
+    <section class="chart-card">
+      <h3 class="chart-card__title">Order Status Breakdown</h3>
+      @if (orderStatusBreakdown().length === 0) {
+        <p class="chart-empty">No data available</p>
+      } @else {
+        <ul class="breakdown-list">
+          @for (item of orderStatusBreakdown(); track item.status) {
+            <li class="breakdown-item">
+              <span class="breakdown-item__label">{{ item.status }}</span>
+              <span class="breakdown-item__count">{{ item.count }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <!-- Top products -->
+    <section class="chart-card chart-card--wide">
+      <h3 class="chart-card__title">Top 10 Products</h3>
+      @if (topProducts().length === 0) {
+        <p class="chart-empty">No data available</p>
+      } @else {
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Units Sold</th>
+              <th>Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of topProducts(); track product.productId; let i = $index) {
+              <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.totalSold }}</td>
+                <td>{{ product.revenue | currency:'INR':'symbol':'1.0-0' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+
+  </div>
+</div>

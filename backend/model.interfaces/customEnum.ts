@@ -24,6 +24,12 @@ export const role = {
     ADMIN: 'admin'
 } as const;
 
+export const adminRole = {
+    SUPER_ADMIN: 'super-admin',
+    USER_ADMIN: 'user-admin',
+    INVENTORY_MANAGEMENT: 'inventory-management',
+} as const;
+
 export const paymentMethod = {
     COD: 'cod',
     CARD: 'card',
@@ -49,6 +55,7 @@ export type gender = typeof gender[keyof typeof gender];
 export type level = typeof level[keyof typeof level];
 export type offerType = typeof offerType[keyof typeof offerType];
 export type role = typeof role[keyof typeof role];
+export type adminRole = typeof adminRole[keyof typeof adminRole];
 export type paymentMethod = typeof paymentMethod[keyof typeof paymentMethod];
 export type paymentStatus = typeof paymentStatus[keyof typeof paymentStatus];
 export type orderStatus = typeof orderStatus[keyof typeof orderStatus];

@@ -23,6 +23,7 @@ export interface AuthUser {
   lastName?: string;
   email: string;
   phone?: string;
+  role?: string;
   isVerified?: boolean;
   isBlocked?: boolean;
 }

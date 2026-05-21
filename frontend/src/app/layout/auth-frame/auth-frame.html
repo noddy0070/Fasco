@@ -2,18 +2,18 @@
   <!-- background image -->
   <!-- overlay -->
   <div
-    class="absolute inset-0 bg-[url('/assets/images/auth/thumbnail.png')] bg-cover bg-center -z-10 "
+    class="absolute inset-0 bg-[url('/assets/images/auth/thumbnail.png')] bg-cover bg-center -z-10"
   ></div>
   <div class="absolute inset-0 bg-black/50 -z-10"></div>
 
   <section
-    class="overflow-hidden h-dvh md:max-h-dvh flex  md:flex-col  justify-center bg-no-repeat bg-center bg-cover b"
+    class="overflow-hidden h-dvh md:max-h-dvh flex md:flex-col justify-center bg-no-repeat bg-center bg-cover b"
   >
     <div
-      class="responsive-margin-x bg-white font-poppins my-10  border-[#DBDBDB] md:border-none  border shadow-[0px_20px_21.7px_rgba(68,68,68,0.4)] md:shadow-[0px_20px_21.7px_rgba(68,68,68,0.04)] md:rounded-l-none rounded-l-2xl rounded-r-2xl md:rounded-r-[30px] w-full md:w-auto max-w-140 md:max-w-none grid grid-cols-1 md:grid-cols-2"
+      class="responsive-margin-x bg-white font-poppins my-10 border-[#DBDBDB] md:border-none border shadow-[0px_20px_21.7px_rgba(68,68,68,0.4)] md:shadow-[0px_20px_21.7px_rgba(68,68,68,0.04)] md:rounded-l-none rounded-l-2xl rounded-r-2xl md:rounded-r-[30px] w-full md:w-auto max-w-140 md:max-w-none grid grid-cols-1 md:grid-cols-2"
     >
       <img
-      alt="s"
+        alt="s"
         src="assets/images/auth/thumbnail.png"
         class="hidden md:block col-span-1 aspect-square md:aspect-auto h-full w-full object-cover"
       />
@@ -24,7 +24,8 @@
               FASCO
             </h1>
           </app-transition-link>
-          <ng-content></ng-content>
+          <ng-content>
+            </ng-content>
         </div>
         <app-transition-link
           link="/terms"

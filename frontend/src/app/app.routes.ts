@@ -26,6 +26,10 @@ export const routes: Routes = [
     {path:'profile',component:Profile, title:'Profile Page', canActivate:[authGuard] },
     {path:'signup/verify',component:SignupVerification, title:'Email Verification Page' },
     {path:'signup/verification',redirectTo:'signup/verify',pathMatch:'full'},
+    {
+        path: 'admin',
+        loadChildren: () => import('./features/admin/admin.routes').then((m) => m.adminRoutes),
+    },
     {path:'404',component:NotFound, title:'Page Not Found'},
     {path:'**',redirectTo:'/404',pathMatch:'full'},
 ];

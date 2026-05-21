@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import type OrderI from "../model.interfaces/orders.interface";
-import { orderStatus, paymentMethod, paymentStatus } from "../model.interfaces/customEnum";
+import type OrderI from "../model.interfaces/orders.interface.ts";
+import { orderStatus, paymentMethod, paymentStatus } from "../model.interfaces/customEnum.ts";
 
 const orderSchema = new Schema<OrderI>({
 
@@ -84,6 +84,6 @@ const orderSchema = new Schema<OrderI>({
 }, { timestamps: true });
 
 orderSchema.index({ user: 1, createdAt: -1 });
-orderSchema.index({ orderStatus: 1 });
 
 export const Order = mongoose.model<OrderI>('Order', orderSchema);
+export default Order;
