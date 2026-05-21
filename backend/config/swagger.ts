@@ -25,6 +25,22 @@ const buildSwaggerSpec = () =>
             name: 'token',
           },
         },
+        schemas: {
+          ProductVariant: {
+            type: 'object',
+            required: ['sku', 'price', 'stock'],
+            properties: {
+              sku:      { type: 'string', description: 'Stock-keeping unit identifier' },
+              price:    { type: 'number', minimum: 0, description: 'Selling price' },
+              discount: { type: 'number', minimum: 0, default: 0, description: 'Discount amount' },
+              stock:    { type: 'number', minimum: 0, description: 'Available stock quantity' },
+              size:     { type: 'string', description: 'Size label (optional)' },
+              color:    { type: 'string', description: 'Color name (optional)' },
+              colorCode:{ type: 'string', description: 'CSS hex color (optional)' },
+              images:   { type: 'array', items: { type: 'string' }, description: 'Image URLs (optional)' },
+            },
+          },
+        },
       },
     },
     apis: ['./routes/**/*.ts', './controller/**/*.ts'],

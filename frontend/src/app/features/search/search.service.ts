@@ -30,8 +30,8 @@ export class SearchService {
   }
 
   private mapProductToSearch(product: ProductModel): SearchProduct[] {
-    const colorList = [...new Set(product.variants.map((v) => v.color).filter(Boolean))];
-    const sizeList = [...new Set(product.variants.map((v) => v.size).filter(Boolean))];
+    const colorList = [...new Set(product.variants.map((v) => v.color).filter((v): v is string => v !== undefined))];
+    const sizeList = [...new Set(product.variants.map((v) => v.size).filter((v): v is string => v !== undefined))];
     const firstVariant = product.variants[0];
 
     const collectionSlug =
@@ -47,7 +47,7 @@ export class SearchService {
       return {
       productId: product._id,
       name: product.title,
-      variant: variant.color,
+      variant: variant.color ?? '',
       price: `$${variant.price}`,
       priceValue: variant.price,
       image: variant.images?.[0] ?? firstVariant?.images?.[0] ?? 'assets/images/promotional_banner_1.webp',

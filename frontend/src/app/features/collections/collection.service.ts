@@ -161,8 +161,8 @@ export class CollectionService {
         const variant = product.variants.find(v => v.color === color);
         return variant?.colorCode ?? '#7f878c';
       }),
-      sizes: sizeList.length > 0 ? sizeList : ['M'],
-      colors: colorList.length > 0 ? colorList : ['Default'],
+      sizes: (sizeList.length > 0 ? sizeList : ['M']).filter((s): s is string => s !== undefined),
+      colors: (colorList.length > 0 ? colorList : ['Default']).filter((c): c is string => c !== undefined),
       gender: product.gender.charAt(0).toUpperCase() + product.gender.slice(1),
       statuses: [
         ...(product.isTrending ? ['Trending'] : []),

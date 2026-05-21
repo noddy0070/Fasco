@@ -16,7 +16,9 @@
     <div class="kpi-grid">
       <div class="kpi-card">
         <span class="kpi-card__label">Total Revenue</span>
-        <span class="kpi-card__value">{{ overview()!.totalRevenue | currency:'INR':'symbol':'1.0-0' }}</span>
+        <span class="kpi-card__value">{{
+          overview()!.totalRevenue | currency: 'INR' : 'symbol' : '1.0-0'
+        }}</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-card__label">Total Orders</span>
@@ -34,7 +36,6 @@
   }
 
   <div class="charts-grid">
-
     <!-- Revenue chart (bar) -->
     <section class="chart-card">
       <h3 class="chart-card__title">Daily Revenue (last 30 days)</h3>
@@ -51,8 +52,8 @@
           }
         </div>
         <div class="bar-chart__labels">
-          <span>{{ revenueChart()[0]?.date | date:'d MMM' }}</span>
-          <span>{{ revenueChart()[revenueChart().length - 1]?.date | date:'d MMM' }}</span>
+          <span>{{ revenueChart()[0]?.date | date: 'd MMM' }}</span>
+          <span>{{ revenueChart()[revenueChart().length - 1]?.date | date: 'd MMM' }}</span>
         </div>
       }
     </section>
@@ -95,13 +96,12 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ product.title }}</td>
                 <td>{{ product.totalSold }}</td>
-                <td>{{ product.revenue | currency:'INR':'symbol':'1.0-0' }}</td>
+                <td>{{ product.revenue | currency: 'INR' : 'symbol' : '1.0-0' }}</td>
               </tr>
             }
           </tbody>
         </table>
       }
     </section>
-
   </div>
 </div>

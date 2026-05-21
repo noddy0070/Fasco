@@ -5,13 +5,14 @@ import { ProductService } from '../../features/products/product.service';
 
 export type ProductVariantModel = {
   sku: string;
-  size: string;
-  color: string;
-  colorCode?: string;
   price: number;
   discount: number;
   stock: number;
-  images: string[];
+  // Optional storefront display fields
+  size?: string;
+  color?: string;
+  colorCode?: string;
+  images?: string[];
 };
 
 export type ProductModel = {

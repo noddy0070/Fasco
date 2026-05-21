@@ -115,7 +115,7 @@ ngOnDestroy(): void {
 
   setVariant(sku: string): void {
     this.selectedSku.set(sku);
-    this.selectedImage.set(this.selectedVariant()?.images[0] ?? '');
+    this.selectedImage.set(this.selectedVariant()?.images?.[0] ?? '');
     void this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { variant: sku },

@@ -47,8 +47,47 @@ export const getProduct = async (req: express.Request, res: express.Response) =>
 };
 
 /**
- * POST /api/admin/products
- * Creates a new product.
+ * @openapi
+ * /api/admin/products:
+ *   post:
+ *     tags:
+ *       - Admin / Products
+ *     summary: Create a new product with one or more variants
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - variants
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               isActive:
+ *                 type: boolean
+ *                 default: true
+ *               isTrending:
+ *                 type: boolean
+ *                 default: false
+ *               isLimitedOffer:
+ *                 type: boolean
+ *                 default: false
+ *               variants:
+ *                 type: array
+ *                 minItems: 1
+ *                 items:
+ *                   $ref: '#/components/schemas/ProductVariant'
+ *     responses:
+ *       201:
+ *         description: Product created successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Internal server error
  */
 export const createProduct = async (req: express.Request, res: express.Response) => {
     try {
@@ -67,8 +106,45 @@ export const createProduct = async (req: express.Request, res: express.Response)
 };
 
 /**
- * PATCH /api/admin/products/:id
- * Updates mutable fields on a product.
+ * @openapi
+ * /api/admin/products/{id}:
+ *   patch:
+ *     tags:
+ *       - Admin / Products
+ *     summary: Update mutable fields on a product, including its variants array
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               isActive:
+ *                 type: boolean
+ *               isTrending:
+ *                 type: boolean
+ *               isLimitedOffer:
+ *                 type: boolean
+ *               variants:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/ProductVariant'
+ *     responses:
+ *       200:
+ *         description: Product updated successfully
+ *       404:
+ *         description: Product not found
+ *       500:
+ *         description: Internal server error
  */
 export const updateProduct = async (req: express.Request, res: express.Response) => {
     try {

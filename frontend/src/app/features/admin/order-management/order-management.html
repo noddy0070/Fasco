@@ -5,17 +5,13 @@
 
   <!-- Status filter chips -->
   <div class="filter-bar">
-    <button
-      class="chip"
-      [class.chip--active]="activeFilter() === ''"
-      (click)="applyFilter('')"
-    >All</button>
+    <button class="chip" [class.chip--active]="activeFilter() === ''" (click)="applyFilter('')">
+      All
+    </button>
     @for (s of statusOptions; track s) {
-      <button
-        class="chip"
-        [class.chip--active]="activeFilter() === s"
-        (click)="applyFilter(s)"
-      >{{ s }}</button>
+      <button class="chip" [class.chip--active]="activeFilter() === s" (click)="applyFilter(s)">
+        {{ s }}
+      </button>
     }
   </div>
 
@@ -39,26 +35,47 @@
       </thead>
       <tbody>
         @if (isLoading()) {
-          <tr><td colspan="8" class="table-state">Loading…</td></tr>
+          <tr>
+            <td colspan="8" class="table-state">Loading…</td>
+          </tr>
         } @else if (orders().length === 0) {
-          <tr><td colspan="8" class="table-state table-state--empty">No orders found</td></tr>
+          <tr>
+            <td colspan="8" class="table-state table-state--empty">No orders found</td>
+          </tr>
         } @else {
           @for (order of orders(); track order._id) {
             <tr>
-              <td class="mono">{{ order._id | slice:0:8 }}…</td>
+              <td class="mono">{{ order._id | slice: 0 : 8 }}…</td>
               <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
               <td>{{ order.items.length }}</td>
-              <td>{{ order.totalAmount | currency:'INR':'symbol':'1.0-0' }}</td>
+              <td>{{ order.totalAmount | currency: 'INR' : 'symbol' : '1.0-0' }}</td>
               <td>
-                <span class="badge" [class.badge--paid]="order.payment.status === 'paid'" [class.badge--pending]="order.payment.status !== 'paid'">
+                <span
+                  class="badge"
+                  [class.badge--paid]="order.payment.status === 'paid'"
+                  [class.badge--pending]="order.payment.status !== 'paid'"
+                >
                   {{ order.payment.status }}
                 </span>
               </td>
-              <td><span class="badge status-badge">{{ order.orderStatus }}</span></td>
-              <td>{{ order.createdAt | date:'dd MMM yy' }}</td>
+              <td>
+                <span class="badge status-badge">{{ order.orderStatus }}</span>
+              </td>
+              <td>{{ order.createdAt | date: 'dd MMM yy' }}</td>
               <td>
                 <button class="btn btn--icon" title="Update status" (click)="openStatusEdit(order)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                  </svg>
                 </button>
               </td>
             </tr>
@@ -79,7 +96,6 @@
       <button class="modal__close" (click)="closeModal()">✕</button>
     </header>
     <form [formGroup]="statusForm" (ngSubmit)="onStatusSubmit()" class="modal__form" novalidate>
-
       <div class="form-group">
         <label class="form-label">Status *</label>
         <select class="form-input" formControlName="status">

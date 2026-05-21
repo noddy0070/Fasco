@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
 import { TransitionLink } from './transition-link';
 
 describe('TransitionLink', () => {
@@ -8,12 +8,14 @@ describe('TransitionLink', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransitionLink]
+      imports: [TransitionLink],
+      providers: [provideRouter([])],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(TransitionLink);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('link', '/test');
     await fixture.whenStable();
   });
 

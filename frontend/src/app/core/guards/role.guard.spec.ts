@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { vi } from 'vitest';
 import { roleGuard } from './role.guard';
 import { UserStore } from '../store/user-store';
 import type { AdminRole } from '../../features/admin/admin.models';
@@ -7,12 +8,12 @@ import type { AdminRole } from '../../features/admin/admin.models';
 // ── Stubs ─────────────────────────────────────────────────────────────────────
 
 const routerStub = {
-    createUrlTree: jasmine.createSpy('createUrlTree').and.callFake((commands: string[]) => commands as unknown as UrlTree),
-    navigate: jasmine.createSpy('navigate'),
+    createUrlTree: vi.fn().mockImplementation((commands: string[]) => commands as unknown as UrlTree),
+    navigate: vi.fn(),
 };
 
 const userStoreStub = {
-    user: jasmine.createSpy('user'),
+    user: vi.fn(),
 };
 
 // ── Helper ────────────────────────────────────────────────────────────────────
@@ -38,12 +39,12 @@ describe('roleGuard', () => {
             ],
         });
 
-        routerStub.createUrlTree.calls.reset();
+        routerStub.createUrlTree.mockClear();
     });
 
     describe('when no user is authenticated', () => {
         beforeEach(() => {
-            userStoreStub.user.and.returnValue(null);
+            userStoreStub.user.mockReturnValue(null);
         });
 
         it('redirects to /admin', () => {
@@ -53,13 +54,13 @@ describe('roleGuard', () => {
 
         it('does not return true', () => {
             const result = runGuard(['super-admin']);
-            expect(result).not.toBeTrue();
+            expect(result).not.toBe(true);
         });
     });
 
     describe('when user lacks the required role', () => {
         beforeEach(() => {
-            userStoreStub.user.and.returnValue({ role: 'inventory-management' });
+            userStoreStub.user.mockReturnValue({ role: 'inventory-management' });
         });
 
         it('redirects to /admin/dashboard when role is insufficient', () => {
@@ -70,21 +71,21 @@ describe('roleGuard', () => {
 
     describe('when user holds a permitted role', () => {
         it('returns true for super-admin on any route', () => {
-            userStoreStub.user.and.returnValue({ role: 'super-admin' });
+            userStoreStub.user.mockReturnValue({ role: 'super-admin' });
             const result = runGuard(['super-admin']);
-            expect(result).toBeTrue();
+            expect(result).toBe(true);
         });
 
         it('returns true for user-admin on user-management route', () => {
-            userStoreStub.user.and.returnValue({ role: 'user-admin' });
+            userStoreStub.user.mockReturnValue({ role: 'user-admin' });
             const result = runGuard(['super-admin', 'user-admin']);
-            expect(result).toBeTrue();
+            expect(result).toBe(true);
         });
 
         it('returns true for inventory-management on product route', () => {
-            userStoreStub.user.and.returnValue({ role: 'inventory-management' });
+            userStoreStub.user.mockReturnValue({ role: 'inventory-management' });
             const result = runGuard(['super-admin', 'inventory-management']);
-            expect(result).toBeTrue();
+            expect(result).toBe(true);
         });
     });
 });

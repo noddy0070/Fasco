@@ -1,13 +1,14 @@
 
-export type ProductVariant = {
+export type ProductVariantModel = {
   sku: string;
-  size: string;
-  color: string;
-  colorCode?: string;
   price: number;
   discount: number;
   stock: number;
-  images: string[];
+  // Optional storefront display fields
+  size?: string;
+  color?: string;
+  colorCode?: string;
+  images?: string[];
 };
 
 export type ProductDetailModel = {
@@ -15,7 +16,10 @@ export type ProductDetailModel = {
   title: string;
   slug: string;
   description?: string;
-  variants: ProductVariant[];
+  isActive: boolean;
+  isTrending: boolean;
+  isLimitedOffer: boolean;
+  variants: ProductVariantModel[];
   averageRating: number;
   totalReviews: number;
   specifications: Array<{ title: string; value: string }>;

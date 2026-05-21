@@ -31,8 +31,52 @@ export const getProducts = async (req: express.Request, res: express.Response) =
 };
 
 /**
- * GET /api/products/:id
- * Returns a single product by its Mongoose _id.
+ * @openapi
+ * /api/products/{id}:
+ *   get:
+ *     tags:
+ *       - Products
+ *     summary: Get a product by its database ID (includes full variants array)
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the product
+ *     responses:
+ *       200:
+ *         description: Product found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     isActive:
+ *                       type: boolean
+ *                     isTrending:
+ *                       type: boolean
+ *                     isLimitedOffer:
+ *                       type: boolean
+ *                     variants:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/ProductVariant'
+ *       404:
+ *         description: Product not found
+ *       500:
+ *         description: Internal server error
  */
 export const getProductById = async (req: express.Request, res: express.Response) => {
     try {

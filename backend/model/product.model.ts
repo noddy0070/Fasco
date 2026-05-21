@@ -1,6 +1,23 @@
 import mongoose, { Schema } from "mongoose";
 import type ProductI from "../model.interfaces/product.interface.ts";
 
+/**
+ * Sub-schema for a product variant.
+ * Required fields: sku, price, stock.
+ * Optional storefront fields: size, color, colorCode, images.
+ */
+const variantSchema = new Schema({
+  sku:      { type: String, required: true, trim: true, index: true },
+  price:    { type: Number, required: true, min: 0 },
+  discount: { type: Number, default: 0, min: 0 },
+  stock:    { type: Number, required: true, min: 0 },
+  // Optional storefront display fields
+  size:     { type: String },
+  color:    { type: String },
+  colorCode:{ type: String },
+  images:   [{ type: String }],
+}, { _id: false });
+
 const productSchema = new Schema<ProductI>({
 
   title: { type: String, required: true, trim: true },
@@ -33,16 +50,7 @@ const productSchema = new Schema<ProductI>({
   isTrending: { type: Boolean, default: false, index: true },
   isLimitedOffer: { type: Boolean, default: false, index: true },
 
-  variants: [{
-    sku: { type: String, required: true },
-    size: String,
-    color: String,
-    price: { type: Number, required: true },
-    discount: { type: Number, default: 0 },
-    stock: { type: Number, default: 0 },
-
-    images: [String]
-  }],
+  variants: { type: [variantSchema], default: [] },
 
   averageRating: { type: Number, default: 0 },
   totalReviews: { type: Number, default: 0 },

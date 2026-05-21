@@ -56,12 +56,9 @@ export type AdminProductModel = {
     isLimitedOffer: boolean;
     variants: {
         sku: string;
-        size?: string;
-        color?: string;
         price: number;
         discount: number;
         stock: number;
-        images: string[];
     }[];
     averageRating: number;
     totalReviews: number;

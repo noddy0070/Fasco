@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { signal } from '@angular/core';
 import { EyeTrack } from './eye-track';
 
 describe('EyeTrack', () => {
@@ -14,6 +14,7 @@ describe('EyeTrack', () => {
 
     fixture = TestBed.createComponent(EyeTrack);
     component = fixture.componentInstance;
+    component.isEyeClosed = signal(false);
     await fixture.whenStable();
   });
 
