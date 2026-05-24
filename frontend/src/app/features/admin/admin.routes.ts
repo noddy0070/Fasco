@@ -38,6 +38,22 @@ export const adminRoutes: Routes = [
                     import('./product-management/product-management').then((m) => m.ProductManagement),
             },
             {
+                path: 'catalog',
+                title: 'Catalog',
+                canActivate: [roleGuard(['super-admin', 'inventory-management'])],
+                loadComponent: () =>
+                    import('./catalog-management/catalog-management').then((m) => m.CatalogManagement),
+            },
+            {
+                path: 'collections',
+                title: 'Collections',
+                canActivate: [roleGuard(['super-admin', 'inventory-management'])],
+                loadComponent: () =>
+                    import('./collection-management/collection-management').then(
+                        (m) => m.CollectionManagement,
+                    ),
+            },
+            {
                 path: 'orders',
                 title: 'Order Management',
                 canActivate: [roleGuard(['super-admin'])],

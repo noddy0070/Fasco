@@ -104,10 +104,34 @@
           </div>
         }
 
+        @if (actionMessage()) {
+          <p class="action-msg action-msg--ok">{{ actionMessage() }}</p>
+        }
+        @if (actionError()) {
+          <p class="action-msg action-msg--err">{{ actionError() }}</p>
+        }
+
         <div class="add-row">
-          <button class="wish-btn">♡</button>
-          <button class="add-btn">Add to Bag</button>
+          <button
+            type="button"
+            class="wish-btn"
+            [class.is-active]="isWishlisted()"
+            [disabled]="isWishlistBusy()"
+            (click)="toggleWishlist()"
+            [attr.aria-label]="isWishlisted() ? 'Remove from wishlist' : 'Add to wishlist'"
+          >
+            {{ isWishlisted() ? '♥' : '♡' }}
+          </button>
+          <button type="button" class="add-btn" [disabled]="isAddingToCart()" (click)="addToBag()">
+            {{ isAddingToCart() ? 'Adding…' : 'Add to Bag' }}
+          </button>
         </div>
+        <button type="button" class="buy-now-btn" [disabled]="isAddingToCart()" (click)="buyNow()">
+          Buy now — checkout
+        </button>
+        @if (actionMessage()) {
+          <button type="button" class="cart-link-btn" (click)="goToCart()">View cart</button>
+        }
 
         <div class="mt-7 border-t border-[#DEDEDE] pt-5">
           <p class="text-sm leading-7 text-[#333]">{{ item.description }}</p>

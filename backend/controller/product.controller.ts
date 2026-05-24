@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { Product } from '../model/product.model.ts';
 
 /**
@@ -80,11 +81,24 @@ export const getProducts = async (req: express.Request, res: express.Response) =
  */
 export const getProductById = async (req: express.Request, res: express.Response) => {
     try {
-        const product = await Product.findOne({ _id: req.params['id'], deletedAt: null })
-            .populate('category', 'name slug')
-            .populate('subCategory', 'name slug')
-            .populate('brand', 'name logo')
-            .lean();
+        const id = req.params['id'];
+        let product = null;
+
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            product = await Product.findOne({ _id: id, deletedAt: null })
+                .populate('category', 'name slug')
+                .populate('subCategory', 'name slug')
+                .populate('brand', 'title logo')
+                .lean();
+        }
+
+        if (!product) {
+            product = await Product.findOne({ slug: id, deletedAt: null })
+                .populate('category', 'name slug')
+                .populate('subCategory', 'name slug')
+                .populate('brand', 'title logo')
+                .lean();
+        }
 
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });

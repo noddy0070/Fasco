@@ -1,0 +1,212 @@
+<div class="panel">
+  <header class="panel__header">
+    <h2 class="panel__title">Collection Pages</h2>
+    <button type="button" class="btn btn--primary" (click)="openCreate()">+ Add Collection</button>
+  </header>
+
+  <p class="panel-hint">
+    Manage storefront collection landing pages (hero, tabs, sort options, promo). Products are loaded
+    dynamically from inventory using the product filter.
+  </p>
+
+  @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+  }
+
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Filter</th>
+          <th>Active</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (isLoading()) {
+          <tr>
+            <td colspan="6" class="table-state">Loading…</td>
+          </tr>
+        } @else if (collections().length === 0) {
+          <tr>
+            <td colspan="6" class="table-state table-state--empty">
+              No collections. Run <code>npm run seed:collections</code> or add one.
+            </td>
+          </tr>
+        } @else {
+          @for (col of collections(); track col._id) {
+            <tr>
+              <td>{{ col.displayOrder }}</td>
+              <td class="cell-title">{{ col.title }}</td>
+              <td class="mono">{{ col.slug }}</td>
+              <td>{{ col.productFilter }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.badge--active]="col.isActive"
+                  [class.badge--blocked]="!col.isActive"
+                >
+                  {{ col.isActive ? 'Yes' : 'No' }}
+                </span>
+              </td>
+              <td class="table-actions">
+                <a class="btn btn--icon" [href]="previewUrl(col.slug)" target="_blank" rel="noopener"
+                  >View</a
+                >
+                <button type="button" class="btn btn--icon" (click)="openEdit(col)">Edit</button>
+                <button type="button" class="btn btn--icon btn--danger" (click)="onDelete(col)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="table-meta">
+    Seed from mock:
+    <code>npx ts-node --esm backend/scripts/seed-collections.ts</code>
+  </p>
+</div>
+
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()" tabindex="-1" aria-hidden="true"></div>
+  <dialog class="modal modal--wide" open aria-modal="true">
+    <header class="modal__header">
+      <h3>{{ editTarget() ? 'Edit Collection' : 'Add Collection' }}</h3>
+      <button type="button" class="modal__close" (click)="closeModal()">✕</button>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="modal__form" novalidate>
+      <section class="form-section">
+        <h4 class="form-section__title">Page content</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Title *</label>
+            <input class="form-input" formControlName="title" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Slug</label>
+            <input class="form-input" formControlName="slug" placeholder="auto from title" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Eyebrow (breadcrumb text)</label>
+          <input class="form-input" formControlName="eyebrow" placeholder="Home / Men / New Arrivals" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea class="form-input form-textarea" formControlName="description" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hero image URL</label>
+          <input
+            class="form-input"
+            formControlName="heroImage"
+            placeholder="assets/images/home/hero/hero-top.webp"
+          />
+        </div>
+        <div class="form-row form-row--3">
+          <div class="form-group">
+            <label class="form-label">Product filter *</label>
+            <select class="form-input" formControlName="productFilter">
+              @for (f of productFilters; track f) {
+                <option [value]="f">{{ f }}</option>
+              }
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Display order</label>
+            <input class="form-input" type="number" formControlName="displayOrder" min="0" />
+          </div>
+          <label class="checkbox-label form-label checkbox-row"
+            ><input type="checkbox" formControlName="isActive" /> Active</label
+          >
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sort options (comma-separated)</label>
+          <input class="form-input" formControlName="sortOptionsText" />
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="form-section__header">
+          <h4 class="form-section__title">Tabs</h4>
+          <button type="button" class="btn btn--secondary btn--sm" (click)="addTab()">+ Tab</button>
+        </div>
+        <div formArrayName="tabs" class="nested-list">
+          @for (tab of tabs.controls; track $index; let i = $index) {
+            <div class="form-row nested-row" [formGroupName]="i">
+              <div class="form-group">
+                <input class="form-input" formControlName="label" placeholder="Label (e.g. MEN)" />
+              </div>
+              <div class="form-group">
+                <input class="form-input" formControlName="slug" placeholder="Collection slug" />
+              </div>
+              @if (tabs.length > 1) {
+                <button type="button" class="btn btn--icon btn--danger" (click)="removeTab(i)">✕</button>
+              }
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h4 class="form-section__title">Promo card</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Promo eyebrow</label>
+            <input class="form-input" formControlName="promoEyebrow" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Promo title</label>
+            <input class="form-input" formControlName="promoTitle" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Promo description</label>
+          <textarea class="form-input form-textarea" formControlName="promoDescription" rows="2"></textarea>
+        </div>
+        <div class="form-section__header">
+          <span class="form-label">Promo actions</span>
+          <button type="button" class="btn btn--secondary btn--sm" (click)="addPromoAction()">
+            + Action
+          </button>
+        </div>
+        <div formArrayName="promoActions" class="nested-list">
+          @for (action of promoActions.controls; track $index; let i = $index) {
+            <div class="form-row nested-row" [formGroupName]="i">
+              <div class="form-group">
+                <input class="form-input" formControlName="label" placeholder="Button label" />
+              </div>
+              <div class="form-group">
+                <input class="form-input" formControlName="slug" placeholder="Target collection slug" />
+              </div>
+              @if (promoActions.length > 1) {
+                <button type="button" class="btn btn--icon btn--danger" (click)="removePromoAction(i)">
+                  ✕
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </section>
+
+      @if (formError()) {
+        <div class="alert alert--error">{{ formError() }}</div>
+      }
+
+      <div class="modal__actions">
+        <button type="button" class="btn btn--secondary" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn--primary" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Saving…' : 'Save collection' }}
+        </button>
+      </div>
+    </form>
+  </dialog>
+}

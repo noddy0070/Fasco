@@ -1,0 +1,35 @@
+@import '../product-management/product-management.css';
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.tab--active {
+  background: #111827;
+  border-color: #111827;
+  color: #fff;
+}
+
+.form-row--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+code {
+  font-size: 0.75rem;
+  background: #f3f4f6;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}

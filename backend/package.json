@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node index.ts",
+    "seed:catalog": "npx ts-node --esm scripts/seed-catalog.ts",
+    "seed:collections": "npx ts-node --esm scripts/seed-collections.ts",
     "test": "node --experimental-vm-modules node_modules/.bin/jest --testPathPattern=tests/"
   },
   "jest": {

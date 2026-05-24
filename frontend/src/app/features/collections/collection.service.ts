@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, combineLatest, from, map } from 'rxjs';
+import { Observable, combineLatest, from, map, catchError } from 'rxjs';
 import {
   CollectionData,
   CollectionDataFile,
   CollectionProduct,
+  CollectionProductFilter,
   FilterSlugOption,
 } from '../../shared/collection/collection.types';
 import { PRICE_OPTIONS } from '../../shared/collection/collection.constants';
@@ -14,6 +15,7 @@ import {
   ProductModel,
 } from './collection.models';
 import { ProductStore } from '../../core/store/product-store';
+import { API_ENDPOINTS } from '../../core/api/api.endpoints';
 
 @Injectable({ providedIn: 'root' })
 export class CollectionService {
@@ -22,9 +24,22 @@ export class CollectionService {
 
   loadPageData(): Observable<CollectionPageData> {
     return combineLatest({
-      collections: this.http.get<CollectionDataFile>('/mockData/collections.json').pipe(
-        map(data => data.collections ?? [])
-      ),
+      collections: this.http
+        .get<{ data: Omit<CollectionData, 'products'>[] }>(API_ENDPOINTS.collections.list)
+        .pipe(
+          map((res) =>
+            (res.data ?? []).map((c) => ({
+              ...c,
+              products: [],
+              promo: c.promo ?? { eyebrow: '', title: '', description: '', actions: [] },
+            })),
+          ),
+          catchError(() =>
+            this.http.get<CollectionDataFile>('/mockData/collections.json').pipe(
+              map((data) => data.collections ?? []),
+            ),
+          ),
+        ),
       allProducts: from(this.productStore.loadProducts()),
     });
   }
@@ -34,7 +49,8 @@ export class CollectionService {
     allProducts: ProductModel[],
     slug: string
   ): CollectionData | null {
-    const mappedProducts = this.mapProductsForSlug(allProducts, slug);
+    const collectionMeta = collections.find((c) => c.slug === slug);
+    const mappedProducts = this.mapProductsForCollection(allProducts, collectionMeta, slug);
     const resolvedProducts =
       mappedProducts.length > 0
         ? mappedProducts
@@ -127,19 +143,39 @@ export class CollectionService {
     return match ?? null;
   }
 
-  private mapProductsForSlug(products: ProductModel[], slug: string): CollectionProduct[] {
+  private mapProductsForCollection(
+    products: ProductModel[],
+    collection: CollectionData | undefined,
+    slug: string,
+  ): CollectionProduct[] {
     if (products.length === 0) return [];
 
-    const filtered = products.filter(product => {
-      if (slug === 'sale')
-        return !!product.isLimitedOffer || product.variants.some(v => (v.discount ?? 0) > 0);
-      if (slug === 'featured') return !!product.isTrending;
-      if (slug.includes('women'))
+    const filter: CollectionProductFilter =
+      collection?.productFilter ?? this.inferProductFilter(slug);
+
+    const filtered = products.filter((product) => {
+      if (filter === 'sale') {
+        return !!product.isLimitedOffer || product.variants.some((v) => (v.discount ?? 0) > 0);
+      }
+      if (filter === 'featured') return !!product.isTrending;
+      if (filter === 'women') {
         return product.gender === 'women' || product.gender === 'unisex';
-      return product.gender === 'men' || product.gender === 'unisex';
+      }
+      if (filter === 'men') {
+        return product.gender === 'men' || product.gender === 'unisex';
+      }
+      return true;
     });
 
-    return filtered.map(p => this.toCollectionProduct(p));
+    return filtered.map((p) => this.toCollectionProduct(p));
+  }
+
+  private inferProductFilter(slug: string): CollectionProductFilter {
+    if (slug === 'sale') return 'sale';
+    if (slug === 'featured') return 'featured';
+    if (slug.includes('women')) return 'women';
+    if (slug.includes('men')) return 'men';
+    return 'all';
   }
 
   private toCollectionProduct(product: ProductModel): CollectionProduct {

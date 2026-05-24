@@ -30,6 +30,8 @@ export class DashboardShell {
         { label: 'Analytics', path: '/admin/dashboard/analytics', icon: 'chart', roles: ['super-admin'] },
         { label: 'Users', path: '/admin/dashboard/users', icon: 'users', roles: ['super-admin', 'user-admin'] },
         { label: 'Products', path: '/admin/dashboard/products', icon: 'box', roles: ['super-admin', 'inventory-management'] },
+        { label: 'Catalog', path: '/admin/dashboard/catalog', icon: 'tags', roles: ['super-admin', 'inventory-management'] },
+        { label: 'Collections', path: '/admin/dashboard/collections', icon: 'grid', roles: ['super-admin', 'inventory-management'] },
         { label: 'Orders', path: '/admin/dashboard/orders', icon: 'clipboard', roles: ['super-admin'] },
     ];
 

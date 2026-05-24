@@ -13,6 +13,7 @@ import type {
     CreateUserPayload,
     UpdateUserPayload,
     UpdateOrderStatusPayload,
+    CreateProductPayload,
 } from '../../features/admin/admin.models';
 
 // ─── State shape ─────────────────────────────────────────────────────────────
@@ -43,6 +44,11 @@ type AdminState = {
     // Global UI
     isLoading: boolean;
     error: string | null;
+};
+
+const httpErrorMessage = (err: unknown): string => {
+    const e = err as { error?: { message?: string }; message?: string };
+    return e.error?.message ?? e.message ?? 'Request failed';
 };
 
 const initialState: AdminState = {
@@ -156,7 +162,7 @@ export const AdminStore = signalStore(
             }
         },
 
-        async createProduct(payload: Record<string, unknown>): Promise<boolean> {
+        async createProduct(payload: CreateProductPayload): Promise<boolean> {
             patchState(store, { isLoading: true, error: null });
             try {
                 const res = await firstValueFrom(adminService.createProduct(payload));
@@ -167,12 +173,12 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
 
-        async updateProduct(id: string, payload: Record<string, unknown>): Promise<boolean> {
+        async updateProduct(id: string, payload: Partial<CreateProductPayload>): Promise<boolean> {
             patchState(store, { isLoading: true, error: null });
             try {
                 const res = await firstValueFrom(adminService.updateProduct(id, payload));
@@ -182,7 +188,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },

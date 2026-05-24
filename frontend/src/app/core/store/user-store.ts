@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { signalStore, withMethods, withState, patchState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../features/auth/auth.service';
+import { CommerceService } from '../services/commerce.service';
 import { AuthUser, LoginPayload } from '../../features/auth/auth.models';
 type UserState = {
   user: AuthUser | null;
@@ -16,7 +17,7 @@ const initialState: UserState = {
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withMethods((store, authService = inject(AuthService)) => ({
+  withMethods((store, authService = inject(AuthService), commerce = inject(CommerceService)) => ({
     setUser(user: AuthUser | null): void {
       patchState(store, { user });
     },
@@ -28,6 +29,8 @@ export const UserStore = signalStore(
       try {
         const response = await firstValueFrom(authService.login(credentials));
         patchState(store, { user: response.data, isLoading: false });
+        void commerce.loadCart();
+        void commerce.loadWishlist();
         return true;
       } catch {
         patchState(store, { isLoading: false });
@@ -45,6 +48,8 @@ export const UserStore = signalStore(
       try {
         const response = await firstValueFrom(authService.me());
         patchState(store, { user: response.data });
+        void commerce.loadCart();
+        void commerce.loadWishlist();
       } catch {
         patchState(store, { user: null });
       }

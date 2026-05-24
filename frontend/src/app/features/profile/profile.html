@@ -144,40 +144,41 @@
             <div class="content-header">
               <h2 class="content-title">Recent Orders</h2>
             </div>
-            <div class="empty-well">
-              <div class="empty-icon-wrap">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <rect
-                    x="10"
-                    y="8"
-                    width="28"
-                    height="34"
-                    rx="3"
-                    stroke="#C8C2BA"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M16 8V6a2 2 0 012-2h12a2 2 0 012 2v2"
-                    stroke="#C8C2BA"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M17 22l4 4 10-10"
-                    stroke="#C8C2BA"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+            @if (tabLoading()) {
+              <p class="tab-loading">Loading orders…</p>
+            } @else if (orders().length === 0) {
+              <div class="empty-well">
+                <h3 class="empty-heading">No orders placed yet</h3>
+                <p class="empty-text">Your order history will appear here once you checkout.</p>
+                <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
+                  >Start shopping</app-transition-link
+                >
               </div>
-              <h3 class="empty-heading">No orders placed yet</h3>
-              <p class="empty-text">
-                Your order history will appear here once you make a purchase.
-              </p>
-              <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
-                >Start shopping</app-transition-link
-              >
-            </div>
+            } @else {
+              <div class="order-list">
+                @for (order of orders(); track order._id) {
+                  <article class="order-card">
+                    <header class="order-card__head">
+                      <span class="order-card__id">#{{ order._id | slice: 0 : 8 }}</span>
+                      <span class="order-card__status">{{ order.orderStatus }}</span>
+                      <span class="order-card__date">{{ order.createdAt | date: 'mediumDate' }}</span>
+                    </header>
+                    <ul class="order-card__items">
+                      @for (line of order.items; track $index) {
+                        <li>
+                          {{ line.title ?? 'Product' }}
+                          @if (line.variantSku) {
+                            <span class="muted"> · {{ line.variantSku }}</span>
+                          }
+                          × {{ line.quantity }} — ₹{{ line.finalPrice * line.quantity }}
+                        </li>
+                      }
+                    </ul>
+                    <p class="order-card__total">Total: ₹{{ order.totalAmount }}</p>
+                  </article>
+                }
+              </div>
+            }
           </div>
         }
 
@@ -185,27 +186,84 @@
           <div class="content-section">
             <div class="content-header">
               <h2 class="content-title">Shopping Cart</h2>
+              @if (cart()?.totalItems) {
+                <span class="content-badge">{{ cart()!.totalItems }} items</span>
+              }
             </div>
-            <div class="empty-well">
-              <div class="empty-icon-wrap">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path
-                    d="M6 6h5l4.2 21h20.4L40 16H13"
-                    stroke="#C8C2BA"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <circle cx="19" cy="40" r="3" stroke="#C8C2BA" stroke-width="2" />
-                  <circle cx="34" cy="40" r="3" stroke="#C8C2BA" stroke-width="2" />
-                </svg>
+
+            @if (tabLoading()) {
+              <p class="tab-loading">Loading cart…</p>
+            } @else if (!cart()?.items?.length) {
+              <div class="empty-well">
+                <h3 class="empty-heading">Your cart is empty</h3>
+                <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
+                  >Browse collection</app-transition-link
+                >
               </div>
-              <h3 class="empty-heading">Your cart is empty</h3>
-              <p class="empty-text">Looks like you haven't added anything yet. Time to explore.</p>
-              <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
-                >Browse collection</app-transition-link
-              >
-            </div>
+            } @else {
+              <div class="cart-list">
+                @for (item of cart()!.items; track item.variantSku + cartProductId(item)) {
+                  @if (cartLineProduct(item); as product) {
+                    <div class="cart-row">
+                      <img [src]="cartLineImage(item)" [alt]="product.title" class="cart-row__img" />
+                      <div class="cart-row__body">
+                        <p class="cart-row__title">{{ product.title }}</p>
+                        <p class="cart-row__meta">{{ item.variantSku }}</p>
+                        <p class="cart-row__price">₹{{ cartLinePrice(item) }} each</p>
+                        <div class="cart-row__qty">
+                          <button type="button" (click)="updateQty(item, item.quantity - 1)">−</button>
+                          <span>{{ item.quantity }}</span>
+                          <button type="button" (click)="updateQty(item, item.quantity + 1)">+</button>
+                          <button type="button" class="cart-row__remove" (click)="removeCartItem(item)">
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                }
+              </div>
+
+              <div class="cart-summary">
+                <p>Subtotal: <strong>₹{{ cart()!.totalAmount }}</strong></p>
+                <button type="button" class="checkout-btn" (click)="openCheckout()">Proceed to checkout</button>
+              </div>
+
+              @if (showCheckout()) {
+                <form class="checkout-form" [formGroup]="checkoutForm" (ngSubmit)="submitCheckout()">
+                  <h3 class="checkout-form__title">Shipping & payment</h3>
+                  <div class="checkout-grid">
+                    <input class="checkout-input" placeholder="Full name *" formControlName="fullName" />
+                    <input class="checkout-input" placeholder="Phone *" formControlName="phone" />
+                    <input class="checkout-input" placeholder="Pincode *" formControlName="pincode" />
+                    <input class="checkout-input" placeholder="State *" formControlName="state" />
+                    <input class="checkout-input" placeholder="City *" formControlName="city" />
+                    <input
+                      class="checkout-input checkout-input--full"
+                      placeholder="Address line 1 *"
+                      formControlName="addressLine1"
+                    />
+                    <input
+                      class="checkout-input checkout-input--full"
+                      placeholder="Address line 2"
+                      formControlName="addressLine2"
+                    />
+                    <select class="checkout-input checkout-input--full" formControlName="paymentMethod">
+                      <option value="cod">Cash on delivery</option>
+                      <option value="upi">UPI</option>
+                      <option value="card">Card</option>
+                      <option value="netbanking">Net banking</option>
+                    </select>
+                  </div>
+                  @if (checkoutError()) {
+                    <p class="checkout-error">{{ checkoutError() }}</p>
+                  }
+                  <button type="submit" class="checkout-btn" [disabled]="isCheckoutSubmitting()">
+                    {{ isCheckoutSubmitting() ? 'Placing order…' : 'Place order' }}
+                  </button>
+                </form>
+              }
+            }
           </div>
         }
 
@@ -214,24 +272,48 @@
             <div class="content-header">
               <h2 class="content-title">Wishlist</h2>
             </div>
-            <div class="empty-well">
-              <div class="empty-icon-wrap">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path
-                    d="M24 42S8 32 8 19a9 9 0 0116-5.7A9 9 0 0140 19c0 13-16 23-16 23z"
-                    stroke="#C8C2BA"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+            @if (tabLoading()) {
+              <p class="tab-loading">Loading wishlist…</p>
+            } @else if (!wishlist()?.items?.length) {
+              <div class="empty-well">
+                <h3 class="empty-heading">Nothing saved yet</h3>
+                <p class="empty-text">Tap the heart on a product page to save it here.</p>
+                <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
+                  >Explore products</app-transition-link
+                >
               </div>
-              <h3 class="empty-heading">Nothing saved yet</h3>
-              <p class="empty-text">Tap the heart icon on any product to save it here for later.</p>
-              <app-transition-link link="/collections/mens-new-arrivals" class="empty-link"
-                >Explore products</app-transition-link
-              >
-            </div>
+            } @else {
+              <div class="wishlist-grid">
+                @for (item of wishlist()!.items; track item.variantSku + wishlistProductId(item)) {
+                  @if (lineProduct(item); as product) {
+                    <article class="wish-card">
+                      <img
+                        [src]="lineVariant(item)?.images?.[0] ?? 'assets/images/home/hero/hero-top.webp'"
+                        [alt]="product.title"
+                      />
+                      <div>
+                        <p class="wish-card__title">{{ product.title }}</p>
+                        <p class="wish-card__sku">{{ item.variantSku }}</p>
+                        <div class="wish-card__actions">
+                          <app-transition-link
+                            [link]="'/product/' + product.slug + '?variant=' + item.variantSku"
+                            class="wish-card__link"
+                            >View</app-transition-link
+                          >
+                          <button
+                            type="button"
+                            class="wish-card__remove"
+                            (click)="removeWishlistItem(wishlistProductId(item), item.variantSku)"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  }
+                }
+              </div>
+            }
           </div>
         }
       }

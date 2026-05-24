@@ -1,0 +1,64 @@
+{
+  "brands": [
+    { "title": "Fasco", "slug": "fasco", "description": "Fasco house brand" }
+  ],
+  "categories": [
+    {
+      "name": "Tops",
+      "slug": "tops",
+      "subcategories": [
+        { "name": "Hoodies", "slug": "hoodies" },
+        { "name": "Tank Tops", "slug": "tank-tops" },
+        { "name": "Sports Bras", "slug": "sports-bras" },
+        { "name": "Base Layers", "slug": "base-layers" },
+        { "name": "Polo Shirts", "slug": "polo-shirts" }
+      ]
+    },
+    {
+      "name": "Shoes",
+      "slug": "shoes",
+      "subcategories": [
+        { "name": "Running Shoes", "slug": "running-shoes" },
+        { "name": "Hiking Shoes", "slug": "hiking-shoes" },
+        { "name": "Everyday Sneakers", "slug": "everyday-sneakers" },
+        { "name": "Slip-ons", "slug": "slip-ons" },
+        { "name": "High Tops", "slug": "high-tops" },
+        { "name": "Hiking Boots", "slug": "hiking-boots" },
+        { "name": "Training Shoes", "slug": "training-shoes" }
+      ]
+    },
+    {
+      "name": "Bottoms",
+      "slug": "bottoms",
+      "subcategories": [
+        { "name": "Leggings", "slug": "leggings" },
+        { "name": "Shorts", "slug": "shorts" },
+        { "name": "Yoga Pants", "slug": "yoga-pants" },
+        { "name": "Compression Shorts", "slug": "compression-shorts" },
+        { "name": "Athletic Shorts", "slug": "athletic-shorts" },
+        { "name": "Hiking Pants", "slug": "hiking-pants" },
+        { "name": "Capri Leggings", "slug": "capri-leggings" }
+      ]
+    },
+    {
+      "name": "Dresses",
+      "slug": "dresses",
+      "subcategories": [{ "name": "Casual Dresses", "slug": "casual-dresses" }]
+    },
+    {
+      "name": "Outerwear",
+      "slug": "outerwear",
+      "subcategories": [
+        { "name": "Jackets", "slug": "jackets" },
+        { "name": "Fleece", "slug": "fleece" },
+        { "name": "Rain Jackets", "slug": "rain-jackets" },
+        { "name": "Vests", "slug": "vests" }
+      ]
+    },
+    {
+      "name": "Swimwear",
+      "slug": "swimwear",
+      "subcategories": [{ "name": "Swim Trunks", "slug": "swim-trunks" }]
+    }
+  ]
+}

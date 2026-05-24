@@ -1,0 +1,78 @@
+@import '../product-management/product-management.css';
+
+.panel-hint {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.modal--wide {
+  width: min(900px, 96vw);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  color: #111827;
+}
+
+.form-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-row--3 {
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+}
+
+.checkbox-row {
+  padding-bottom: 0.5rem;
+}
+
+.nested-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nested-row {
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+}
+
+.cell-title {
+  font-weight: 600;
+  max-width: 200px;
+  white-space: normal;
+}
+
+code {
+  font-size: 0.75rem;
+  background: #f3f4f6;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .form-row--3,
+  .nested-row {
+    grid-template-columns: 1fr;
+  }
+}

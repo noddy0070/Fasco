@@ -199,6 +199,16 @@
   background: #000;
   color: #fff;
   font-size: 28px;
+  cursor: pointer;
+}
+
+.wish-btn.is-active {
+  background: #b91c1c;
+}
+
+.wish-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .add-btn {
@@ -209,6 +219,52 @@
   font-weight: 600;
   min-height: 56px;
   font-size: 33px;
+  cursor: pointer;
+}
+
+.add-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buy-now-btn {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buy-now-btn:disabled {
+  opacity: 0.6;
+}
+
+.cart-link-btn {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.action-msg {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.action-msg--ok {
+  color: #065f46;
+}
+
+.action-msg--err {
+  color: #b91c1c;
 }
 
 .pay-btn {

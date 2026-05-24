@@ -38,6 +38,25 @@ export const API_ENDPOINTS = {
             delete: (id: string) => `${ADMIN_PREFIX}/products/${id}`,
             restore: (id: string) => `${ADMIN_PREFIX}/products/${id}/restore`,
         },
+        brands: {
+            list: `${ADMIN_PREFIX}/brands`,
+            create: `${ADMIN_PREFIX}/brands`,
+            update: (id: string) => `${ADMIN_PREFIX}/brands/${id}`,
+            delete: (id: string) => `${ADMIN_PREFIX}/brands/${id}`,
+        },
+        categories: {
+            list: `${ADMIN_PREFIX}/categories`,
+            create: `${ADMIN_PREFIX}/categories`,
+            update: (id: string) => `${ADMIN_PREFIX}/categories/${id}`,
+            delete: (id: string) => `${ADMIN_PREFIX}/categories/${id}`,
+        },
+        collections: {
+            list: `${ADMIN_PREFIX}/collections`,
+            get: (id: string) => `${ADMIN_PREFIX}/collections/${id}`,
+            create: `${ADMIN_PREFIX}/collections`,
+            update: (id: string) => `${ADMIN_PREFIX}/collections/${id}`,
+            delete: (id: string) => `${ADMIN_PREFIX}/collections/${id}`,
+        },
         orders: {
             list: `${ADMIN_PREFIX}/orders`,
             get: (id: string) => `${ADMIN_PREFIX}/orders/${id}`,
@@ -54,5 +73,24 @@ export const API_ENDPOINTS = {
         list: PRODUCTS_PREFIX,
         getById: (id: string) => `${PRODUCTS_PREFIX}/${id}`,
         getBySlug: (slug: string) => `${PRODUCTS_PREFIX}/slug/${slug}`,
+    },
+    collections: {
+        list: `${API_PREFIX}/collections`,
+        getBySlug: (slug: string) => `${API_PREFIX}/collections/${slug}`,
+    },
+    cart: {
+        get: `${API_PREFIX}/cart`,
+        addItem: `${API_PREFIX}/cart/items`,
+        updateItem: `${API_PREFIX}/cart/items`,
+        removeItem: `${API_PREFIX}/cart/items`,
+    },
+    wishlist: {
+        get: `${API_PREFIX}/wishlist`,
+        addItem: `${API_PREFIX}/wishlist/items`,
+        removeItem: `${API_PREFIX}/wishlist/items`,
+    },
+    orders: {
+        list: `${API_PREFIX}/orders`,
+        checkout: `${API_PREFIX}/orders/checkout`,
     },
 } as const;

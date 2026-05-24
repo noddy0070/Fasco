@@ -1,0 +1,241 @@
+<div class="panel">
+  <header class="panel__header">
+    <h2 class="panel__title">Catalog</h2>
+    <button class="btn btn--primary" type="button" (click)="openCreate()">
+      + Add {{ activeTab() === 'brands' ? 'Brand' : activeTab() === 'categories' ? 'Category' : 'Sub-category' }}
+    </button>
+  </header>
+
+  <nav class="tabs">
+    <button
+      type="button"
+      class="tab"
+      [class.tab--active]="activeTab() === 'brands'"
+      (click)="setTab('brands')"
+    >
+      Brands ({{ brands().length }})
+    </button>
+    <button
+      type="button"
+      class="tab"
+      [class.tab--active]="activeTab() === 'categories'"
+      (click)="setTab('categories')"
+    >
+      Categories ({{ mainCategories().length }})
+    </button>
+    <button
+      type="button"
+      class="tab"
+      [class.tab--active]="activeTab() === 'subcategories'"
+      (click)="setTab('subcategories')"
+    >
+      Sub-categories ({{ subCategories().length }})
+    </button>
+  </nav>
+
+  @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+  }
+
+  <div class="table-wrapper">
+    @if (isLoading()) {
+      <p class="table-state">Loading…</p>
+    } @else if (activeTab() === 'brands') {
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Active</th>
+            <th>Featured</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (brands().length === 0) {
+            <tr>
+              <td colspan="5" class="table-state table-state--empty">No brands yet. Run seed script or add one.</td>
+            </tr>
+          } @else {
+            @for (brand of brands(); track brand._id) {
+              <tr>
+                <td>{{ brand.title }}</td>
+                <td class="mono">{{ brand.slug }}</td>
+                <td>
+                  <span class="badge" [class.badge--active]="brand.isActive" [class.badge--blocked]="!brand.isActive">
+                    {{ brand.isActive ? 'Yes' : 'No' }}
+                  </span>
+                </td>
+                <td>{{ brand.isFeatured ? 'Yes' : 'No' }}</td>
+                <td class="table-actions">
+                  <button class="btn btn--icon" type="button" (click)="openEditBrand(brand)">Edit</button>
+                  <button class="btn btn--icon btn--danger" type="button" (click)="onDeleteBrand(brand)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    } @else if (activeTab() === 'categories') {
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Level</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (mainCategories().length === 0) {
+            <tr>
+              <td colspan="4" class="table-state table-state--empty">No categories yet.</td>
+            </tr>
+          } @else {
+            @for (cat of mainCategories(); track cat._id) {
+              <tr>
+                <td>{{ cat.name }}</td>
+                <td class="mono">{{ cat.slug }}</td>
+                <td>{{ cat.level }}</td>
+                <td class="table-actions">
+                  <button class="btn btn--icon" type="button" (click)="openEditCategory(cat)">Edit</button>
+                  <button class="btn btn--icon btn--danger" type="button" (click)="onDeleteCategory(cat)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    } @else {
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Parent</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (subCategories().length === 0) {
+            <tr>
+              <td colspan="4" class="table-state table-state--empty">No sub-categories yet.</td>
+            </tr>
+          } @else {
+            @for (cat of subCategories(); track cat._id) {
+              <tr>
+                <td>{{ cat.name }}</td>
+                <td class="mono">{{ cat.slug }}</td>
+                <td>{{ parentLabel(cat) }}</td>
+                <td class="table-actions">
+                  <button class="btn btn--icon" type="button" (click)="openEditSubCategory(cat)">Edit</button>
+                  <button class="btn btn--icon btn--danger" type="button" (click)="onDeleteSubCategory(cat)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+
+  <p class="table-meta">
+    Seed from mock data:
+    <code>npx ts-node --esm backend/scripts/seed-catalog.ts</code>
+  </p>
+</div>
+
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()" tabindex="-1" aria-hidden="true"></div>
+  <dialog class="modal" open aria-modal="true">
+    <header class="modal__header">
+      <h3>{{ modalTitle() }}</h3>
+      <button class="modal__close" type="button" (click)="closeModal()">✕</button>
+    </header>
+
+    @if (activeTab() === 'brands') {
+      <form [formGroup]="brandForm" (ngSubmit)="onSubmit()" class="modal__form" novalidate>
+        <div class="form-group">
+          <label class="form-label">Title *</label>
+          <input class="form-input" formControlName="title" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Slug</label>
+          <input class="form-input" formControlName="slug" placeholder="Auto from title if empty" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea class="form-input form-textarea" formControlName="description" rows="2"></textarea>
+        </div>
+        <div class="form-row form-row--2">
+          <label class="checkbox-label"><input type="checkbox" formControlName="isActive" /> Active</label>
+          <label class="checkbox-label"><input type="checkbox" formControlName="isFeatured" /> Featured</label>
+        </div>
+        @if (formError()) {
+          <div class="alert alert--error">{{ formError() }}</div>
+        }
+        <div class="modal__actions">
+          <button type="button" class="btn btn--secondary" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn--primary" [disabled]="isSubmitting()">
+            {{ isSubmitting() ? 'Saving…' : 'Save' }}
+          </button>
+        </div>
+      </form>
+    } @else if (activeTab() === 'categories') {
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="modal__form" novalidate>
+        <div class="form-group">
+          <label class="form-label">Name *</label>
+          <input class="form-input" formControlName="name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Slug</label>
+          <input class="form-input" formControlName="slug" placeholder="Auto from name if empty" />
+        </div>
+        @if (formError()) {
+          <div class="alert alert--error">{{ formError() }}</div>
+        }
+        <div class="modal__actions">
+          <button type="button" class="btn btn--secondary" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn--primary" [disabled]="isSubmitting()">
+            {{ isSubmitting() ? 'Saving…' : 'Save' }}
+          </button>
+        </div>
+      </form>
+    } @else {
+      <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()" class="modal__form" novalidate>
+        <div class="form-group">
+          <label class="form-label">Parent category *</label>
+          <select class="form-input" formControlName="parent">
+            <option value="">Select parent…</option>
+            @for (cat of mainCategories(); track cat._id) {
+              <option [value]="cat._id">{{ cat.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name *</label>
+          <input class="form-input" formControlName="name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Slug</label>
+          <input class="form-input" formControlName="slug" placeholder="Auto from name if empty" />
+        </div>
+        @if (formError()) {
+          <div class="alert alert--error">{{ formError() }}</div>
+        }
+        <div class="modal__actions">
+          <button type="button" class="btn btn--secondary" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn--primary" [disabled]="isSubmitting()">
+            {{ isSubmitting() ? 'Saving…' : 'Save' }}
+          </button>
+        </div>
+      </form>
+    }
+  </dialog>
+}

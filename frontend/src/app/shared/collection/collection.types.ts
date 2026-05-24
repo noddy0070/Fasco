@@ -39,6 +39,8 @@ export interface CollectionPromo {
   actions: CollectionPromoAction[];
 }
 
+export type CollectionProductFilter = 'men' | 'women' | 'sale' | 'featured' | 'all';
+
 export interface CollectionData {
   slug: string;
   eyebrow: string;
@@ -49,6 +51,7 @@ export interface CollectionData {
   sortOptions: string[];
   products: CollectionProduct[];
   promo: CollectionPromo;
+  productFilter?: CollectionProductFilter;
 }
 
 export interface CollectionDataFile {
