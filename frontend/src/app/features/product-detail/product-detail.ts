@@ -44,7 +44,7 @@ ngOnDestroy(): void {
   colorOptions = computed(() => {
     const item = this.product();
     if (!item) return [];
-    return [...new Set(item.variants.map((variant) => variant.color))];
+    return [...new Set(item.variants.map((variant) => variant.color).filter((c): c is string => c !== undefined))];
   });
 
   colorCodeMap = computed((): Record<string, string> => {
@@ -62,7 +62,7 @@ ngOnDestroy(): void {
   sizeOptions = computed(() => {
     const item = this.product();
     if (!item) return [];
-    return [...new Set(item.variants.map((variant) => variant.size))];
+    return [...new Set(item.variants.map((variant) => variant.size).filter((s): s is string => s !== undefined))];
   });
 
   discountedPrice = computed(() => {
