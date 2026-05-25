@@ -23,7 +23,12 @@ export const roleGuard = (allowedRoles: AdminRole[]): CanActivateFn => {
 
         const userRole = user.role;
         if (!userRole || !(allowedRoles as string[]).includes(userRole)) {
-            return router.createUrlTree(['/admin/dashboard']);
+            // Redirect to the first route accessible to this role, or back to
+            // the login page. Never redirect to /admin/dashboard (default child)
+            // because that would trigger an infinite redirect loop.
+            if ((userRole === 'user-admin')) return router.createUrlTree(['/admin/dashboard/users']);
+            if (userRole === 'inventory-management') return router.createUrlTree(['/admin/dashboard/products']);
+            return router.createUrlTree(['/admin']);
         }
 
         return true;

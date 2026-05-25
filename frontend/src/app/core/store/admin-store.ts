@@ -94,7 +94,7 @@ export const AdminStore = signalStore(
                     isLoading: false,
                 });
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
             }
         },
 
@@ -109,7 +109,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
@@ -124,7 +124,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
@@ -140,7 +140,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
@@ -158,7 +158,7 @@ export const AdminStore = signalStore(
                     isLoading: false,
                 });
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
             }
         },
 
@@ -204,7 +204,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
@@ -222,7 +222,7 @@ export const AdminStore = signalStore(
                     isLoading: false,
                 });
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
             }
         },
 
@@ -236,7 +236,7 @@ export const AdminStore = signalStore(
                 });
                 return true;
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
                 return false;
             }
         },
@@ -261,7 +261,7 @@ export const AdminStore = signalStore(
                     isLoading: false,
                 });
             } catch (err: unknown) {
-                patchState(store, { isLoading: false, error: (err as Error).message });
+                patchState(store, { isLoading: false, error: httpErrorMessage(err) });
             }
         },
 

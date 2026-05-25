@@ -45,13 +45,21 @@ export const UserStore = signalStore(
       }
     },
     async hydrateFromSession(): Promise<void> {
+      // Skip if a user is already set (e.g. freshly logged in) to avoid a
+      // stale in-flight request overwriting an explicit setUser() call.
+      if (store.user()) return;
       try {
         const response = await firstValueFrom(authService.me());
-        patchState(store, { user: response.data });
-        void commerce.loadCart();
-        void commerce.loadWishlist();
+        // Only apply if no user was set while we were awaiting.
+        if (!store.user()) {
+          patchState(store, { user: response.data });
+          void commerce.loadCart();
+          void commerce.loadWishlist();
+        }
       } catch {
-        patchState(store, { user: null });
+        if (!store.user()) {
+          patchState(store, { user: null });
+        }
       }
     },
   })),

@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import type { adminRole } from '../model.interfaces/customEnum.ts';
+import { extractCookieToken } from './auth.middleware.ts';
 
 interface AdminJwtPayload {
     userId: string;
@@ -8,23 +9,8 @@ interface AdminJwtPayload {
     role: string;
 }
 
-/**
- * Extracts the raw JWT string from the Cookie header.
- */
-const extractCookieToken = (cookieHeader?: string): string | null => {
-    if (!cookieHeader) return null;
-    const pair = cookieHeader
-        .split(';')
-        .map((p) => p.trim())
-        .find((p) => p.startsWith('token='));
-    if (!pair) return null;
-    return decodeURIComponent(pair.replace('token=', ''));
-};
 
-/**
- * Factory that returns an Express middleware enforcing that the caller
- * holds one of the supplied admin roles inside their JWT token cookie.
- */
+
 export const requireRole = (allowedRoles: adminRole[]) => {
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
         const token = extractCookieToken(req.headers.cookie);

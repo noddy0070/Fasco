@@ -46,7 +46,6 @@ const reviewSchema = new Schema<ReviewI>({
 }, { timestamps: true });
 
 
-// 🔥 Prevent duplicate reviews
 reviewSchema.index({ user: 1, product: 1 }, { unique: true });
 
 export const Review = mongoose.model<ReviewI>('Review', reviewSchema);

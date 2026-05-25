@@ -9,7 +9,7 @@ export interface AuthUserPayload {
 
 export type AuthedRequest = express.Request & { user?: AuthUserPayload };
 
-const extractCookieToken = (cookieHeader?: string): string | null => {
+export const extractCookieToken = (cookieHeader?: string): string | null => {
     if (!cookieHeader) return null;
     const pair = cookieHeader
         .split(';')
@@ -39,3 +39,4 @@ export const requireUser = (req: AuthedRequest, res: express.Response, next: exp
         return res.status(401).json({ message: 'Unauthorized: invalid or expired session' });
     }
 };
+

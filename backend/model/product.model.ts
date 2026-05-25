@@ -1,17 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 import type ProductI from "../model.interfaces/product.interface.ts";
 
-/**
- * Sub-schema for a product variant.
- * Required fields: sku, price, stock.
- * Optional storefront fields: size, color, colorCode, images.
- */
+
 const variantSchema = new Schema({
   sku:      { type: String, required: true, trim: true, index: true },
   price:    { type: Number, required: true, min: 0 },
   discount: { type: Number, default: 0, min: 0 },
   stock:    { type: Number, required: true, min: 0 },
-  // Optional storefront display fields
   size:     { type: String },
   color:    { type: String },
   colorCode:{ type: String },
@@ -79,7 +74,6 @@ productSchema.index({
   tags: 'text'
 });
 
-// ⚡ Compound indexes (IMPORTANT)
 productSchema.index({ category: 1, isActive: 1 });
 productSchema.index({ gender: 1, category: 1 });
 productSchema.index({ isFeatured: 1, isActive: 1 });

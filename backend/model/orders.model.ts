@@ -34,7 +34,7 @@ const orderSchema = new Schema<OrderI>({
     image: [String]          // snapshot for UI
   }],
 
-  // 📍 Address snapshot
+
   shippingAddress: {
     fullName: String,
     phone: String,
@@ -69,7 +69,6 @@ const orderSchema = new Schema<OrderI>({
     index: true
   },
 
-  // 💰 Pricing
   totalItems: Number,
 
   subtotal: Number,

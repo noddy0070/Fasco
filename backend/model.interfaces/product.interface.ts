@@ -5,7 +5,6 @@ export interface ProductVariantI {
     price: number;
     discount: number;
     stock: number;
-    // Optional fields retained for storefront display
     size?: string;
     color?: string;
     colorCode?: string;

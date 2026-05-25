@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
 import { AdminLogin } from './admin-login/admin-login';
 import { DashboardShell } from './dashboard-shell/dashboard-shell';
 import { roleGuard } from '../../core/guards/role.guard';
-import { authGuard } from '../../core/guards/auth.guard';
+import { adminAuthGuard } from '../../core/guards/auth.guard';
+import { UserStore } from '../../core/store/user-store';
 
 export const adminRoutes: Routes = [
     {
@@ -14,7 +16,7 @@ export const adminRoutes: Routes = [
         path: 'dashboard',
         component: DashboardShell,
         title: 'Admin Dashboard',
-        canActivate: [authGuard],
+        canActivate: [adminAuthGuard],
         children: [
             {
                 path: 'analytics',
@@ -60,7 +62,16 @@ export const adminRoutes: Routes = [
                 loadComponent: () =>
                     import('./order-management/order-management').then((m) => m.OrderManagement),
             },
-            { path: '', redirectTo: 'analytics', pathMatch: 'full' },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: () => {
+                    const role = inject(UserStore).user()?.role;
+                    if (role === 'user-admin') return '/admin/dashboard/users';
+                    if (role === 'inventory-management') return '/admin/dashboard/products';
+                    return '/admin/dashboard/analytics';
+                },
+            },
         ],
     },
 ];
