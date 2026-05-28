@@ -12,8 +12,8 @@ const verifyEmail= (req: express.Request, res: express.Response)=>{
         if(typeof token !== "string"){
             return res.status(400).json({message:"Invalid token"});
         }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-        const userId = decoded.userId;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as jwt.JwtPayload;
+        const userId = decoded['userId'];
         User.findByIdAndUpdate(userId, { isVerified: true }, { new: true })
         .then((user) => {
             if (!user) {

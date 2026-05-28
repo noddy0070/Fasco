@@ -11,13 +11,6 @@ export default interface UserI extends Document{
     isVerified:boolean,
     isBlocked:boolean,
     deletedAt:Date,
-    wishlist:mongoose.Schema.Types.ObjectId[],
-    cart:[
-        {
-            product:mongoose.Schema.Types.ObjectId,
-            quantity:number
-        }
-    ],
     orders:mongoose.Schema.Types.ObjectId[],
     reviews:mongoose.Schema.Types.ObjectId[],
     savedAddress:[{

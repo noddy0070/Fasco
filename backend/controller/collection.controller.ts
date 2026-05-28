@@ -21,7 +21,7 @@ export const listCollections = async (_req: express.Request, res: express.Respon
 
         return res.status(200).json({
             message: 'Collections fetched successfully',
-            data: collections.map((c) => toPublicShape(c as Record<string, unknown>)),
+            data: collections.map((c) => toPublicShape(c as unknown as Record<string, unknown>)),
         });
     } catch (err) {
         console.error('listCollections error', err);
@@ -42,7 +42,7 @@ export const getCollectionBySlug = async (req: express.Request, res: express.Res
 
         return res.status(200).json({
             message: 'Collection fetched successfully',
-            data: toPublicShape(collection as Record<string, unknown>),
+            data: toPublicShape(collection as unknown as Record<string, unknown>),
         });
     } catch (err) {
         console.error('getCollectionBySlug error', err);

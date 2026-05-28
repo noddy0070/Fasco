@@ -1,14 +1,13 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import type { adminRole } from '../model.interfaces/customEnum.ts';
-import { extractCookieToken } from './auth.middleware.ts';
+import { extractCookieToken } from '../utils/cookie.util.ts';
 
 interface AdminJwtPayload {
     userId: string;
     email: string;
     role: string;
 }
-
 
 
 export const requireRole = (allowedRoles: adminRole[]) => {

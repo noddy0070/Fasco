@@ -1,7 +1,7 @@
 import express from 'express';
 import { CollectionPage } from '../../model/collection-page.model.ts';
 import { toSlug, inferProductFilter } from '../../utils/slug.util.ts';
-import type { CollectionPromoI, CollectionTabI } from '../../model.interfaces/collection-page.interface.ts';
+import type { CollectionProductFilter, CollectionPromoI, CollectionTabI } from '../../model.interfaces/collection-page.interface.ts';
 
 const normalizeTabs = (tabs: unknown): CollectionTabI[] => {
     if (!Array.isArray(tabs)) return [];
@@ -63,7 +63,7 @@ const buildPayload = (body: Record<string, unknown>) => {
         tabs: normalizeTabs(body['tabs']),
         sortOptions: normalizeSortOptions(body['sortOptions']),
         promo: normalizePromo(body['promo']),
-        productFilter: body['productFilter'] ?? (slug ? inferProductFilter(slug) : 'all'),
+        productFilter: (body['productFilter'] ?? (slug ? inferProductFilter(slug) : 'all')) as CollectionProductFilter,
         isActive: body['isActive'] !== false,
         displayOrder: Number(body['displayOrder'] ?? 0),
     };

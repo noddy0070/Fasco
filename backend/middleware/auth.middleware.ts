@@ -1,5 +1,8 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import { extractCookieToken } from '../utils/cookie.util.ts';
+
+export {   };
 
 export interface AuthUserPayload {
     userId: string;
@@ -8,16 +11,6 @@ export interface AuthUserPayload {
 }
 
 export type AuthedRequest = express.Request & { user?: AuthUserPayload };
-
-export const extractCookieToken = (cookieHeader?: string): string | null => {
-    if (!cookieHeader) return null;
-    const pair = cookieHeader
-        .split(';')
-        .map((p) => p.trim())
-        .find((p) => p.startsWith('token='));
-    if (!pair) return null;
-    return decodeURIComponent(pair.replace('token=', ''));
-};
 
 export const requireUser = (req: AuthedRequest, res: express.Response, next: express.NextFunction) => {
     const token = extractCookieToken(req.headers.cookie);

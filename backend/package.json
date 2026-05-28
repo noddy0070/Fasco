@@ -4,15 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node index.ts",
+    "dev": "tsx watch index.ts",
     "seed:catalog": "npx ts-node --esm scripts/seed-catalog.ts",
     "seed:collections": "npx ts-node --esm scripts/seed-collections.ts",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --testPathPattern=tests/"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathPatterns=tests/",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --testPathPatterns=tests/",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.ts\""
   },
   "jest": {
     "preset": "ts-jest/presets/default-esm",
     "testEnvironment": "node",
-    "extensionsToTreatAsEsm": [".ts"],
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "collectCoverageFrom": [
+      "controller/**/*.ts",
+      "utils/**/*.ts",
+      "middleware/**/*.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 40,
+        "functions": 40
+      }
+    },
     "moduleNameMapper": {
       "^(\\.{1,2}/.*)\\.ts$": "$1"
     },
@@ -39,12 +56,18 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1",
-    "mongose": "^0.0.2-security",
     "nodemailer": "^8.0.5",
+    "pino": "^10.3.1",
+    "pino-http": "^11.0.0",
+    "pino-pretty": "^13.1.3",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "tsx": "^4.22.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",

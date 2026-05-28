@@ -37,13 +37,6 @@ const userSchema = new Schema<UserI>({
 
   deletedAt: Date,
 
-  wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Wishlist' }],
-
-  cart: [{
-    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    quantity: { type: Number, default: 1 }
-  }],
-
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 

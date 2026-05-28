@@ -3,16 +3,8 @@ import User from '../../model/user.model.ts';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../../utils/mailService.ts';
-
-const extractCookieToken = (cookieHeader?: string): string | null => {
-    if (!cookieHeader) return null;
-    const tokenPair = cookieHeader
-        .split(';')
-        .map((part) => part.trim())
-        .find((part) => part.startsWith('token='));
-    if (!tokenPair) return null;
-    return decodeURIComponent(tokenPair.replace('token=', ''));
-};
+import { extractCookieToken } from '../../utils/cookie.util.ts';
+import logger from '../../utils/logger.ts';
 
 const signup = async (req: express.Request, res: express.Response) => {
     try {
@@ -48,15 +40,16 @@ const signup = async (req: express.Request, res: express.Response) => {
         });
 
         await newUser.save();
-        await sendEmail(
+        // Fire-and-forget: don't block the response if email sending fails.
+        sendEmail(
             email,
             `${process.env.FRONTEND_URL}/signup/verify?token=${jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET as string, { expiresIn: "1h" })}`,
             newUser._id.toString()
-        );
+        ).catch((err) => logger.error({ err }, 'sendEmail failed during signup'));
 
         return res.status(201).json({ message: "User created successfully" });
     } catch (err) {
-        console.log("Error signing up", err);
+        logger.error({ err }, 'signup error');
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -70,17 +63,14 @@ const login = async (req: express.Request, res: express.Response) => {
 
         // hashedPassword is select:false in schema, so we must explicitly include it.
         const user = await User.findOne({ email }).select('+hashedPassword');
-        if (!user) {
-            return res.status(400).json({ message: "User not found" });
-        }
-
-        if (!user.hashedPassword) {
-            return res.status(400).json({ message: "Invalid account data. Please sign up again." });
+        // Use a single generic message to prevent account enumeration.
+        if (!user || !user.hashedPassword) {
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         const isMatch = await bcrypt.compare(password, user.hashedPassword);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid password" });
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         if (user.isBlocked) {
@@ -106,11 +96,10 @@ const login = async (req: express.Request, res: express.Response) => {
 
         return res.status(200).json({
             message: "Login successful",
-            token,
             data: userData
         });
     } catch (err) {
-        console.log("Error logging in", err);
+        logger.error({ err }, 'login error');
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -124,7 +113,7 @@ const logout = async (_req: express.Request, res: express.Response) => {
         });
         return res.status(200).json({ message: "Logout successful" });
     } catch (err) {
-        console.log("Error logging out", err);
+        logger.error({ err }, 'logout error');
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -143,7 +132,7 @@ const me = async (req: express.Request, res: express.Response) => {
 
         const user = await User.findById(decoded.userId);
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(401).json({ message: "Unauthorized" });
         }
 
         return res.status(200).json({
@@ -151,7 +140,7 @@ const me = async (req: express.Request, res: express.Response) => {
             data: user,
         });
     } catch (err) {
-        console.log("Error fetching current user", err);
+        logger.error({ err }, 'me error');
         return res.status(401).json({ message: "Unauthorized" });
     }
 };
@@ -187,7 +176,7 @@ const forgotPassword = async (req: express.Request, res: express.Response) => {
 
         return res.status(200).json({ message: "If this email exists, a reset link has been sent." });
     } catch (err) {
-        console.log("Error sending forgot password email", err);
+        logger.error({ err }, 'forgotPassword error');
         return res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -223,7 +212,7 @@ const resetPassword = async (req: express.Request, res: express.Response) => {
 
         return res.status(200).json({ message: "Password reset successful" });
     } catch (err) {
-        console.log("Error resetting password", err);
+        logger.error({ err }, 'resetPassword error');
         return res.status(400).json({ message: "Invalid or expired token" });
     }
 };

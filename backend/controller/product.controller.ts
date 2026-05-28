@@ -9,6 +9,10 @@ import { Product } from '../model/product.model.ts';
  */
 export const getProducts = async (req: express.Request, res: express.Response) => {
     try {
+        const page = Math.max(1, parseInt(req.query['page'] as string) || 1);
+        const limit = Math.min(100, Math.max(1, parseInt(req.query['limit'] as string) || 20));
+        const skip = (page - 1) * limit;
+
         const filter: Record<string, unknown> = {
             isActive: true,
             deletedAt: null,
@@ -18,13 +22,18 @@ export const getProducts = async (req: express.Request, res: express.Response) =
         if (req.query['isTrending'] === 'true') filter['isTrending'] = true;
         if (req.query['isLimitedOffer'] === 'true') filter['isLimitedOffer'] = true;
 
-        const products = await Product.find(filter)
-            .populate('category', 'name slug')
-            .populate('subCategory', 'name slug')
-            .populate('brand', 'name logo')
-            .lean();
+        const [products, total] = await Promise.all([
+            Product.find(filter)
+                .populate('category', 'name slug')
+                .populate('subCategory', 'name slug')
+                .populate('brand', 'name logo')
+                .skip(skip)
+                .limit(limit)
+                .lean(),
+            Product.countDocuments(filter),
+        ]);
 
-        return res.status(200).json({ message: 'Products fetched successfully', data: products });
+        return res.status(200).json({ message: 'Products fetched successfully', data: { products, total, page, limit } });
     } catch (err) {
         console.error('getProducts error', err);
         return res.status(500).json({ message: 'Internal server error' });
@@ -81,7 +90,7 @@ export const getProducts = async (req: express.Request, res: express.Response) =
  */
 export const getProductById = async (req: express.Request, res: express.Response) => {
     try {
-        const id = req.params['id'];
+        const id = req.params['id'] as string;
         let product = null;
 
         if (mongoose.Types.ObjectId.isValid(id)) {

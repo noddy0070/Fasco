@@ -47,6 +47,4 @@ const cartSchema = new Schema<CartI>({
 }, { timestamps: true });
 
 
-cartSchema.index({ user: 1 });
-
 export const Cart = mongoose.model<CartI>('Cart', cartSchema);

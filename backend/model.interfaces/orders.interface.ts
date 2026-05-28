@@ -1,8 +1,8 @@
 import mongoose, { Document } from "mongoose";
 export default interface OrderI extends Document{
-    user:mongoose.Schema.Types.ObjectId,
-    items:[{
-        product:mongoose.Schema.Types.ObjectId,
+    user:mongoose.Types.ObjectId,
+    items:{
+        product:mongoose.Types.ObjectId,
         title:string,
         slug:string,
         variantSku:string,
@@ -13,7 +13,7 @@ export default interface OrderI extends Document{
         quantity:number,
         finalPrice:number,
         image:string[]
-    }],
+    }[],
     shippingAddress:{
         fullName:string,
         phone:string,

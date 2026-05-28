@@ -62,7 +62,7 @@ export const createCategory = async (req: express.Request, res: express.Response
             name: name.trim(),
             slug: slug?.trim() || toSlug(name),
             level: levelValue,
-            parent: levelValue === level.SUB ? parent : null,
+            parent: levelValue === level.SUB ? (parent ?? undefined) : undefined,
         });
 
         return res.status(201).json({ message: 'Category created successfully', data: category });
@@ -120,7 +120,7 @@ export const deleteCategory = async (req: express.Request, res: express.Response
         }
 
         if (category.level === level.MAIN) {
-            const childCount = await Category.countDocuments({ parent: category._id });
+            const childCount = await Category.countDocuments({ parent: category._id as unknown as string });
             if (childCount > 0) {
                 return res.status(400).json({
                     message: 'Cannot delete category with sub-categories. Remove sub-categories first.',

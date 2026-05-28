@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { Cart } from '../model/cart.model.ts';
 import { Order } from '../model/orders.model.ts';
 import User from '../model/user.model.ts';
+import Product from '../model/product.model.ts';
 import type { AuthedRequest } from '../middleware/auth.middleware.ts';
 import { paymentMethod, paymentStatus, orderStatus } from '../model.interfaces/customEnum.ts';
 import { resolveProduct } from '../utils/resolve-product.util.ts';
@@ -24,6 +25,26 @@ type ShippingAddressInput = {
 };
 
 const buildLineItems = async (inputs: CheckoutItemInput[]) => {
+    // Batch-load all products in one query instead of N individual reads.
+    const identifiers = inputs.map((i) => i.productId);
+    const objectIdInputs = identifiers.filter((id) => mongoose.Types.ObjectId.isValid(id));
+    const slugInputs = identifiers.filter((id) => !mongoose.Types.ObjectId.isValid(id));
+
+    const products = await Product.find({
+        $or: [
+            ...(objectIdInputs.length ? [{ _id: { $in: objectIdInputs } }] : []),
+            ...(slugInputs.length ? [{ slug: { $in: slugInputs } }] : []),
+        ],
+        deletedAt: null,
+    });
+
+    const productMap = new Map(
+        products.flatMap((p) => [
+            [p._id.toString(), p],
+            ...(p.slug ? [[p.slug, p] as [string, typeof p]] : []),
+        ]),
+    );
+
     const lines: Array<{
         product: mongoose.Types.ObjectId;
         title: string;
@@ -38,8 +59,11 @@ const buildLineItems = async (inputs: CheckoutItemInput[]) => {
         image: string[];
     }> = [];
 
+    // Collect stock decrements for a single bulkWrite at the end.
+    const stockUpdates: Array<{ productId: mongoose.Types.ObjectId; sku: string; qty: number }> = [];
+
     for (const input of inputs) {
-        const product = await resolveProduct(input.productId);
+        const product = productMap.get(input.productId) ?? productMap.get(input.productId.toLowerCase());
         if (!product || product.deletedAt) {
             throw new Error(`Product not found: ${input.productId}`);
         }
@@ -70,8 +94,19 @@ const buildLineItems = async (inputs: CheckoutItemInput[]) => {
             image: variant.images ?? [],
         });
 
-        variant.stock -= qty;
-        await product.save();
+        stockUpdates.push({ productId: product._id as mongoose.Types.ObjectId, sku: variant.sku, qty });
+    }
+
+    // Single bulkWrite to decrement all variant stocks atomically.
+    if (stockUpdates.length > 0) {
+        await Product.bulkWrite(
+            stockUpdates.map(({ productId, sku, qty }) => ({
+                updateOne: {
+                    filter: { _id: productId, 'variants.sku': sku },
+                    update: { $inc: { 'variants.$.stock': -qty } },
+                },
+            })),
+        );
     }
 
     return lines;
@@ -79,11 +114,20 @@ const buildLineItems = async (inputs: CheckoutItemInput[]) => {
 
 export const getMyOrders = async (req: AuthedRequest, res: express.Response) => {
     try {
-        const orders = await Order.find({ user: req.user!.userId })
-            .sort({ createdAt: -1 })
-            .lean();
+        const page = Math.max(1, parseInt(req.query['page'] as string) || 1);
+        const limit = Math.min(50, Math.max(1, parseInt(req.query['limit'] as string) || 10));
+        const skip = (page - 1) * limit;
 
-        return res.status(200).json({ message: 'Orders fetched successfully', data: orders });
+        const [orders, total] = await Promise.all([
+            Order.find({ user: req.user!.userId })
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .lean(),
+            Order.countDocuments({ user: req.user!.userId }),
+        ]);
+
+        return res.status(200).json({ message: 'Orders fetched successfully', data: { orders, total, page, limit } });
     } catch (err) {
         console.error('getMyOrders error', err);
         return res.status(500).json({ message: 'Internal server error' });
@@ -127,7 +171,7 @@ export const checkout = async (req: AuthedRequest, res: express.Response) => {
                 variantSku: i.variantSku,
                 quantity: Math.max(1, Number(i.quantity) || 1),
             }));
-        } else if (useCart !== false) {
+        } else if (useCart === true) {
             const cart = await Cart.findOne({ user: req.user!.userId });
             if (!cart?.items.length) {
                 return res.status(400).json({ message: 'Cart is empty' });

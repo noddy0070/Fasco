@@ -1,10 +1,9 @@
 import express from 'express';
-const apiMiddleWare=(req:express.Request,res:express.Response,next:express.NextFunction)=>{
-    console.log("API Middleware");
-    console.log("Request URL:", req.url);
-    console.log("Request Method:", req.method);
-    console.log("Request Body:", req.body); 
+import logger from '../utils/logger.ts';
+
+const apiMiddleWare = (req: express.Request, _res: express.Response, next: express.NextFunction) => {
+    logger.info({ method: req.method, url: req.url }, 'incoming request');
     next();
-}
+};
 
 export default apiMiddleWare;

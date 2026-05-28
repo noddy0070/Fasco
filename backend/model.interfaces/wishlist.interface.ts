@@ -1,9 +1,9 @@
 import mongoose, { Document } from 'mongoose';
 
 export default interface WishlistI extends Document {
-    user: mongoose.Schema.Types.ObjectId;
+    user: mongoose.Types.ObjectId;
     items: {
-        product: mongoose.Schema.Types.ObjectId;
+        product: mongoose.Types.ObjectId;
         variantSku: string;
         addedAt: Date;
     }[];

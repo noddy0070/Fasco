@@ -76,7 +76,7 @@ productSchema.index({
 
 productSchema.index({ category: 1, isActive: 1 });
 productSchema.index({ gender: 1, category: 1 });
-productSchema.index({ isFeatured: 1, isActive: 1 });
+// Note: isFeatured is not a schema field — removed the stale compound index.
 
 export const Product = mongoose.model<ProductI>('Product', productSchema);
 export default Product;
